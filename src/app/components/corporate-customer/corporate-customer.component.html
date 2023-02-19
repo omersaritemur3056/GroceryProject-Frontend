@@ -1,0 +1,22 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Individual customer id</th>
+            <th>User id</th>
+            <th>Image id</th>
+            <th>Address</th>
+            <th>Phone number</th>
+            <th>Company name</th>
+            <th>Tax number</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let corporateCustomer of corporateCustomers">
+        <td>{{corporateCustomer.id}}</td>
+        <td>{{corporateCustomer.userId}}</td>
+        <td>{{corporateCustomer.imageId}}</td>
+        <td>{{corporateCustomer.address}}</td>
+        <td>{{corporateCustomer.phoneNumber}}</td>
+        <td>{{corporateCustomer.companyName}}</td>
+        <td>{{corporateCustomer.taxNumber}}</td>
+    </tr>
+</table>

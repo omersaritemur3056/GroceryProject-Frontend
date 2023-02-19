@@ -1,0 +1,11 @@
+.list-group-item{
+    background-color: blue;
+    font-size: 1.1rem;
+    font-weight: 575;
+    padding: 0.5rem;
+    border: none;
+}
+
+.list-group-item,a{
+    color: red;
+}

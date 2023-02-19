@@ -1,0 +1,26 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Individual customer id</th>
+            <th>User id</th>
+            <th>Image id</th>
+            <th>Address</th>
+            <th>Phone number</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Gender</th>
+            <th>National Identity</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let individualCustomer of individualCustomers">
+        <td>{{individualCustomer.id}}</td>
+        <td>{{individualCustomer.userId}}</td>
+        <td>{{individualCustomer.imageId}}</td>
+        <td>{{individualCustomer.address}}</td>
+        <td>{{individualCustomer.phoneNumber}}</td>
+        <td>{{individualCustomer.firstName}}</td>
+        <td>{{individualCustomer.lastName}}</td>
+        <td>{{individualCustomer.gender}}</td>
+        <td>{{individualCustomer.nationalIdentity}}</td>
+    </tr>
+</table>

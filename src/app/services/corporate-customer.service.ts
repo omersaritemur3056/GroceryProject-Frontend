@@ -1,7 +1,8 @@
+import { GetAllCorporateCustomerResponse } from './../models/corporate-customer/get-all-corporate-customer';
+import { ListResponseModel } from './../models/list-response-model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CorporateCustomerResponseModel } from '../models/corporate-customer/corporate-customer-response-model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class CorporateCustomerService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getCorporateCustomer():Observable<CorporateCustomerResponseModel>{
-    return this.httpClient.get<CorporateCustomerResponseModel>(this.apiUrl);
+  getCorporateCustomer():Observable<ListResponseModel<GetAllCorporateCustomerResponse>>{
+    return this.httpClient.get<ListResponseModel<GetAllCorporateCustomerResponse>>(this.apiUrl);
   }
   
 }

@@ -1,4 +1,6 @@
-import { CategoryResponseModel } from './../models/category/category-response-model';
+import { GetAllCategoryResponse } from './../models/category/get-all-category';
+import { ListResponseModel } from './../models/list-response-model';
+
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -12,8 +14,8 @@ export class CategoryService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getCategories():Observable<CategoryResponseModel>{
-    return this.httpClient.get<CategoryResponseModel>(this.apiUrl);
+  getCategories():Observable<ListResponseModel<GetAllCategoryResponse>>{
+    return this.httpClient.get<ListResponseModel<GetAllCategoryResponse>>(this.apiUrl);
   }
   
 }

@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class CategoryComponent implements OnInit {
 
   categories:GetAllCategoryResponse[] = [];
+  currentCategory:GetAllCategoryResponse;
 
   constructor(private categoryService:CategoryService){}
 
@@ -21,5 +22,29 @@ export class CategoryComponent implements OnInit {
     this.categoryService.getCategories().subscribe(response => {
       this.categories = response.data;
     })
+  }
+
+  setCurrentCategory(category:GetAllCategoryResponse){
+    this.currentCategory = category;
+  }
+
+  setAllCategory(){
+    this.currentCategory = {id:0, name:""}
+  }
+
+  getCurrentCategoryClass(category:GetAllCategoryResponse){
+    if(category == this.currentCategory){
+      return "list-group-item active"
+    }else{
+      return "list-group-item"
+    }
+  }
+
+  getAllCategoryClass(){
+    if(!this.currentCategory){
+      return "list-group-item active"
+    }else{
+      return "list-group-item"
+    }
   }
 }

@@ -1,4 +1,5 @@
-import { EmployeeResponseModel } from './../models/employee/employee-response-model';
+import { GetAllEmployeeResponse } from 'src/app/models/employee/get-all-employee';
+import { ListResponseModel } from './../models/list-response-model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -12,7 +13,7 @@ export class EmployeeService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getEmployee():Observable<EmployeeResponseModel>{
-    return this.httpClient.get<EmployeeResponseModel>(this.apiUrl);
+  getEmployee():Observable<ListResponseModel<GetAllEmployeeResponse>>{
+    return this.httpClient.get<ListResponseModel<GetAllEmployeeResponse>>(this.apiUrl);
   }
 }

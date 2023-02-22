@@ -1,8 +1,14 @@
 .table{
-    background-color: aqua;
+    background-color: #308CF7;
     border: none;
 }
 
 th{
     font-size: 0.8rem;
+}
+
+.alert{
+    border: none;
+    opacity: 0.75;
+    background-color: #178600;
 }

@@ -7,7 +7,11 @@ export interface GetAllProductResponse{
   expirationDate:Date;
   stock:number;
   categoryId:number;
+  categoryName:string;
   supplierId:number;
+  supplierName:string;
   producerId:number;
+  producerName:string;
   imageIds:number[];
+  urls:string[];
 }

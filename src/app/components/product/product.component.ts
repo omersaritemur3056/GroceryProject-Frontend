@@ -47,5 +47,4 @@ export class ProductComponent implements OnInit {
     this.toastrService.success("Sepete eklendi", product.name)
     this.cartService.addToCart(product);
   }
-
 }

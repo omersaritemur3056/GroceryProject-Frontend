@@ -4,7 +4,7 @@
 
 <div class="mb-3">
   <label for="filterText" class="form-label">Search product</label>
-  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="enter product name">
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter product name">
 </div>
 <div *ngIf="filterText.length >= 2" class="alert alert-success">
   {{filterText}} searching...
@@ -13,34 +13,32 @@
 <table *ngIf="dataLoaded==true" class="table">
   <thead>
     <tr>
-      <th>Product id</th>
-      <th>Product name</th>
-      <th>Price</th>
-      <th>Price with KDV</th>
-      <th>Description</th>
-      <th>Production date</th>
-      <th>Expiration date</th>
-      <th>Stock</th>
-      <th>Category</th>
-      <th>Supplier</th>
-      <th>Producer</th>
-      <th>Images</th>
+      <th>Ürün adı</th>
+      <th>KDV'li fiyatı</th>
+      <th>Açıklaması</th>
+      <th>Üretim tarihi</th>
+      <th>Son kullanma tarihi</th>
+      <th>Stok</th>
+      <th>Kategori</th>
+      <th>Tedarikçi</th>
+      <th>Üretici</th>
+      <th>Resimler</th>
       <th></th>
     </tr>
   </thead>
   <tr *ngFor="let product of products |filterPipe:filterText">
-    <td>{{product.id}}</td>
-    <td>{{product.name |uppercase}}</td>
-    <td>{{product.price |currency}}</td>
-    <td>{{product.price |vatAdded:18 |currency}}</td>
+    <td>{{product.name |titlecase}}</td>
+    <td>{{product.price |vatAdded:18 |currency:'TRY':'symbol-narrow':'1.2-2'}}</td>
     <td>{{product.description}}</td>
-    <td>{{product.productionDate}}</td>
-    <td>{{product.expirationDate}}</td>
+    <td>{{product.productionDate |date:"dd/MM/yyyy"}}</td>
+    <td>{{product.expirationDate |date:"dd/MM/yyyy"}}</td>
     <td>{{product.stock}}</td>
-    <td>{{product.categoryId}}</td>
-    <td>{{product.supplierId}}</td>
-    <td>{{product.producerId}}</td>
-    <td>{{product.imageIds}}</td>
-    <td><button (click)="addToCart(product)" class="btn btn-success">Sepete ekle</button></td>
+    <td>{{product.categoryName}}</td>
+    <td>{{product.supplierName}}</td>
+    <td>{{product.producerName}}</td>
+    <td *ngFor="let url of product.urls">
+      <img class="table-images" src="{{url}}" alt="">
+    </td>
+    <td><button (click)="addToCart(product)" class="btn btn-success">Sepete ekle!</button></td>
   </tr>
 </table>

@@ -1,14 +1,25 @@
 .table{
     background-color: #308CF7;
     border: none;
+    overflow: auto;
 }
 
 th{
     font-size: 0.8rem;
+    padding-left: .8rem;
+}
+
+td{
+    padding-left: .8rem;
 }
 
 .alert{
     border: none;
     opacity: 0.75;
     background-color: #178600;
+}
+
+.table-images{
+    max-width: 50px;
+    max-height: 50px;
 }

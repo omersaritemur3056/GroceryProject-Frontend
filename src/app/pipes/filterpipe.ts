@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'filterPipe'
 })
-export class FilterPipePipe implements PipeTransform {
+export class FilterPipe implements PipeTransform {
 
   transform(value: GetAllProductResponse[], filterText: string): GetAllProductResponse[] {
     filterText = filterText ? filterText.toLocaleLowerCase() : ""

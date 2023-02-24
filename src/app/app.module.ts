@@ -13,7 +13,7 @@ import { IndividualCustomerComponent } from './components/individual-customer/in
 import { CorporateCustomerComponent } from './components/corporate-customer/corporate-customer.component';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
 import { FormsModule } from '@angular/forms';
-import { FilterPipePipe } from './pipes/filter-pipe.pipe';
+import { FilterPipe } from './pipes/filterpipe';
 
 import { ToastrModule } from 'ngx-toastr';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
@@ -28,7 +28,7 @@ import { CartSummaryComponent } from './components/cart-summary/cart-summary.com
     IndividualCustomerComponent,
     CorporateCustomerComponent,
     VatAddedPipe,
-    FilterPipePipe,
+    FilterPipe,
     CartSummaryComponent
   ],
   imports: [

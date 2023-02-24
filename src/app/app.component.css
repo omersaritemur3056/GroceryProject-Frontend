@@ -5,3 +5,7 @@
 .row{
     margin-top: 1.5rem;
 }
+
+.col-md-9{
+    overflow: auto;
+}

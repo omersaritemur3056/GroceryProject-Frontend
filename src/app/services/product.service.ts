@@ -22,6 +22,11 @@ export class ProductService {
     return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);
   }
 
+  getProductsBySortingNameAsc():Observable<ListResponseModel<GetAllProductResponse>>{
+    let newPath = this.apiUrl + "product/getlistbysorting"
+    return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);
+  }
+
   getProductsByCategory(categoryId:number):Observable<ListResponseModel<GetAllProductResponse>>{
     let newPath = this.apiUrl + "product/getallbycategory?categoryId=" + categoryId
     return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);

@@ -9,12 +9,13 @@ import { Observable } from 'rxjs';
 })
 export class CorporateCustomerService {
 
-  apiUrl = "http://localhost:8080/api/corporatecustomer/getall";
+  apiUrl = "http://localhost:8080/api/";
 
   constructor(private httpClient:HttpClient) { }
 
-  getCorporateCustomer():Observable<ListResponseModel<GetAllCorporateCustomerResponse>>{
-    return this.httpClient.get<ListResponseModel<GetAllCorporateCustomerResponse>>(this.apiUrl);
+  getCorporateCustomers():Observable<ListResponseModel<GetAllCorporateCustomerResponse>>{
+    let newPath = this.apiUrl + "corporatecustomer/getall"
+    return this.httpClient.get<ListResponseModel<GetAllCorporateCustomerResponse>>(newPath);
   }
   
 }

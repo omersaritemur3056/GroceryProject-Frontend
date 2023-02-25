@@ -18,7 +18,7 @@ export class IndividualCustomerComponent implements OnInit {
   }
 
   getIndividualCustomers(){
-    this.individualCustomerService.getCorporateCustomer().subscribe(response => {
+    this.individualCustomerService.getIndividualCustomers().subscribe(response => {
       this.individualCustomers = response.data;
     })
   }

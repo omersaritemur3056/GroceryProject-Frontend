@@ -13,7 +13,7 @@ import { IndividualCustomerComponent } from './components/individual-customer/in
 import { CorporateCustomerComponent } from './components/corporate-customer/corporate-customer.component';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
 import { FormsModule } from '@angular/forms';
-import { FilterPipe } from './pipes/filterpipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 import { ToastrModule } from 'ngx-toastr';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';

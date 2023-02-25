@@ -18,7 +18,7 @@ export class CorporateCustomerComponent implements OnInit {
   }
 
   getCorporateCustomers(){
-    this.corporateCustomerService.getCorporateCustomer().subscribe(response => {
+    this.corporateCustomerService.getCorporateCustomers().subscribe(response => {
       this.corporateCustomers = response.data;
     })
   }

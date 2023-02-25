@@ -10,12 +10,13 @@ import { Injectable } from '@angular/core';
 })
 export class CategoryService {
 
-  apiUrl = "http://localhost:8080/api/category/getall";
+  apiUrl = "http://localhost:8080/api/";
 
   constructor(private httpClient:HttpClient) { }
 
   getCategories():Observable<ListResponseModel<GetAllCategoryResponse>>{
-    return this.httpClient.get<ListResponseModel<GetAllCategoryResponse>>(this.apiUrl);
+    let newPath = this.apiUrl + "category/getall"
+    return this.httpClient.get<ListResponseModel<GetAllCategoryResponse>>(newPath);
   }
   
 }

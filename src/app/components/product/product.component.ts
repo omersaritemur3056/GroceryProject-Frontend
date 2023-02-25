@@ -24,13 +24,20 @@ export class ProductComponent implements OnInit {
       if(params["categoryId"]){
         this.getProductsByCategory(params["categoryId"])
       }else{
-        this.getProducts();
+        this.getProductsBySortingNameAsc();
       }
     })
   }
 
   getProducts(){
     this.productService.getProducts().subscribe(response => {
+      this.products = response.data;
+      this.dataLoaded = true;
+    })
+  }
+
+  getProductsBySortingNameAsc(){
+    this.productService.getProductsBySortingNameAsc().subscribe(response => {
       this.products = response.data;
       this.dataLoaded = true;
     })

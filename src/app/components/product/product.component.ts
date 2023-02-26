@@ -14,6 +14,7 @@ export class ProductComponent implements OnInit {
 
   products: GetAllProductResponse[] = [];
   dataLoaded = false;
+  enablePageButton = false;
   filterText="";
 
   constructor(private productService:ProductService, private activatedRoute:ActivatedRoute, 
@@ -22,9 +23,13 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       if(params["categoryId"]){
-        this.getProductsByCategory(params["categoryId"])
-      }else{
-        this.getProductsBySortingNameAsc();
+        this.getProductsByCategory(params["categoryId"]);
+      }
+      else if(params["pageNo"]){
+        this.getProductsByPaginationAndSortingNameAsc(params["pageNo"]);
+      }
+      else{
+        this.getProductsByPaginationAndSortingNameAsc(1);
       }
     })
   }
@@ -33,6 +38,7 @@ export class ProductComponent implements OnInit {
     this.productService.getProducts().subscribe(response => {
       this.products = response.data;
       this.dataLoaded = true;
+      this.enablePageButton = true;
     })
   }
 
@@ -40,6 +46,15 @@ export class ProductComponent implements OnInit {
     this.productService.getProductsBySortingNameAsc().subscribe(response => {
       this.products = response.data;
       this.dataLoaded = true;
+      this.enablePageButton = true;
+    })
+  }
+
+  getProductsByPaginationAndSortingNameAsc(page:number){
+    this.productService.getProductsByPaginationAndSortingNameAsc(page - 1).subscribe(response => {
+      this.products = response.data;
+      this.dataLoaded = true;
+      this.enablePageButton = true;
     })
   }
 

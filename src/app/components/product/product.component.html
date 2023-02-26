@@ -37,8 +37,24 @@
     <td>{{product.supplierName}}</td>
     <td>{{product.producerName}}</td>
     <td *ngFor="let url of product.urls">
-      <img class="table-images" src="{{url}}" alt="">
+      <a class="image-link" [href]="url" target="_blank">
+        <img class="table-images" src="{{url}}" alt="">
+      </a>
     </td>
     <td><button (click)="addToCart(product)" class="btn btn-success">Sepete ekle!</button></td>
   </tr>
 </table>
+<div *ngIf="enablePageButton">
+  <button class="btn btn-danger" type="button" routerLink="/product/page:1"
+    (click)="getProductsByPaginationAndSortingNameAsc(1)">1
+  </button>
+  <button class="btn btn-danger" type="button" routerLink="/product/page:2"
+    (click)="getProductsByPaginationAndSortingNameAsc(2)">2
+  </button>
+</div>
+
+<!-- <div *ngFor="let item of products; index as i">
+  <button *ngIf="i == 10">
+    TEST BUTTON
+  </button>
+</div> -->

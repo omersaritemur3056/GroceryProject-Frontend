@@ -27,6 +27,11 @@ export class ProductService {
     return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);
   }
 
+  getProductsByPaginationAndSortingNameAsc(pageNo:number):Observable<ListResponseModel<GetAllProductResponse>>{
+    let newPath = this.apiUrl + "product/getlistbypaginationandsorting?pageNo=" + pageNo
+    return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);
+  }
+
   getProductsByCategory(categoryId:number):Observable<ListResponseModel<GetAllProductResponse>>{
     let newPath = this.apiUrl + "product/getallbycategory?categoryId=" + categoryId
     return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);

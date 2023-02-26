@@ -25,7 +25,7 @@ export class CartSummaryComponent implements OnInit {
 
   removeFromCart(product:GetAllProductResponse){
     this.cartService.removeFromCart(product);
-    this.toastrService.error("Ürün: ", product.name + " kaldırıldı!")
+    this.toastrService.error(product.name + " sepetten çıkarıldı!")
   }
 
 }

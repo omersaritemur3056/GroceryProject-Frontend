@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CategoryService } from './category.service';
 import { GetAllCategoryResponse } from '../models/category/get-all-category';
+import { CreateProductRequest } from '../models/product/create-product-request';
+import { ResponseModel } from '../models/response-model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class ProductService {
 
   categories:GetAllCategoryResponse[] = [];
 
-  apiUrl = "http://localhost:8080/api/";
+  apiUrl:string = "http://localhost:8080/api/";
 
   constructor(private httpClient:HttpClient, private categoryService:CategoryService) { }
 
@@ -35,5 +37,9 @@ export class ProductService {
   getProductsByCategory(categoryId:number):Observable<ListResponseModel<GetAllProductResponse>>{
     let newPath = this.apiUrl + "product/getallbycategory?categoryId=" + categoryId
     return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);
+  }
+
+  add(product:CreateProductRequest):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl + "product/add", product);
   }
 }

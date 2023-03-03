@@ -45,16 +45,13 @@
   </tr>
 </table>
 <div *ngIf="enablePageButton">
-  <button class="btn btn-danger" type="button" routerLink="/product/page:1"
-    (click)="getProductsByPaginationAndSortingNameAsc(1)">1
-  </button>
-  <button class="btn btn-danger" type="button" routerLink="/product/page:2"
-    (click)="getProductsByPaginationAndSortingNameAsc(2)">2
-  </button>
+  <button (click)="getProductsByPaginationAndSortingNameAsc(1)" class="btn btn-danger"><<</button>
+  <span *ngFor="let item of products;let i = index">
+    <span>
+      <button class="btn btn-danger" type="button" (click)="getProductsByPaginationAndSortingNameAsc(i + 1)"
+      routerLink="/product/pageNo/{{i}}">
+        {{i + 1}}
+      </button>
+    </span>
+  </span>
 </div>
-
-<!-- <div *ngFor="let item of products; index as i">
-  <button *ngIf="i == 10">
-    TEST BUTTON
-  </button>
-</div> -->

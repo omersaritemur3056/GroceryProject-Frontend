@@ -4,12 +4,14 @@ import { EmployeeComponent } from './components/employee/employee.component';
 import { ProductComponent } from './components/product/product.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProductAddComponent } from './components/product-add/product-add.component';
 
 const routes: Routes = [
   {path:"", component:ProductComponent},
   {path:"product", component:ProductComponent},
   {path:"product/page/:pageNo", component:ProductComponent},
   {path:"product/category/:categoryId", component:ProductComponent},
+  {path:"product/add", component:ProductAddComponent},
   {path:"employee", component:EmployeeComponent},
   {path:"individualcustomer", component:IndividualCustomerComponent},
   {path:"corporatecustomer", component:CorporateCustomerComponent}

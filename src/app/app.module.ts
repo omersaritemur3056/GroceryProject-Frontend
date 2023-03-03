@@ -12,11 +12,12 @@ import { EmployeeComponent } from './components/employee/employee.component';
 import { IndividualCustomerComponent } from './components/individual-customer/individual-customer.component';
 import { CorporateCustomerComponent } from './components/corporate-customer/corporate-customer.component';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from './pipes/filter.pipe';
 
 import { ToastrModule } from 'ngx-toastr';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
+import { ProductAddComponent } from './components/product-add/product-add.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CartSummaryComponent } from './components/cart-summary/cart-summary.com
     CorporateCustomerComponent,
     VatAddedPipe,
     FilterPipe,
-    CartSummaryComponent
+    CartSummaryComponent,
+    ProductAddComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { CartSummaryComponent } from './components/cart-summary/cart-summary.com
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

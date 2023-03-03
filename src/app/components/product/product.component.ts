@@ -15,7 +15,8 @@ export class ProductComponent implements OnInit {
   products: GetAllProductResponse[] = [];
   dataLoaded = false;
   enablePageButton = false;
-  filterText="";
+  filterText = "";
+  pageSize = 10;
 
   constructor(private productService:ProductService, private activatedRoute:ActivatedRoute, 
     private toastrService:ToastrService, private cartService:CartService){}
@@ -37,9 +38,9 @@ export class ProductComponent implements OnInit {
   getProducts(){
     this.productService.getProducts().subscribe(response => {
       this.products = response.data;
-      this.dataLoaded = true;
-      this.enablePageButton = true;
+      this.enablePageButton = false;
     })
+    return this.products.length
   }
 
   getProductsBySortingNameAsc(){
@@ -51,7 +52,8 @@ export class ProductComponent implements OnInit {
   }
 
   getProductsByPaginationAndSortingNameAsc(page:number){
-    this.productService.getProductsByPaginationAndSortingNameAsc(page - 1).subscribe(response => {
+    let x = Math.ceil(page)
+    this.productService.getProductsByPaginationAndSortingNameAsc(x - 1).subscribe(response => {
       this.products = response.data;
       this.dataLoaded = true;
       this.enablePageButton = true;
@@ -69,4 +71,5 @@ export class ProductComponent implements OnInit {
     this.toastrService.success("Sepete eklendi", product.name)
     this.cartService.addToCart(product);
   }
+
 }

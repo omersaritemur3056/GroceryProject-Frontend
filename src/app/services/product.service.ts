@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CategoryService } from './category.service';
-import { GetAllCategoryResponse } from '../models/category/get-all-category';
+import { GetAllCategoryResponse } from '../models/category/get-all-category-response';
 import { CreateProductRequest } from '../models/product/create-product-request';
 import { ResponseModel } from '../models/response-model';
 

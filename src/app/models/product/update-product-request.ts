@@ -1,4 +1,4 @@
-export interface CreateProductRequest {
+export interface UpdateProductRequest {
     name: string;
     price: any; //double veri tipi bulunacak...
     description: string;

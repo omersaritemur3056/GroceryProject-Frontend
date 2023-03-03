@@ -1,8 +1,10 @@
-import { GetAllIndividualCustomerResponse } from './../models/individual-customer/get-all-individual-customer';
+import { GetAllIndividualCustomerResponse } from '../models/individual-customer/get-all-individual-customer-response';
 import { ListResponseModel } from './../models/list-response-model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CreateIndividualCustomerRequest } from '../models/individual-customer/create-individual-customer-request';
+import { ResponseModel } from '../models/response-model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,4 +19,19 @@ export class IndividualCustomerService {
     let newPath = this.apiUrl + "individualcustomer/getall"
     return this.httpClient.get<ListResponseModel<GetAllIndividualCustomerResponse>>(newPath);
   }
+
+  getIndividualCustomersBySortingNameAsc():Observable<ListResponseModel<GetAllIndividualCustomerResponse>>{
+    let newPath = this.apiUrl + "individualcustomer/getlistbysorting"
+    return this.httpClient.get<ListResponseModel<GetAllIndividualCustomerResponse>>(newPath);
+  }
+
+  getIndividualCustomersByPaginationAndSortingNameAsc(pageNo:number):Observable<ListResponseModel<GetAllIndividualCustomerResponse>>{
+    let newPath = this.apiUrl + "individualcustomer/getlistbypaginationandsorting?pageNo=" + pageNo
+    return this.httpClient.get<ListResponseModel<GetAllIndividualCustomerResponse>>(newPath);
+  }
+
+  add(individualcustomer:CreateIndividualCustomerRequest):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl + "individualcustomer/add", individualcustomer);
+  }
+
 }

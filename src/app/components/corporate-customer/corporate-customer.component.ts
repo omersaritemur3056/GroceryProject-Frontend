@@ -1,6 +1,6 @@
 import { CorporateCustomerService } from './../../services/corporate-customer.service';
 import { Component, OnInit } from '@angular/core';
-import { GetAllCorporateCustomerResponse } from 'src/app/models/corporate-customer/get-all-corporate-customer';
+import { GetAllCorporateCustomerResponse } from 'src/app/models/corporate-customer/get-all-corporate-customer-request';
 
 @Component({
   selector: 'app-corporate-customer',

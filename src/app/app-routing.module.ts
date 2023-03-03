@@ -13,8 +13,11 @@ const routes: Routes = [
   {path:"product/category/:categoryId", component:ProductComponent},
   {path:"product/add", component:ProductAddComponent},
   {path:"employee", component:EmployeeComponent},
+  {path:"employee/page/:pageNo", component:EmployeeComponent},
   {path:"individualcustomer", component:IndividualCustomerComponent},
-  {path:"corporatecustomer", component:CorporateCustomerComponent}
+  {path:"individualcustomer/page/:pageNo", component:IndividualCustomerComponent},
+  {path:"corporatecustomer", component:CorporateCustomerComponent},
+  {path:"corporatecustomer/page/:pageNo", component:CorporateCustomerComponent},
 ];
 
 @NgModule({

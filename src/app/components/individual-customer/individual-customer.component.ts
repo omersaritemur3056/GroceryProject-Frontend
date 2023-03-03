@@ -1,6 +1,6 @@
 import { IndividualCustomerService } from './../../services/individual-customer.service';
 import { Component, OnInit } from '@angular/core';
-import { GetAllIndividualCustomerResponse } from 'src/app/models/individual-customer/get-all-individual-customer';
+import { GetAllIndividualCustomerResponse } from 'src/app/models/individual-customer/get-all-individual-customer-response';
 
 @Component({
   selector: 'app-individual-customer',

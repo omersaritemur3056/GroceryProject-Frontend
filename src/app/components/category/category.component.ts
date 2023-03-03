@@ -1,5 +1,5 @@
 import { CategoryService } from './../../services/category.service';
-import { GetAllCategoryResponse } from './../../models/category/get-all-category';
+import { GetAllCategoryResponse } from '../../models/category/get-all-category-response';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

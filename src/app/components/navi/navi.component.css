@@ -1,4 +1,9 @@
 .navbar-brand{
-    font-size: 1.9rem;
+    font-size: 2rem;
+    font-weight: 575;
+    color: chartreuse;
+}
+
+.navbar-nav{
     color: chartreuse;
 }

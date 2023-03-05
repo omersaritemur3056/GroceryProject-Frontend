@@ -36,7 +36,6 @@ export class ProductAddComponent implements OnInit {
 
   add(){
     if(this.productAddForm.valid){
-      //let productModel = Object.assign({}, this.productAddForm.value);
       let productModel = JSON.parse(JSON.stringify(this.productAddForm.value))
       this.productService.add(productModel).subscribe(response => {
         this.toastrService.success(response.message, "Başarili")

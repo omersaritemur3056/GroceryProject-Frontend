@@ -1,7 +1,8 @@
 .list-group-item{
-    color: red;
+    color: #10e51a;
+    background-color: #f03393;
     font-size: 1.1rem;
-    font-weight: 575;
+    font-weight: 700;
     padding: 0.5rem;
     border: none;
 }

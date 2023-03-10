@@ -22,5 +22,11 @@
         <td>{{individualCustomer.lastName}}</td>
         <td>{{individualCustomer.gender}}</td>
         <td>{{individualCustomer.nationalIdentity}}</td>
+        <td>
+            <span>
+                <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .6rem;"
+                    class="btn btn-danger btn-sm" (click)="deleteIndividualCustomer(individualCustomer.id)">Sil</button>
+            </span>
+        </td>
     </tr>
 </table>

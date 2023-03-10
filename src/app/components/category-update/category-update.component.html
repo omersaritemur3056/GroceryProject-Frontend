@@ -2,10 +2,10 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="title">Kategori ekle</h5>
+                <h5 class="title">Kategori güncelle</h5>
             </div>
             <div class="card-body">
-                <form [formGroup]="categoryAddForm">
+                <form [formGroup]="categoryUpdateForm">
                     <div class="mb-3">
                         <label for="name">Kategori adı</label>
                         <div class="form-group">
@@ -16,7 +16,7 @@
                 </form>
             </div>
             <div class="card-footer">
-                <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+                <button class="btn btn-fill btn-primary" (click)="update()">Güncelle</button>
             </div>
         </div>
     </div>

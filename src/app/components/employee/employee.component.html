@@ -24,5 +24,11 @@
     <td>{{employee.nationality}}</td>
     <td>{{employee.birthYear}}</td>
     <td>{{employee.salary}}</td>
+    <td>
+      <span>
+          <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .6rem;"
+              class="btn btn-danger btn-sm" (click)="deleteEmployee(employee.id)">Sil</button>
+      </span>
+  </td>
   </tr>
 </table>

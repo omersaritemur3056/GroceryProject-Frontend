@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/list-response-model';
 import { ResponseModel } from '../models/response-model';
 import { CreateSupplierRequest } from '../models/supplier/create-supplier-request';
+import { DeleteSupplierRequest } from '../models/supplier/delete-supplier-request';
 import { GetAllSupplierResponse } from '../models/supplier/get-all-supplier-response';
 
 @Injectable({
@@ -34,4 +35,7 @@ export class SupplierService {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "supplier/add", supplier);
   }
 
+  delete(supplier:DeleteSupplierRequest):Observable<ResponseModel>{
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "supplier/delete", {body:supplier});
+  }
 }

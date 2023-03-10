@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/list-response-model';
 import { CreateOrderRequest } from '../models/order/create-order-request';
+import { DeleteOrderRequest } from '../models/order/delete-order-request';
 import { GetAllOrderResponse } from '../models/order/get-all-order-response';
 import { ResponseModel } from '../models/response-model';
 
@@ -34,4 +35,7 @@ export class OrderService {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "order/add", order);
   }
 
+  delete(order:DeleteOrderRequest):Observable<ResponseModel>{
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "order/delete", {body:order});
+  }
 }

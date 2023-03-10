@@ -6,6 +6,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { CategoryAddComponent } from './components/category-add/category-add.component';
+import { CategoryUpdateComponent } from './components/category-update/category-update.component';
+import { ProductUpdateComponent } from './components/product-update/product-update.component';
 
 const routes: Routes = [
   {path:"", component:ProductComponent},
@@ -13,7 +15,9 @@ const routes: Routes = [
   {path:"product/page/:pageNo", component:ProductComponent},
   {path:"product/category/:categoryId", component:ProductComponent},
   {path:"product/add", component:ProductAddComponent},
+  {path:"product/update/:id", component:ProductUpdateComponent},
   {path:"category/add", component:CategoryAddComponent},
+  {path:"category/update/:id", component:CategoryUpdateComponent},
   {path:"employee", component:EmployeeComponent},
   {path:"employee/page/:pageNo", component:EmployeeComponent},
   {path:"individualcustomer", component:IndividualCustomerComponent},

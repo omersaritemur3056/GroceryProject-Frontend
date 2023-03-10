@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CreateIndividualCustomerRequest } from '../models/individual-customer/create-individual-customer-request';
 import { ResponseModel } from '../models/response-model';
+import { DeleteIndividualCustomerRequest } from '../models/individual-customer/delete-individual-customer-request';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +35,7 @@ export class IndividualCustomerService {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "individualcustomer/add", individualcustomer);
   }
 
+  delete(individualcustomer:DeleteIndividualCustomerRequest):Observable<ResponseModel>{
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "individualcustomer/delete", {body:individualcustomer});
+  }
 }

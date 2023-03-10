@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/list-response-model';
 import { CreateProducerRequest } from '../models/producer/create-producer-request';
+import { DeleteProducerRequest } from '../models/producer/delete-producer-request';
 import { GetAllProducerResponse } from '../models/producer/get-all-producer-response';
 import { ResponseModel } from '../models/response-model';
 
@@ -34,4 +35,7 @@ export class ProducerService {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "producer/add", producer);
   }
 
+  delete(producer:DeleteProducerRequest):Observable<ResponseModel>{
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "producer/delete", {body:producer});
+  }
 }

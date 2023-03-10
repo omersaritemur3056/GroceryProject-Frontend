@@ -27,5 +27,4 @@ export class PhotoService {
     let newPath = this.apiUrl + "image/getlistbypaginationandsorting?pageNo=" + pageNo
     return this.httpClient.get<ListResponseModel<GetAllImageResponse>>(newPath);
   }
-
 }

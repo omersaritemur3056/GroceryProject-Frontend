@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/list-response-model';
 import { CreatePaymentRequest } from '../models/payment/create-payment-request';
+import { DeletePaymentRequest } from '../models/payment/delete-payment-request';
 import { GetAllPaymentResponse } from '../models/payment/get-all-payment-response';
 import { ResponseModel } from '../models/response-model';
 
@@ -34,4 +35,7 @@ export class PaymentService {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "payment/add", payment);
   }
 
+  delete(payment:DeletePaymentRequest):Observable<ResponseModel>{
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "payment/delete", {body:payment});
+  }
 }

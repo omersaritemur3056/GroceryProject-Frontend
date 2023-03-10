@@ -42,6 +42,16 @@
       </a>
     </td>
     <td><button (click)="addToCart(product)" class="btn btn-success">Sepete ekle!</button></td>
+    <td>
+      <span>
+        <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .6rem;" 
+        class="btn btn-warning btn-sm">Ürünü güncelle!</button>
+      </span>
+      <span>
+        <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .1rem; --bs-btn-font-size: .6rem;"
+         class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Ürünü kaldır!</button>
+      </span>
+    </td>
   </tr>
 </table>
 <div *ngIf="enablePageButton">
@@ -49,8 +59,8 @@
   <span *ngFor="let item of products;let i = index">
     <span>
       <button class="btn btn-danger" type="button" (click)="getProductsByPaginationAndSortingNameAsc(i + 1)"
-      routerLink="/product/pageNo/{{i}}">
-        {{i + 1}}
+      routerLink="/product/pageNo/{{i|paging:pageSize}}">
+        {{i |paging:pageSize}}
       </button>
     </span>
   </span>

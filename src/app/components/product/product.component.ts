@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { GetAllProductResponse } from 'src/app/models/product/get-all-product-response';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { DeleteProductRequest } from 'src/app/models/product/delete-product-request';
 
 @Component({
   selector: 'app-product',
@@ -35,12 +36,16 @@ export class ProductComponent implements OnInit {
     })
   }
 
-  getProducts(){
+  getProducts():GetAllProductResponse[]{
     this.productService.getProducts().subscribe(response => {
       this.products = response.data;
       this.enablePageButton = false;
     })
-    return this.products.length
+    return this.products;
+  }
+
+  getAllProductsLength():number{
+    return this.products.length;
   }
 
   getProductsBySortingNameAsc(){
@@ -64,6 +69,14 @@ export class ProductComponent implements OnInit {
     this.productService.getProductsByCategory(categoryId).subscribe(response => {
       this.products = response.data;
       this.dataLoaded = true;
+    })
+  }
+
+  deleteProduct(deleteProductId:number){
+    if(!window.confirm("Silmek istediğinize emin misiniz?")){return;}
+    let deleteProduct:DeleteProductRequest = {id:deleteProductId}
+    this.productService.delete(deleteProduct).subscribe(response => {
+      this.toastrService.error(response.message, deleteProduct.id.toString());
     })
   }
 

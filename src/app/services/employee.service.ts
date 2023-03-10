@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CreateEmployeeRequest } from '../models/employee/create-employee-request';
 import { ResponseModel } from '../models/response-model';
+import { DeleteEmployeeRequest } from '../models/employee/delete-employee-request';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +35,7 @@ export class EmployeeService {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "employee/add", employee);
   }
 
+  delete(employee:DeleteEmployeeRequest):Observable<ResponseModel>{
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "employee/delete", {body:employee});
+  }
 }

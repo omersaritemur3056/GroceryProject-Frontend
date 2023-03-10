@@ -18,5 +18,11 @@
         <td>{{corporateCustomer.phoneNumber}}</td>
         <td>{{corporateCustomer.companyName}}</td>
         <td>{{corporateCustomer.taxNumber}}</td>
+        <td>
+            <span>
+                <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .6rem;"
+                    class="btn btn-danger btn-sm" (click)="deleteCorporateCustomer(corporateCustomer.id)">Sil</button>
+            </span>
+        </td>
     </tr>
 </table>

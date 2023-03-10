@@ -1,6 +1,8 @@
 import { CategoryService } from './../../services/category.service';
 import { GetAllCategoryResponse } from '../../models/category/get-all-category-response';
 import { Component, OnInit } from '@angular/core';
+import { DeleteCategoryRequest } from 'src/app/models/category/delete-category-request';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-category',
@@ -12,7 +14,7 @@ export class CategoryComponent implements OnInit {
   categories:GetAllCategoryResponse[] = [];
   currentCategory:GetAllCategoryResponse;
 
-  constructor(private categoryService:CategoryService){}
+  constructor(private categoryService:CategoryService, private toastrService:ToastrService){}
 
   ngOnInit(): void {
     this.getCategories();
@@ -46,5 +48,13 @@ export class CategoryComponent implements OnInit {
     }else{
       return "list-group-item"
     }
+  }
+
+  deleteCategory(deleteCategoryId:number){
+    if(!window.confirm("Silmek istediğinize emin misiniz?")){return;}
+    let deleteCategory:DeleteCategoryRequest = {id:deleteCategoryId}
+    this.categoryService.delete(deleteCategory).subscribe(response => {
+      this.toastrService.error(response.message, deleteCategory.id.toString());
+    })
   }
 }

@@ -19,6 +19,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { CategoryAddComponent } from './components/category-add/category-add.component';
+import { CategoryUpdateComponent } from './components/category-update/category-update.component';
+import { ProductUpdateComponent } from './components/product-update/product-update.component';
+import { PagingPipe } from './pipes/paging.pipe';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { CategoryAddComponent } from './components/category-add/category-add.com
     FilterPipe,
     CartSummaryComponent,
     ProductAddComponent,
-    CategoryAddComponent
+    CategoryAddComponent,
+    CategoryUpdateComponent,
+    ProductUpdateComponent,
+    PagingPipe
   ],
   imports: [
     BrowserModule,

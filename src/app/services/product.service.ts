@@ -7,6 +7,8 @@ import { CategoryService } from './category.service';
 import { GetAllCategoryResponse } from '../models/category/get-all-category-response';
 import { CreateProductRequest } from '../models/product/create-product-request';
 import { ResponseModel } from '../models/response-model';
+import { UpdateProductRequest } from '../models/product/update-product-request';
+import { DeleteProductRequest } from '../models/product/delete-product-request';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +43,13 @@ export class ProductService {
 
   add(product:CreateProductRequest):Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>(this.apiUrl + "product/add", product);
+  }
+
+  update(product:UpdateProductRequest, id:number):Observable<ResponseModel>{
+    return this.httpClient.put<ResponseModel>(this.apiUrl + "product/update?id=" + id, product);
+  }
+
+  delete(deleteProduct:DeleteProductRequest):Observable<ResponseModel>{
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "product/delete" , {body:deleteProduct});
   }
 }

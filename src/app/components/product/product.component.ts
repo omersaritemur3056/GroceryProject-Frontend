@@ -5,6 +5,7 @@ import { GetAllProductResponse } from 'src/app/models/product/get-all-product-re
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteProductRequest } from 'src/app/models/product/delete-product-request';
+import { UpdateProductRequest } from 'src/app/models/product/update-product-request';
 
 @Component({
   selector: 'app-product',
@@ -14,8 +15,9 @@ import { DeleteProductRequest } from 'src/app/models/product/delete-product-requ
 export class ProductComponent implements OnInit {
 
   products: GetAllProductResponse[] = [];
-  dataLoaded = false;
-  enablePageButton = false;
+  dataLoaded:boolean = false;
+  enablePageButton:boolean = false;
+  clickedUpdateButtond:boolean = false;
   filterText = "";
   pageSize = 10;
 
@@ -78,6 +80,11 @@ export class ProductComponent implements OnInit {
     this.productService.delete(deleteProduct).subscribe(response => {
       this.toastrService.error(response.message, deleteProduct.id.toString());
     })
+  }
+
+  updateProduct(updateProductId:number){
+    let productForUpdate = this.products.find(p => p.id == updateProductId);
+    let updateProduct:UpdateProductRequest;
   }
 
   addToCart(product:GetAllProductResponse){

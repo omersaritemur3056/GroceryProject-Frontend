@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'src/app/services/product.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-update',
@@ -14,7 +15,7 @@ export class ProductUpdateComponent {
   id:number;
 
   constructor(private formBuilder:FormBuilder, private productService:ProductService,
-    private toastrService:ToastrService){}
+    private toastrService:ToastrService, private route:ActivatedRoute){}
 
   ngOnInit(): void {
       this.createProductUpdateForm();
@@ -38,13 +39,16 @@ export class ProductUpdateComponent {
   update(){
     if(this.productUpdateForm.valid){
       let productModel = JSON.parse(JSON.stringify(this.productUpdateForm.value))
-      this.productService.update(productModel, this.id).subscribe(response => {
-        this.toastrService.success(response.message, "Başarili")
-      }, error => {
-        for(let key in error.error.data){
-          this.toastrService.error(error.error.data[key], error.error.message)
-        }
-      });
+      this.route.params.subscribe(params => {
+        this.id = params['id'];
+        this.productService.update(productModel, this.id).subscribe(response => {
+          this.toastrService.success(response.message, "Başarili")
+        }, error => {
+          for(let key in error.error.data){
+            this.toastrService.error(error.error.data[key], error.error.message)
+          }
+        });
+      })
     }else{
       this.toastrService.error("Form bilgileri eksik ya da hatali!", "Dikkat!")
     }

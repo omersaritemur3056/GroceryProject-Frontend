@@ -41,16 +41,12 @@
         <img class="table-images" src="{{url}}" alt="">
       </a>
     </td>
-    <td><button (click)="addToCart(product)" class="btn btn-success">Sepete ekle!</button></td>
+    <td><button (click)="addToCart(product)" class="btn btn-success btn-sm">Sepete ekle!</button></td>
     <td>
-      <span>
-        <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .6rem;" 
-        class="btn btn-warning btn-sm">Ürünü güncelle!</button>
-      </span>
-      <span>
-        <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .1rem; --bs-btn-font-size: .6rem;"
-         class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Ürünü kaldır!</button>
-      </span>
+        <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;" 
+        class="btn btn-secondary btn-sm" routerLink="/product/update/{{product.id}}">Güncelle</button>
+        <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
+         class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Sil</button>
     </td>
   </tr>
 </table>

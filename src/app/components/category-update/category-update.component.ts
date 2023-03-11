@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from 'src/app/services/category.service';
 
@@ -14,7 +15,7 @@ export class CategoryUpdateComponent {
   id:number;
 
   constructor(private formBuilder:FormBuilder, private categoryService:CategoryService, 
-    private toastrService:ToastrService) { }
+    private toastrService:ToastrService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
       this.updateCategoryForm();
@@ -29,12 +30,15 @@ export class CategoryUpdateComponent {
   update(){
     if (this.categoryUpdateForm.valid) {
       let categoryModel = Object.assign({}, this.categoryUpdateForm.value);
-      this.categoryService.update(this.id, categoryModel).subscribe(response => {
-        this.toastrService.success(response.message, "Başarılı!");
-      }, error => {
-        for(let key in error.error.data){
-          this.toastrService.error(error.error.data[key], error.error.message)
-        }
+      this.route.params.subscribe(params => {
+        this.id = params['id'];
+        this.categoryService.update(this.id, categoryModel).subscribe(response => {
+          this.toastrService.success(response.message, "Başarılı!");
+        }, error => {
+          for(let key in error.error.data){
+            this.toastrService.error(error.error.data[key], error.error.message)
+          }
+        })
       })
     } else {
       this.toastrService.error("Form bilgileri eksik ya da hatali!", "Dikkat!")

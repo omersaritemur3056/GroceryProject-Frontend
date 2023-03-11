@@ -4,7 +4,7 @@
     [class]="getCurrentCategoryClass(category)" *ngFor="let category of categories">
     {{category.name |titlecase}}
     <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .1rem; --bs-btn-font-size: .6rem;" type="button"
-      class="btn btn-warning btn-sm" routerLink="category/update/{{category.id}}">Güncelle</button>
+      class="btn btn-warning btn-sm" routerLink="/category/update/{{category.id}}">Güncelle</button>
     <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .6rem;" type="button"
       class="btn btn-danger btn-sm" (click)="deleteCategory(category.id)">Sil</button>
   </li>

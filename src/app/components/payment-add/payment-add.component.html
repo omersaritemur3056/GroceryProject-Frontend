@@ -1,0 +1,58 @@
+<div class="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="title">Kredi kartı ekle</h5>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="paymentAddForm">
+                    <div class="mb-3">
+                        <label for="cardNumber">Kart numarası</label>
+                        <div class="form-group">
+                            <input type="text" id="cardNumber" formControlName="cardNumber" class="form-control"
+                                placeholder="Kart numarası" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fullName">Fullname</label>
+                        <div class="form-group">
+                            <input type="text" id="fullName" formControlName="fullName" class="form-control"
+                                placeholder="Fullname" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cardExpirationYear">card Expiration Year</label>
+                        <div class="form-group">
+                            <input type="number" id="cardExpirationYear" formControlName="cardExpirationYear" class="form-control"
+                                placeholder="Card Expiration Year" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cardExpirationMonth">Card Expiration Month</label>
+                        <div class="form-group">
+                            <input type="number" id="cardExpirationMonth" formControlName="cardExpirationMonth" class="form-control"
+                                placeholder="Card Expiration Month" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cardCvv">Cvv</label>
+                        <div class="form-group">
+                            <input type="text" id="cardCvv" formControlName="cardCvv" class="form-control"
+                                placeholder="Cvv" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="balance">Balance</label>
+                        <div class="form-group">
+                            <input type="number" id="balance" formControlName="balance" class="form-control"
+                                placeholder="Stok adedi" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+            </div>
+        </div>
+    </div>
+</div>

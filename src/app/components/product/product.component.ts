@@ -17,7 +17,6 @@ export class ProductComponent implements OnInit {
   products: GetAllProductResponse[] = [];
   dataLoaded:boolean = false;
   enablePageButton:boolean = false;
-  clickedUpdateButtond:boolean = false;
   filterText = "";
   pageSize = 10;
 
@@ -80,11 +79,6 @@ export class ProductComponent implements OnInit {
     this.productService.delete(deleteProduct).subscribe(response => {
       this.toastrService.error(response.message, deleteProduct.id.toString());
     })
-  }
-
-  updateProduct(updateProductId:number){
-    let productForUpdate = this.products.find(p => p.id == updateProductId);
-    let updateProduct:UpdateProductRequest;
   }
 
   addToCart(product:GetAllProductResponse){

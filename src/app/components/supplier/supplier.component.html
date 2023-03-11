@@ -1,0 +1,22 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th>Tedarikçi Adı</th>
+        <th>Adres</th>
+        <th>Telefon numarası</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let supplier of suppliers">
+      <td>{{supplier.name}}</td>
+      <td>{{supplier.address}}</td>
+      <td>{{supplier.phoneNumber}}</td>
+      <td>{{supplier.email}}</td>
+      <td>
+        <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;" 
+        class="btn btn-secondary btn-sm" routerLink="/supplier/update/{{supplier.id}}">Güncelle</button>
+        <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
+         class="btn btn-danger btn-sm" (click)="deleteSupplier(supplier.id)">Sil</button>
+    </td>
+    </tr>
+  </table>

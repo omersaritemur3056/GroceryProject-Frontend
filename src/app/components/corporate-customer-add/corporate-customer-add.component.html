@@ -1,0 +1,58 @@
+<div class="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="title">Tüzel müşteri ekle</h5>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="corporateCustomerAddForm">
+                    <div class="mb-3">
+                        <label for="address">Adres</label>
+                        <div class="form-group">
+                            <input type="text" id="address" formControlName="address" class="form-control"
+                                placeholder="Adres" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phoneNumber">Telefon numarası</label>
+                        <div class="form-group">
+                            <input type="text" id="phoneNumber" formControlName="phoneNumber" class="form-control"
+                                placeholder="Telefon numarası" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="companyName">Şirket adı</label>
+                        <div class="form-group">
+                            <input type="text" id="companyName" formControlName="companyName" class="form-control"
+                                placeholder="Şirket adı" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="taxNumber">Vergi No.</label>
+                        <div class="form-group">
+                            <input type="text" id="taxNumber" formControlName="taxNumber" class="form-control"
+                                placeholder="Vergi No." />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userId">User Id</label>
+                        <div class="form-group">
+                            <input type="number" id="userId" formControlName="userId" class="form-control"
+                                placeholder="User Id" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageId">Image Id</label>
+                        <div class="form-group">
+                            <input type="number" id="imageId" formControlName="imageId" class="form-control"
+                                placeholder="Image Id" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+            </div>
+        </div>
+    </div>
+</div>

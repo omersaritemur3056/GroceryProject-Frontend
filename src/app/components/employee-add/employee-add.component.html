@@ -1,0 +1,72 @@
+<div class="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="title">Çalışan ekle</h5>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="employeeAddForm">
+                    <div class="mb-3">
+                        <label for="firstName">Adı</label>
+                        <div class="form-group">
+                            <input type="text" id="firstName" formControlName="firstName" class="form-control"
+                                placeholder="Adı" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName">Soyadı</label>
+                        <div class="form-group">
+                            <input type="text" id="lastName" formControlName="lastName" class="form-control"
+                                placeholder="Soyadı" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gender">Cinsiyeti</label>
+                        <div class="form-group">
+                            <input type="text" id="gender" formControlName="gender" class="form-control"
+                                placeholder="Cinsiyeti" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nationalIdentity">Kimlik No.</label>
+                        <div class="form-group">
+                            <input type="text" id="nationalIdentity" formControlName="nationalIdentity" class="form-control"
+                                placeholder="Kimlik No." />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="birthYear">Doğum tarihi</label>
+                        <div class="form-group">
+                            <input type="date" id="birthYear" formControlName="birthYear" class="form-control"
+                                placeholder="Doğum tarihi" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="salary">Maaşı</label>
+                        <div class="form-group">
+                            <input type="number" id="salary" formControlName="salary" class="form-control"
+                                placeholder="Maaşı" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userId">User Id</label>
+                        <div class="form-group">
+                            <input type="number" id="userId" formControlName="userId" class="form-control"
+                                placeholder="User Id" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageId">Image Id</label>
+                        <div class="form-group">
+                            <input type="number" id="imageId" formControlName="imageId" class="form-control"
+                                placeholder="Image Id" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+            </div>
+        </div>
+    </div>
+</div>

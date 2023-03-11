@@ -22,6 +22,21 @@ import { CategoryAddComponent } from './components/category-add/category-add.com
 import { CategoryUpdateComponent } from './components/category-update/category-update.component';
 import { ProductUpdateComponent } from './components/product-update/product-update.component';
 import { PagingPipe } from './pipes/paging.pipe';
+import { CorporateCustomerUpdateComponent } from './components/corporate-customer-update/corporate-customer-update.component';
+import { IndividualCustomerUpdateComponent } from './components/individual-customer-update/individual-customer-update.component';
+import { EmployeeUpdateComponent } from './components/employee-update/employee-update.component';
+import { ProducerComponent } from './components/producer/producer.component';
+import { ProducerAddComponent } from './components/producer-add/producer-add.component';
+import { ProducerUpdateComponent } from './components/producer-update/producer-update.component';
+import { SupplierComponent } from './components/supplier/supplier.component';
+import { SupplierAddComponent } from './components/supplier-add/supplier-add.component';
+import { SupplierUpdateComponent } from './components/supplier-update/supplier-update.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { PaymentAddComponent } from './components/payment-add/payment-add.component';
+import { PaymentUpdateComponent } from './components/payment-update/payment-update.component';
+import { EmployeeAddComponent } from './components/employee-add/employee-add.component';
+import { IndividualCustomerAddComponent } from './components/individual-customer-add/individual-customer-add.component';
+import { CorporateCustomerAddComponent } from './components/corporate-customer-add/corporate-customer-add.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +54,22 @@ import { PagingPipe } from './pipes/paging.pipe';
     CategoryAddComponent,
     CategoryUpdateComponent,
     ProductUpdateComponent,
-    PagingPipe
+    PagingPipe,
+    CorporateCustomerUpdateComponent,
+    IndividualCustomerUpdateComponent,
+    EmployeeUpdateComponent,
+    ProducerComponent,
+    ProducerAddComponent,
+    ProducerUpdateComponent,
+    SupplierComponent,
+    SupplierAddComponent,
+    SupplierUpdateComponent,
+    PaymentComponent,
+    PaymentAddComponent,
+    PaymentUpdateComponent,
+    EmployeeAddComponent,
+    IndividualCustomerAddComponent,
+    CorporateCustomerAddComponent
   ],
   imports: [
     BrowserModule,

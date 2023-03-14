@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class NaviComponent {
 
+  haveToken(){
+    if (localStorage.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  logout(){
+    localStorage.clear();
+  }
 }

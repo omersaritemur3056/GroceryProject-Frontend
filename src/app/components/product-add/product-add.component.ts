@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { map, Observable } from 'rxjs';
+import { GetAllCategoryResponse } from 'src/app/models/category/get-all-category-response';
+import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -11,12 +14,26 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductAddComponent implements OnInit {
 
   productAddForm:FormGroup;
+  categories:GetAllCategoryResponse[] = [];
 
   constructor(private formBuilder:FormBuilder, private productService:ProductService,
-    private toastrService:ToastrService){}
+    private toastrService:ToastrService, private categoryService:CategoryService){}
 
   ngOnInit(): void {
       this.createProductAddForm();
+  }
+
+  getCategories():Observable<GetAllCategoryResponse[]>{
+    return this.categoryService.getCategories().pipe(
+      map(response => response.data)
+    );
+  }
+
+  getCategories2(){
+    this.categoryService.getCategories().forEach(c => {
+      this.categories = c.data;
+    })
+    return this.categories;
   }
 
   createProductAddForm(){

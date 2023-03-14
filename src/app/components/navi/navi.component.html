@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Grocery</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -24,7 +25,8 @@
         <ul class="dropdown-menu">
           <li><button class="dropdown-item" type="button" routerLink="employee">Çalışanlar</button></li>
           <li><button class="dropdown-item" type="button" routerLink="corporatecustomer">Tüzel Müşteriler</button></li>
-          <li><button class="dropdown-item" type="button" routerLink="individualcustomer">Bireysel Müşteriler</button></li>
+          <li><button class="dropdown-item" type="button" routerLink="individualcustomer">Bireysel Müşteriler</button>
+          </li>
           <li><button class="dropdown-item" type="button" routerLink="payment">Ödemeler</button></li>
           <li><button class="dropdown-item" type="button" routerLink="producer">Üreticiler</button></li>
           <li><button class="dropdown-item" type="button" routerLink="supplier">Tedarikçiler</button></li>
@@ -39,8 +41,10 @@
           <li><button class="dropdown-item" type="button" routerLink="product/add">Ürün ekle</button></li>
           <li><button class="dropdown-item" type="button" routerLink="category/add">Kategori ekle</button></li>
           <li><button class="dropdown-item" type="button" routerLink="employee/add">Çalışan ekle</button></li>
-          <li><button class="dropdown-item" type="button" routerLink="individualcustomer/add">Biretysel müşteri ekle</button></li>
-          <li><button class="dropdown-item" type="button" routerLink="corporatecustomer/add">Tüzel müşteri ekle</button></li>
+          <li><button class="dropdown-item" type="button" routerLink="individualcustomer/add">Biretysel müşteri
+              ekle</button></li>
+          <li><button class="dropdown-item" type="button" routerLink="corporatecustomer/add">Tüzel müşteri ekle</button>
+          </li>
           <li><button class="dropdown-item" type="button" routerLink="payment/add">Kredi kartı ekle</button></li>
           <li><button class="dropdown-item" type="button" routerLink="producer/add">Üretici ekle</button></li>
           <li><button class="dropdown-item" type="button" routerLink="supplier/add">Tedarikçi ekle</button></li>
@@ -50,6 +54,10 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
+      <button type="button" class="btn btn-primary" routerLink="/register" *ngIf="haveToken()==false">Register</button>
+      <button type="button" class="btn btn-primary" routerLink="/login" *ngIf="haveToken()==false">Login</button>
+      <button type="button" class="btn btn-danger" (click)="logout()" *ngIf="haveToken()==true"
+        routerLink="">Logout</button>
     </div>
   </div>
 </nav>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
 
 import { AppRoutingModule } from './app-routing.module';
@@ -37,6 +37,8 @@ import { PaymentUpdateComponent } from './components/payment-update/payment-upda
 import { EmployeeAddComponent } from './components/employee-add/employee-add.component';
 import { IndividualCustomerAddComponent } from './components/individual-customer-add/individual-customer-add.component';
 import { CorporateCustomerAddComponent } from './components/corporate-customer-add/corporate-customer-add.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,8 @@ import { CorporateCustomerAddComponent } from './components/corporate-customer-a
     PaymentUpdateComponent,
     EmployeeAddComponent,
     IndividualCustomerAddComponent,
-    CorporateCustomerAddComponent
+    CorporateCustomerAddComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +85,9 @@ import { CorporateCustomerAddComponent } from './components/corporate-customer-a
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

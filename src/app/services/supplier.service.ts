@@ -6,6 +6,7 @@ import { ResponseModel } from '../models/response-model';
 import { CreateSupplierRequest } from '../models/supplier/create-supplier-request';
 import { DeleteSupplierRequest } from '../models/supplier/delete-supplier-request';
 import { GetAllSupplierResponse } from '../models/supplier/get-all-supplier-response';
+import { UpdateSupplierRequest } from '../models/supplier/update-supplier-request';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,9 @@ export class SupplierService {
 
   delete(supplier:DeleteSupplierRequest):Observable<ResponseModel>{
     return this.httpClient.delete<ResponseModel>(this.apiUrl + "supplier/delete", {body:supplier});
+  }
+
+  update(id:number, supplier:UpdateSupplierRequest):Observable<ResponseModel>{
+    return this.httpClient.put<ResponseModel>(this.apiUrl + "supplier/update?id=" + id, supplier);
   }
 }

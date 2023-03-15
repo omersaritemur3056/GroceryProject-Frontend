@@ -5,6 +5,7 @@ import { ListResponseModel } from '../models/list-response-model';
 import { CreateProducerRequest } from '../models/producer/create-producer-request';
 import { DeleteProducerRequest } from '../models/producer/delete-producer-request';
 import { GetAllProducerResponse } from '../models/producer/get-all-producer-response';
+import { UpdateProducerRequest } from '../models/producer/update-producer-request';
 import { ResponseModel } from '../models/response-model';
 
 @Injectable({
@@ -37,5 +38,9 @@ export class ProducerService {
 
   delete(producer:DeleteProducerRequest):Observable<ResponseModel>{
     return this.httpClient.delete<ResponseModel>(this.apiUrl + "producer/delete", {body:producer});
+  }
+
+  update(id:number, producer:UpdateProducerRequest):Observable<ResponseModel>{
+    return this.httpClient.put<ResponseModel>(this.apiUrl + "producer/update?id=" + id, producer);
   }
 }

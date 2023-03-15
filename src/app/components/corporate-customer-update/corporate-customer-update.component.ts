@@ -37,7 +37,7 @@ export class CorporateCustomerUpdateComponent {
       let corporateCustomerModel = JSON.parse(JSON.stringify(this.corporateCustomerUpdateForm.value))
       this.route.params.subscribe(params => {
         this.id = params['id'];
-        this.corporateCustomerService.add(corporateCustomerModel).subscribe(response => {
+        this.corporateCustomerService.update(this.id, corporateCustomerModel).subscribe(response => {
           this.toastrService.success(response.message, "Başarili")
         }, error => {
           for(let key in error.error.data){

@@ -39,6 +39,9 @@ import { IndividualCustomerAddComponent } from './components/individual-customer
 import { CorporateCustomerAddComponent } from './components/corporate-customer-add/corporate-customer-add.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { RegisterComponent } from './components/register/register.component';
+import { UserComponent } from './components/user/user.component';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +75,10 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     EmployeeAddComponent,
     IndividualCustomerAddComponent,
     CorporateCustomerAddComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    UserComponent,
+    UserUpdateComponent
   ],
   imports: [
     BrowserModule,

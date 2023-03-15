@@ -25,6 +25,9 @@ import { PaymentAddComponent } from './components/payment-add/payment-add.compon
 import { PaymentUpdateComponent } from './components/payment-update/payment-update.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginGuard } from './guards/login.guard';
+import { RegisterComponent } from './components/register/register.component';
+import { UserComponent } from './components/user/user.component';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
 
 const routes: Routes = [
   {path:"", component:ProductComponent},
@@ -60,6 +63,9 @@ const routes: Routes = [
   {path:"payment/add", component:PaymentAddComponent, canActivate:[LoginGuard]},
   {path:"payment/update/:id", component:PaymentUpdateComponent, canActivate:[LoginGuard]},
   {path:"login", component:LoginComponent},
+  {path:"register", component:RegisterComponent},
+  {path:"user", component:UserComponent, canActivate:[LoginGuard]},
+  {path:"user/update/:id", component:UserUpdateComponent, canActivate:[LoginGuard]}
 ];
 
 @NgModule({

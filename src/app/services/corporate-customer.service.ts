@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { CreateCorporateCustomerRequest } from '../models/corporate-customer/create-corporate-customer-request';
 import { ResponseModel } from '../models/response-model';
 import { DeleteCorporateCustomerRequest } from '../models/corporate-customer/delete-corporate-customer-request';
+import { UpdateCorporateCustomerRequest } from '../models/corporate-customer/update-corporate-customer-request';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,9 @@ export class CorporateCustomerService {
   
   delete(corporateCustomer:DeleteCorporateCustomerRequest):Observable<ResponseModel>{
     return this.httpClient.delete<ResponseModel>(this.apiUrl + "corporatecustomer/delete", {body:corporateCustomer});
+  }
+
+  update(id:number, corporateCustomer:UpdateCorporateCustomerRequest):Observable<ResponseModel>{
+    return this.httpClient.put<ResponseModel>(this.apiUrl + "corporateCustomer/update?id=" + id, corporateCustomer);
   }
 }

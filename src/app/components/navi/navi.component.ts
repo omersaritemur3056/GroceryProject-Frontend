@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class NaviComponent {
 
+  role = localStorage.getItem("roles");
+
   haveToken(){
     if (localStorage.length > 0) {
       return true;
@@ -17,5 +19,12 @@ export class NaviComponent {
 
   logout(){
     localStorage.clear();
+  }
+
+  hasAdmin(){
+    if (!this.role == null || this.role == "ADMIN") {
+      return true;
+    }
+    return false;
   }
 }

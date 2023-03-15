@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { CreateEmployeeRequest } from '../models/employee/create-employee-request';
 import { ResponseModel } from '../models/response-model';
 import { DeleteEmployeeRequest } from '../models/employee/delete-employee-request';
+import { UpdateEmployeeRequest } from '../models/employee/update-employee-request';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,9 @@ export class EmployeeService {
 
   delete(employee:DeleteEmployeeRequest):Observable<ResponseModel>{
     return this.httpClient.delete<ResponseModel>(this.apiUrl + "employee/delete", {body:employee});
+  }
+
+  update(id:number, employee:UpdateEmployeeRequest):Observable<ResponseModel>{
+    return this.httpClient.put<ResponseModel>(this.apiUrl + "employee/update?id=" + id, employee);
   }
 }

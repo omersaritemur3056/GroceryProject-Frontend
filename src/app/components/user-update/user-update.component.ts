@@ -2,37 +2,40 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ProducerService } from 'src/app/services/producer.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-producer-update',
-  templateUrl: './producer-update.component.html',
-  styleUrls: ['./producer-update.component.css']
+  selector: 'app-user-update',
+  templateUrl: './user-update.component.html',
+  styleUrls: ['./user-update.component.css']
 })
-export class ProducerUpdateComponent {
+export class UserUpdateComponent {
 
-  producerUpdateForm:FormGroup;
+  userUpdateForm:FormGroup;
   id:number;
 
-  constructor(private formBuilder:FormBuilder, private producerService:ProducerService,
+  constructor(private formBuilder:FormBuilder, private userService:UserService,
     private toastrService:ToastrService, private route:ActivatedRoute){}
 
   ngOnInit(): void {
-      this.createProducerUpdateForm();
+      this.createUserUpdateForm();
   }
 
-  createProducerUpdateForm(){
-    this.producerUpdateForm = this.formBuilder.group({
-      name:["", Validators.required]
+  createUserUpdateForm(){
+    this.userUpdateForm = this.formBuilder.group({
+      username:["", Validators.required],
+      email:["", Validators.required],
+      role:[[""]],
+      password:["", Validators.required]
     })
   }
 
   update(){
-    if(this.producerUpdateForm.valid){
-      let supplierModel = Object.assign({}, this.producerUpdateForm.value)
+    if(this.userUpdateForm.valid){
+      let userModel = JSON.parse(JSON.stringify(this.userUpdateForm.value))
       this.route.params.subscribe(params => {
         this.id = params['id'];
-        this.producerService.update(this.id, supplierModel).subscribe(response => {
+        this.userService.update(this.id, userModel).subscribe(response => {
           this.toastrService.success(response.message, "Başarili")
         }, error => {
           for(let key in error.error.data){

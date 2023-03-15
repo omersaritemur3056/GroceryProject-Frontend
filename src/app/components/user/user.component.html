@@ -1,0 +1,30 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th>User Id</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Email</th>
+        <th>Roles</th>
+        <th>Created Date</th>
+        <th>Updated Date</th>
+        <th>Active</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let user of users">
+      <td>{{user.id}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.password}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.roles}}</td>
+      <td>{{user.createdDate}}</td>
+      <td>{{user.updatedDate}}</td>
+      <td>{{user.active}}</td>
+      <td>
+        <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;"
+          class="btn btn-secondary btn-sm" routerLink="/user/update/{{user.id}}">Güncelle</button>
+        <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
+          class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Sil</button>
+      </td>
+    </tr>
+  </table>

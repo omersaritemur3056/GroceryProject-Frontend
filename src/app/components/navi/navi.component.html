@@ -23,14 +23,19 @@
           Varlıkları Listele
         </button>
         <ul class="dropdown-menu">
-          <li><button class="dropdown-item" type="button" routerLink="employee">Çalışanlar</button></li>
-          <li><button class="dropdown-item" type="button" routerLink="corporatecustomer">Tüzel Müşteriler</button></li>
-          <li><button class="dropdown-item" type="button" routerLink="individualcustomer">Bireysel Müşteriler</button>
+          <li><button class="dropdown-item" type="button" routerLink="employee">Çalışanlar</button>
           </li>
+          <li><button class="dropdown-item" type="button" routerLink="corporatecustomer">Tüzel
+              Müşteriler</button></li>
+          <li><button class="dropdown-item" type="button" routerLink="individualcustomer">Bireysel
+              Müşteriler</button></li>
           <li><button class="dropdown-item" type="button" routerLink="payment">Ödemeler</button></li>
-          <li><button class="dropdown-item" type="button" routerLink="producer">Üreticiler</button></li>
-          <li><button class="dropdown-item" type="button" routerLink="supplier">Tedarikçiler</button></li>
+          <li><button class="dropdown-item" type="button" routerLink="producer">Üreticiler</button>
+          </li>
+          <li><button class="dropdown-item" type="button" routerLink="supplier">Tedarikçiler</button>
+          </li>
           <li><button class="dropdown-item" type="button" routerLink="product">Ürünler</button></li>
+          <li><button class="dropdown-item" type="button" routerLink="user" *ngIf="hasAdmin()">Kullanıcılar</button></li>
         </ul>
       </div>
       <div class="dropdown">
@@ -38,16 +43,23 @@
           Ekleme Menüsü
         </button>
         <ul class="dropdown-menu">
-          <li><button class="dropdown-item" type="button" routerLink="product/add">Ürün ekle</button></li>
-          <li><button class="dropdown-item" type="button" routerLink="category/add">Kategori ekle</button></li>
-          <li><button class="dropdown-item" type="button" routerLink="employee/add">Çalışan ekle</button></li>
-          <li><button class="dropdown-item" type="button" routerLink="individualcustomer/add">Biretysel müşteri
-              ekle</button></li>
-          <li><button class="dropdown-item" type="button" routerLink="corporatecustomer/add">Tüzel müşteri ekle</button>
+          <li><button class="dropdown-item" type="button" routerLink="product/add">Ürün ekle</button>
           </li>
-          <li><button class="dropdown-item" type="button" routerLink="payment/add">Kredi kartı ekle</button></li>
-          <li><button class="dropdown-item" type="button" routerLink="producer/add">Üretici ekle</button></li>
-          <li><button class="dropdown-item" type="button" routerLink="supplier/add">Tedarikçi ekle</button></li>
+          <li><button class="dropdown-item" type="button" routerLink="category/add">Kategori
+              ekle</button></li>
+          <li><button class="dropdown-item" type="button" routerLink="employee/add">Çalışan
+              ekle</button></li>
+          <li><button class="dropdown-item" type="button" routerLink="individualcustomer/add">Bireysel müşteri
+              ekle</button></li>
+          <li><button class="dropdown-item" type="button" routerLink="corporatecustomer/add">Tüzel
+              müşteri ekle</button>
+          </li>
+          <li><button class="dropdown-item" type="button" routerLink="payment/add">Kredi kartı
+              ekle</button></li>
+          <li><button class="dropdown-item" type="button" routerLink="producer/add">Üretici
+              ekle</button></li>
+          <li><button class="dropdown-item" type="button" routerLink="supplier/add">Tedarikçi
+              ekle</button></li>
         </ul>
       </div>
       <form class="d-flex" role="search">

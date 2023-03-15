@@ -35,7 +35,7 @@ export class SupplierUpdateComponent {
       let supplierModel = JSON.parse(JSON.stringify(this.supplierUpdateForm.value))
       this.route.params.subscribe(params => {
         this.id = params['id'];
-        this.supplierService.add(supplierModel).subscribe(response => {
+        this.supplierService.update(this.id, supplierModel).subscribe(response => {
           this.toastrService.success(response.message, "Başarili")
         }, error => {
           for(let key in error.error.data){

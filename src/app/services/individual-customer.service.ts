@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { CreateIndividualCustomerRequest } from '../models/individual-customer/create-individual-customer-request';
 import { ResponseModel } from '../models/response-model';
 import { DeleteIndividualCustomerRequest } from '../models/individual-customer/delete-individual-customer-request';
+import { UpdateIndividualCustomerRequest } from '../models/individual-customer/update-individual-customer-request';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,9 @@ export class IndividualCustomerService {
 
   delete(individualcustomer:DeleteIndividualCustomerRequest):Observable<ResponseModel>{
     return this.httpClient.delete<ResponseModel>(this.apiUrl + "individualcustomer/delete", {body:individualcustomer});
+  }
+
+  update(id:number, individualCustomer:UpdateIndividualCustomerRequest):Observable<ResponseModel>{
+    return this.httpClient.put<ResponseModel>(this.apiUrl + "individualcustomer/update?id=" + id, individualCustomer);
   }
 }

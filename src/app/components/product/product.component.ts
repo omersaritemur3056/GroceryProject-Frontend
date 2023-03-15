@@ -5,7 +5,6 @@ import { GetAllProductResponse } from 'src/app/models/product/get-all-product-re
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteProductRequest } from 'src/app/models/product/delete-product-request';
-import { UpdateProductRequest } from 'src/app/models/product/update-product-request';
 
 @Component({
   selector: 'app-product',
@@ -82,6 +81,10 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(product:GetAllProductResponse){
+    if (localStorage.length < 1) {
+      this.toastrService.error("Sisteme giriş yapmalısınız!")
+      return;
+    }
     this.toastrService.success("Sepete eklendi", product.name)
     this.cartService.addToCart(product);
   }

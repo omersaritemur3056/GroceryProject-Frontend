@@ -5,6 +5,7 @@ import { ListResponseModel } from '../models/list-response-model';
 import { CreateOrderRequest } from '../models/order/create-order-request';
 import { DeleteOrderRequest } from '../models/order/delete-order-request';
 import { GetAllOrderResponse } from '../models/order/get-all-order-response';
+import { UpdateOrderRequest } from '../models/order/update-order-request';
 import { ResponseModel } from '../models/response-model';
 
 @Injectable({
@@ -37,5 +38,9 @@ export class OrderService {
 
   delete(order:DeleteOrderRequest):Observable<ResponseModel>{
     return this.httpClient.delete<ResponseModel>(this.apiUrl + "order/delete", {body:order});
+  }
+
+  update(id:number, order:UpdateOrderRequest):Observable<ResponseModel>{
+    return this.httpClient.put<ResponseModel>(this.apiUrl + "order/update?id=" + id, order);
   }
 }

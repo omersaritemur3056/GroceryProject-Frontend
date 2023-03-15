@@ -5,6 +5,7 @@ import { ListResponseModel } from '../models/list-response-model';
 import { CreatePaymentRequest } from '../models/payment/create-payment-request';
 import { DeletePaymentRequest } from '../models/payment/delete-payment-request';
 import { GetAllPaymentResponse } from '../models/payment/get-all-payment-response';
+import { UpdatePaymentRequest } from '../models/payment/update-payment-request';
 import { ResponseModel } from '../models/response-model';
 
 @Injectable({
@@ -37,5 +38,9 @@ export class PaymentService {
 
   delete(payment:DeletePaymentRequest):Observable<ResponseModel>{
     return this.httpClient.delete<ResponseModel>(this.apiUrl + "payment/delete", {body:payment});
+  }
+
+  update(id:number, payment:UpdatePaymentRequest):Observable<ResponseModel>{
+    return this.httpClient.put<ResponseModel>(this.apiUrl + "payment/update?id=" + id, payment);
   }
 }

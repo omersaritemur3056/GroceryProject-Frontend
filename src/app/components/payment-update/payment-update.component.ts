@@ -37,7 +37,7 @@ export class PaymentUpdateComponent {
       let paymentModel = JSON.parse(JSON.stringify(this.paymentUpdateForm.value))
       this.route.params.subscribe(params => {
         this.id = params['id'];
-        this.paymentService.add(paymentModel).subscribe(response => {
+        this.paymentService.update(this.id, paymentModel).subscribe(response => {
           this.toastrService.success(response.message, "Başarili")
         }, error => {
           for(let key in error.error.data){

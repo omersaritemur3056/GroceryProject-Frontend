@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginModel).subscribe(response => {
         this.toastrService.info("Hoş geldiniz!", response.data.username);
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("roles", response.data.roles.toLocaleString())
       }, error => {
         console.log(error);
         this.toastrService.error(error.error.message, "Hatalı bilgiler!");

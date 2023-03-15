@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DataResponseModel } from '../models/data-response-model';
 import { LoginModel } from '../models/login/login-model';
+import { RegisterModel } from '../models/register/register-model';
 import { TokenModel } from '../models/token-model';
 
 @Injectable({
@@ -13,9 +14,9 @@ export class AuthService {
 
   constructor(private httpClient:HttpClient) { }
 
-  register(){
+  register(user:RegisterModel){
     let newPath = this.apiUrl + "user/signup"
-
+    return this.httpClient.post<DataResponseModel<RegisterModel>>(newPath, user);
   }
 
   login(user:LoginModel){

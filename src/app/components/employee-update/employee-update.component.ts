@@ -40,7 +40,7 @@ export class EmployeeUpdateComponent {
       let employeeModel = JSON.parse(JSON.stringify(this.employeeUpdateForm.value))
       this.route.params.subscribe(params => {
         this.id = params['id'];
-        this.employeeService.add(employeeModel).subscribe(response => {
+        this.employeeService.update(this.id, employeeModel).subscribe(response => {
           this.toastrService.success(response.message, "Başarili")
         }, error => {
           for(let key in error.error.data){

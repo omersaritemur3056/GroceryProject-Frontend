@@ -5,6 +5,7 @@ import { GetAllProductResponse } from 'src/app/models/product/get-all-product-re
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteProductRequest } from 'src/app/models/product/delete-product-request';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-product',
@@ -20,7 +21,7 @@ export class ProductComponent implements OnInit {
   pageSize = 10;
 
   constructor(private productService:ProductService, private activatedRoute:ActivatedRoute, 
-    private toastrService:ToastrService, private cartService:CartService){}
+    private toastrService:ToastrService, private cartService:CartService, private authService:AuthService){}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -89,4 +90,27 @@ export class ProductComponent implements OnInit {
     this.cartService.addToCart(product);
   }
 
+  isAdmin(){
+    if (this.authService.hasAutorized().role == "ADMIN") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isModerator(){
+    if (this.authService.hasAutorized().role == "MODERATOR") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isEditor(){
+    if (this.authService.hasAutorized().role == "EDITOR") {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

@@ -3,6 +3,7 @@ import { GetAllCategoryResponse } from '../../models/category/get-all-category-r
 import { Component, OnInit } from '@angular/core';
 import { DeleteCategoryRequest } from 'src/app/models/category/delete-category-request';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-category',
@@ -14,7 +15,8 @@ export class CategoryComponent implements OnInit {
   categories:GetAllCategoryResponse[] = [];
   currentCategory:GetAllCategoryResponse;
 
-  constructor(private categoryService:CategoryService, private toastrService:ToastrService){}
+  constructor(private categoryService:CategoryService, private toastrService:ToastrService, 
+    private authService:AuthService){}
 
   ngOnInit(): void {
     this.getCategories();
@@ -56,5 +58,29 @@ export class CategoryComponent implements OnInit {
     this.categoryService.delete(deleteCategory).subscribe(response => {
       this.toastrService.error(response.message, deleteCategory.id.toString());
     })
+  }
+
+  isAdmin(){
+    if (this.authService.hasAutorized().role == "ADMIN") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isModerator(){
+    if (this.authService.hasAutorized().role == "MODERATOR") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  isEditor(){
+    if (this.authService.hasAutorized().role == "EDITOR") {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

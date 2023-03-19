@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navi',
   templateUrl: './navi.component.html',
   styleUrls: ['./navi.component.css']
 })
-export class NaviComponent {
+export class NaviComponent{
 
-  role = localStorage.getItem("roles");
+  constructor(private authService:AuthService){}
 
   haveToken(){
     if (localStorage.length > 0) {
@@ -19,12 +20,29 @@ export class NaviComponent {
 
   logout(){
     localStorage.clear();
+    location.replace("/product")
   }
 
-  hasAdmin(){
-    if (!this.role == null || this.role == "ADMIN") {
+  isAdmin(){
+    if (this.authService.hasAutorized().role == "ADMIN") {
       return true;
+    } else {
+      return false;
     }
-    return false;
+  }
+
+  isModerator(){
+    if (this.authService.hasAutorized().role == "MODERATOR") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  isEditor(){
+    if (this.authService.hasAutorized().role == "EDITOR") {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

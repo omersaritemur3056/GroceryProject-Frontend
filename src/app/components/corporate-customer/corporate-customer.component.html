@@ -20,10 +20,11 @@
         <td>{{corporateCustomer.taxNumber}}</td>
         <td>
             <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;"
-                class="btn btn-secondary btn-sm"
-                routerLink="/corporateCustomer/update/{{corporateCustomer.id}}">Güncelle</button>
+                class="btn btn-secondary btn-sm" routerLink="/corporateCustomer/update/{{corporateCustomer.id}}"
+                *ngIf="isAdmin() || isModerator()">Güncelle</button>
             <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
-                class="btn btn-danger btn-sm" (click)="deleteCorporateCustomer(corporateCustomer.id)">Sil</button>
+                class="btn btn-danger btn-sm" (click)="deleteCorporateCustomer(corporateCustomer.id)"
+                *ngIf="isAdmin() || isModerator()">Sil</button>
         </td>
     </tr>
 </table>

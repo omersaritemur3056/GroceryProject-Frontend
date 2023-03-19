@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DeletePaymentRequest } from 'src/app/models/payment/delete-payment-request';
 import { GetAllPaymentResponse } from 'src/app/models/payment/get-all-payment-response';
+import { AuthService } from 'src/app/services/auth.service';
 import { PaymentService } from 'src/app/services/payment.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class PaymentComponent {
   pageSize = 10;
 
   constructor(private paymentService:PaymentService, private activatedRoute:ActivatedRoute, 
-    private toastrService:ToastrService){}
+    private toastrService:ToastrService, private authService:AuthService){}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -63,5 +64,29 @@ export class PaymentComponent {
     this.paymentService.delete(deletePayment).subscribe(response => {
       this.toastrService.error(response.message, deletePayment.id.toString());
     })
+  }
+
+  isAdmin(){
+    if (this.authService.hasAutorized().role == "ADMIN") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isModerator(){
+    if (this.authService.hasAutorized().role == "MODERATOR") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isEditor(){
+    if (this.authService.hasAutorized().role == "EDITOR") {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

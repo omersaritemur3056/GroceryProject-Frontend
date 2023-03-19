@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteProducerRequest } from 'src/app/models/producer/delete-producer-request';
 import { GetAllProducerResponse } from 'src/app/models/producer/get-all-producer-response';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProducerService } from 'src/app/services/producer.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class ProducerComponent {
 
   producers: GetAllProducerResponse[] = [];
 
-  constructor(private producerService:ProducerService, private toastrService:ToastrService){}
+  constructor(private producerService:ProducerService, private toastrService:ToastrService, 
+    private authService:AuthService){}
 
   ngOnInit(): void {
     this.getProducers();
@@ -31,5 +33,29 @@ export class ProducerComponent {
     this.producerService.delete(deleteProducer).subscribe(response => {
       this.toastrService.error(response.message, deleteProducer.id.toString());
     })
+  }
+
+  isAdmin(){
+    if (this.authService.hasAutorized().role == "ADMIN") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isModerator(){
+    if (this.authService.hasAutorized().role == "MODERATOR") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isEditor(){
+    if (this.authService.hasAutorized().role == "EDITOR") {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

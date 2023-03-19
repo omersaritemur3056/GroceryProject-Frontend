@@ -22,9 +22,9 @@
       <td>{{user.active}}</td>
       <td>
         <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;"
-          class="btn btn-secondary btn-sm" routerLink="/user/update/{{user.id}}">Güncelle</button>
+          class="btn btn-secondary btn-sm" routerLink="/user/update/{{user.id}}" *ngIf="isAdmin()">Güncelle</button>
         <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
-          class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Sil</button>
+          class="btn btn-danger btn-sm" (click)="deleteUser(user.id)" *ngIf="isAdmin()">Sil</button>
       </td>
     </tr>
   </table>

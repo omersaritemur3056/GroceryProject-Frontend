@@ -43,21 +43,24 @@
     </td>
     <td><button (click)="addToCart(product)" class="btn btn-success btn-sm">Sepete ekle!</button></td>
     <td>
-        <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;" 
-        class="btn btn-secondary btn-sm" routerLink="/product/update/{{product.id}}">Güncelle</button>
-        <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
-         class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Sil</button>
+      <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;"
+        class="btn btn-secondary btn-sm" routerLink="/product/update/{{product.id}}"
+        *ngIf="isAdmin() || isModerator() || isEditor()">Güncelle</button>
+      <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
+        class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)" *ngIf="isAdmin() || isModerator()">
+        Sil</button>
     </td>
   </tr>
 </table>
 <div *ngIf="enablePageButton">
-  <button (click)="getProductsByPaginationAndSortingNameAsc(1)" class="btn btn-danger"><<</button>
-  <span *ngFor="let item of products;let i = index">
-    <span>
-      <button class="btn btn-danger" type="button" (click)="getProductsByPaginationAndSortingNameAsc(i + 1)"
-      routerLink="/product/pageNo/{{i|paging:pageSize}}">
-        {{i |paging:pageSize}}
-      </button>
-    </span>
-  </span>
+  <button (click)="getProductsByPaginationAndSortingNameAsc(1)" class="btn btn-danger">
+    <<< </button>
+      <span *ngFor="let item of products;let i = index">
+        <span>
+          <button class="btn btn-danger" type="button" (click)="getProductsByPaginationAndSortingNameAsc(i + 1)"
+            routerLink="/product/pageNo/{{i|paging:pageSize}}">
+            {{i |paging:pageSize}}
+          </button>
+        </span>
+      </span>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm:FormGroup;
 
   constructor(private formBuilder:FormBuilder, private authService:AuthService, 
-    private toastrService:ToastrService) {}
+    private toastrService:ToastrService, private router:Router) {}
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -33,6 +34,9 @@ export class LoginComponent implements OnInit {
         this.toastrService.info("Hoş geldiniz!", response.data.username);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("roles", response.data.roles.toLocaleString())
+        setTimeout(() => {
+          location.replace("/product")
+        },1000)
       }, error => {
         console.log(error);
         this.toastrService.error(error.error.message, "Hatalı bilgiler!");

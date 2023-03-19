@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteSupplierRequest } from 'src/app/models/supplier/delete-supplier-request';
 import { GetAllSupplierResponse } from 'src/app/models/supplier/get-all-supplier-response';
+import { AuthService } from 'src/app/services/auth.service';
 import { SupplierService } from 'src/app/services/supplier.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class SupplierComponent {
 
   suppliers: GetAllSupplierResponse[] = [];
 
-  constructor(private supplierService:SupplierService, private toastrService:ToastrService){}
+  constructor(private supplierService:SupplierService, private toastrService:ToastrService, 
+    private authService:AuthService){}
 
   ngOnInit(): void {
     this.getSuppliers();
@@ -31,5 +33,29 @@ export class SupplierComponent {
     this.supplierService.delete(deleteSupplier).subscribe(response => {
       this.toastrService.error(response.message, deleteSupplier.id.toString());
     })
+  }
+
+  isAdmin(){
+    if (this.authService.hasAutorized().role == "ADMIN") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isModerator(){
+    if (this.authService.hasAutorized().role == "MODERATOR") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isEditor(){
+    if (this.authService.hasAutorized().role == "EDITOR") {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

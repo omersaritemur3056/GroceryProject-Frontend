@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { GetAllCorporateCustomerResponse } from 'src/app/models/corporate-customer/get-all-corporate-customer-request';
 import { DeleteCorporateCustomerRequest } from 'src/app/models/corporate-customer/delete-corporate-customer-request';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-corporate-customer',
@@ -13,7 +14,8 @@ export class CorporateCustomerComponent implements OnInit {
 
   corporateCustomers: GetAllCorporateCustomerResponse[] = [];
 
-  constructor(private corporateCustomerService:CorporateCustomerService, private toastrService:ToastrService){}
+  constructor(private corporateCustomerService:CorporateCustomerService, private toastrService:ToastrService, 
+    private authService:AuthService){}
 
   ngOnInit(): void {
     this.getCorporateCustomers();
@@ -31,5 +33,29 @@ export class CorporateCustomerComponent implements OnInit {
     this.corporateCustomerService.delete(deleteCorporateCustomer).subscribe(response => {
       this.toastrService.error(response.message, deleteCorporateCustomer.id.toString());
     })
+  }
+
+  isAdmin(){
+    if (this.authService.hasAutorized().role == "ADMIN") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isModerator(){
+    if (this.authService.hasAutorized().role == "MODERATOR") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isEditor(){
+    if (this.authService.hasAutorized().role == "EDITOR") {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

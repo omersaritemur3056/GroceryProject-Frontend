@@ -14,9 +14,11 @@
     <td>{{supplier.email}}</td>
     <td>
       <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;"
-        class="btn btn-secondary btn-sm" routerLink="/supplier/update/{{supplier.id}}">Güncelle</button>
+        class="btn btn-secondary btn-sm" routerLink="/supplier/update/{{supplier.id}}" 
+        *ngIf="isAdmin() || isModerator()">Güncelle</button>
       <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
-        class="btn btn-danger btn-sm" (click)="deleteSupplier(supplier.id)">Sil</button>
+        class="btn btn-danger btn-sm" (click)="deleteSupplier(supplier.id)" 
+        *ngIf="isAdmin() || isModerator()">Sil</button>
     </td>
   </tr>
 </table>

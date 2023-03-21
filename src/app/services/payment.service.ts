@@ -15,32 +15,33 @@ export class PaymentService {
 
   apiUrl = "http://localhost:8080/api/";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getPayments():Observable<ListResponseModel<GetAllPaymentResponse>>{
+  getPayments(): Observable<ListResponseModel<GetAllPaymentResponse>> {
     let newPath = this.apiUrl + "payment/getall"
     return this.httpClient.get<ListResponseModel<GetAllPaymentResponse>>(newPath);
   }
 
-  getPaymentsBySortingNameAsc():Observable<ListResponseModel<GetAllPaymentResponse>>{
-    let newPath = this.apiUrl + "payment/getlistbysorting"
+  getPaymentsBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllPaymentResponse>> {
+    let newPath = this.apiUrl + "payment/getlistbysorting?sortBy=" + sortBy
     return this.httpClient.get<ListResponseModel<GetAllPaymentResponse>>(newPath);
   }
 
-  getPaymentsByPaginationAndSortingNameAsc(pageNo:number):Observable<ListResponseModel<GetAllPaymentResponse>>{
-    let newPath = this.apiUrl + "payment/getlistbypaginationandsorting?pageNo=" + pageNo
+  getPaymentsByPaginationAndSortingNameAsc(pageNo: number, pageSize: number, sortBy: string): Observable<ListResponseModel<GetAllPaymentResponse>> {
+    let newPath = this.apiUrl +
+      `payment/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
     return this.httpClient.get<ListResponseModel<GetAllPaymentResponse>>(newPath);
   }
 
-  add(payment:CreatePaymentRequest):Observable<ResponseModel>{
+  add(payment: CreatePaymentRequest): Observable<ResponseModel> {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "payment/add", payment);
   }
 
-  delete(payment:DeletePaymentRequest):Observable<ResponseModel>{
-    return this.httpClient.delete<ResponseModel>(this.apiUrl + "payment/delete", {body:payment});
+  delete(payment: DeletePaymentRequest): Observable<ResponseModel> {
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "payment/delete", { body: payment });
   }
 
-  update(id:number, payment:UpdatePaymentRequest):Observable<ResponseModel>{
+  update(id: number, payment: UpdatePaymentRequest): Observable<ResponseModel> {
     return this.httpClient.put<ResponseModel>(this.apiUrl + "payment/update?id=" + id, payment);
   }
 }

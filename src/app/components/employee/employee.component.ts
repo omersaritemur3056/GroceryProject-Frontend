@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class EmployeeComponent implements OnInit {
 
   employees: GetAllEmployeeResponse[] = [];
+  filterText = "";
 
   constructor(private employeeService:EmployeeService, private toastrService:ToastrService, 
     private authService:AuthService){}

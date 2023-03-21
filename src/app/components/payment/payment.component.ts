@@ -14,59 +14,58 @@ import { PaymentService } from 'src/app/services/payment.service';
 export class PaymentComponent {
 
   payments: GetAllPaymentResponse[] = [];
-  enablePageButton:boolean = false;
+  enablePageButton: boolean = false;
   filterText = "";
-  pageSize = 10;
+  pageNo: number;
+  pageSize: number = 10;
+  sortBy: string = "name";
 
-  constructor(private paymentService:PaymentService, private activatedRoute:ActivatedRoute, 
-    private toastrService:ToastrService, private authService:AuthService){}
+  constructor(private paymentService: PaymentService, private activatedRoute: ActivatedRoute,
+    private toastrService: ToastrService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      if(params["pageNo"]){
+      if (params["pageNo"]) {
         this.getPaymentsByPaginationAndSortingNameAsc(params["pageNo"]);
       }
-      else{
+      else {
         this.getPaymentsByPaginationAndSortingNameAsc(1);
       }
     })
   }
 
-  getPayments():GetAllPaymentResponse[]{
+  getPayments(): GetAllPaymentResponse[] {
     this.paymentService.getPayments().subscribe(response => {
       this.payments = response.data;
     })
     return this.payments;
   }
 
-  getAllPaymentsLength():number{
-    return this.payments.length;
-  }
-
-  getPaymentsBySortingNameAsc(){
-    this.paymentService.getPaymentsBySortingNameAsc().subscribe(response => {
+  getPaymentsBySortingNameAsc() {
+    this.paymentService.getPaymentsBySortingNameAsc(this.sortBy).subscribe(response => {
       this.payments = response.data;
       this.enablePageButton = true;
     })
   }
 
-  getPaymentsByPaginationAndSortingNameAsc(page:number){
+  getPaymentsByPaginationAndSortingNameAsc(page: number) {
     let x = Math.ceil(page)
-    this.paymentService.getPaymentsByPaginationAndSortingNameAsc(x - 1).subscribe(response => {
-      this.payments = response.data;
-      this.enablePageButton = true;
-    })
+    this.paymentService.getPaymentsByPaginationAndSortingNameAsc(x - 1, this.pageSize, this.sortBy)
+      .subscribe(response => {
+        this.payments = response.data;
+        this.enablePageButton = true;
+      })
   }
 
-  deletePayment(deletePaymentId:number){
-    if(!window.confirm("Silmek istediğinize emin misiniz?")){return;}
-    let deletePayment:DeletePaymentRequest = {id:deletePaymentId}
+  deletePayment(deletePaymentId: number) {
+    if (!window.confirm("Silmek istediğinize emin misiniz?")) { return; }
+    let deletePayment: DeletePaymentRequest = { id: deletePaymentId }
     this.paymentService.delete(deletePayment).subscribe(response => {
       this.toastrService.error(response.message, deletePayment.id.toString());
     })
   }
 
-  isAdmin(){
+  isAdmin() {
     if (this.authService.hasAutorized().role == "ADMIN") {
       return true;
     } else {
@@ -74,7 +73,7 @@ export class PaymentComponent {
     }
   }
 
-  isModerator(){
+  isModerator() {
     if (this.authService.hasAutorized().role == "MODERATOR") {
       return true;
     } else {
@@ -82,7 +81,7 @@ export class PaymentComponent {
     }
   }
 
-  isEditor(){
+  isEditor() {
     if (this.authService.hasAutorized().role == "EDITOR") {
       return true;
     } else {

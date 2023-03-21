@@ -13,6 +13,7 @@ import { ProducerService } from 'src/app/services/producer.service';
 export class ProducerComponent {
 
   producers: GetAllProducerResponse[] = [];
+  filterText = "";
 
   constructor(private producerService:ProducerService, private toastrService:ToastrService, 
     private authService:AuthService){}

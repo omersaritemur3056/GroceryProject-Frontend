@@ -26,13 +26,14 @@ export class ProductService {
     return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);
   }
 
-  getProductsBySortingNameAsc():Observable<ListResponseModel<GetAllProductResponse>>{
-    let newPath = this.apiUrl + "product/getlistbysorting"
+  getProductsBySortingNameAsc(sortBy:string):Observable<ListResponseModel<GetAllProductResponse>>{
+    let newPath = this.apiUrl + "product/getlistbysorting?sortBy=" + sortBy
     return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);
   }
 
-  getProductsByPaginationAndSortingNameAsc(pageNo:number):Observable<ListResponseModel<GetAllProductResponse>>{
-    let newPath = this.apiUrl + "product/getlistbypaginationandsorting?pageNo=" + pageNo
+  getProductsByPaginationAndSortingNameAsc(pageNo:number, pageSize:number, sortBy:string):Observable<ListResponseModel<GetAllProductResponse>>{
+    let newPath = this.apiUrl + 
+    `product/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
     return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);
   }
 

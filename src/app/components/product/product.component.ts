@@ -14,30 +14,32 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ProductComponent implements OnInit {
 
-  products: GetAllProductResponse[] = [];
-  dataLoaded:boolean = false;
-  enablePageButton:boolean = false;
+  products:GetAllProductResponse[] = [];
+  dataLoaded: boolean = false;
+  enablePageButton: boolean = false;
   filterText = "";
-  pageSize = 10;
+  pageNo:number;
+  pageSize:number = 10;
+  sortBy:string = "name";
 
-  constructor(private productService:ProductService, private activatedRoute:ActivatedRoute, 
-    private toastrService:ToastrService, private cartService:CartService, private authService:AuthService){}
+  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute,
+    private toastrService: ToastrService, private cartService: CartService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      if(params["categoryId"]){
+      if (params["categoryId"]) {
         this.getProductsByCategory(params["categoryId"]);
       }
-      else if(params["pageNo"]){
+      else if (params["pageNo"]) {
         this.getProductsByPaginationAndSortingNameAsc(params["pageNo"]);
       }
-      else{
+      else {
         this.getProductsByPaginationAndSortingNameAsc(1);
       }
     })
   }
 
-  getProducts():GetAllProductResponse[]{
+  getProducts(): GetAllProductResponse[] {
     this.productService.getProducts().subscribe(response => {
       this.products = response.data;
       this.enablePageButton = false;
@@ -45,43 +47,40 @@ export class ProductComponent implements OnInit {
     return this.products;
   }
 
-  getAllProductsLength():number{
-    return this.products.length;
-  }
-
-  getProductsBySortingNameAsc(){
-    this.productService.getProductsBySortingNameAsc().subscribe(response => {
+  getProductsBySortingNameAsc() {
+    this.productService.getProductsBySortingNameAsc(this.sortBy).subscribe(response => {
       this.products = response.data;
       this.dataLoaded = true;
       this.enablePageButton = true;
     })
   }
 
-  getProductsByPaginationAndSortingNameAsc(page:number){
+  getProductsByPaginationAndSortingNameAsc(page: number) {
     let x = Math.ceil(page)
-    this.productService.getProductsByPaginationAndSortingNameAsc(x - 1).subscribe(response => {
-      this.products = response.data;
-      this.dataLoaded = true;
-      this.enablePageButton = true;
+    this.productService.getProductsByPaginationAndSortingNameAsc(x - 1, this.pageSize, this.sortBy)
+      .subscribe(response => {
+        this.products = response.data;
+        this.dataLoaded = true;
+        this.enablePageButton = true;
     })
   }
 
-  getProductsByCategory(categoryId:number){
+  getProductsByCategory(categoryId: number) {
     this.productService.getProductsByCategory(categoryId).subscribe(response => {
       this.products = response.data;
       this.dataLoaded = true;
     })
   }
 
-  deleteProduct(deleteProductId:number){
-    if(!window.confirm("Silmek istediğinize emin misiniz?")){return;}
-    let deleteProduct:DeleteProductRequest = {id:deleteProductId}
+  deleteProduct(deleteProductId: number) {
+    if (!window.confirm("Silmek istediğinize emin misiniz?")) { return; }
+    let deleteProduct: DeleteProductRequest = { id: deleteProductId }
     this.productService.delete(deleteProduct).subscribe(response => {
       this.toastrService.error(response.message, deleteProduct.id.toString());
     })
   }
 
-  addToCart(product:GetAllProductResponse){
+  addToCart(product: GetAllProductResponse) {
     if (localStorage.length < 1) {
       this.toastrService.error("Sisteme giriş yapmalısınız!")
       return;
@@ -90,7 +89,7 @@ export class ProductComponent implements OnInit {
     this.cartService.addToCart(product);
   }
 
-  isAdmin(){
+  isAdmin() {
     if (this.authService.hasAutorized().role == "ADMIN") {
       return true;
     } else {
@@ -98,7 +97,7 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  isModerator(){
+  isModerator() {
     if (this.authService.hasAutorized().role == "MODERATOR") {
       return true;
     } else {
@@ -106,7 +105,7 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  isEditor(){
+  isEditor() {
     if (this.authService.hasAutorized().role == "EDITOR") {
       return true;
     } else {

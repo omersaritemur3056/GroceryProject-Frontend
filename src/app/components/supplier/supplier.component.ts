@@ -13,6 +13,7 @@ import { SupplierService } from 'src/app/services/supplier.service';
 export class SupplierComponent {
 
   suppliers: GetAllSupplierResponse[] = [];
+  filterText = "";
 
   constructor(private supplierService:SupplierService, private toastrService:ToastrService, 
     private authService:AuthService){}

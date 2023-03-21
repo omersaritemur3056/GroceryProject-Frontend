@@ -15,32 +15,33 @@ export class ProducerService {
 
   apiUrl = "http://localhost:8080/api/";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getProducers():Observable<ListResponseModel<GetAllProducerResponse>>{
+  getProducers(): Observable<ListResponseModel<GetAllProducerResponse>> {
     let newPath = this.apiUrl + "producer/getall"
     return this.httpClient.get<ListResponseModel<GetAllProducerResponse>>(newPath);
   }
 
-  getProducersBySortingNameAsc():Observable<ListResponseModel<GetAllProducerResponse>>{
-    let newPath = this.apiUrl + "producer/getlistbysorting"
+  getProducersBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllProducerResponse>> {
+    let newPath = this.apiUrl + "producer/getlistbysorting?sortBy=" + sortBy
     return this.httpClient.get<ListResponseModel<GetAllProducerResponse>>(newPath);
   }
 
-  getProducersByPaginationAndSortingNameAsc(pageNo:number):Observable<ListResponseModel<GetAllProducerResponse>>{
-    let newPath = this.apiUrl + "producer/getlistbypaginationandsorting?pageNo=" + pageNo
+  getProducersByPaginationAndSortingNameAsc(pageNo: number, pageSize: number, sortBy: string): Observable<ListResponseModel<GetAllProducerResponse>> {
+    let newPath = this.apiUrl +
+      `producer/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
     return this.httpClient.get<ListResponseModel<GetAllProducerResponse>>(newPath);
   }
 
-  add(producer:CreateProducerRequest):Observable<ResponseModel>{
+  add(producer: CreateProducerRequest): Observable<ResponseModel> {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "producer/add", producer);
   }
 
-  delete(producer:DeleteProducerRequest):Observable<ResponseModel>{
-    return this.httpClient.delete<ResponseModel>(this.apiUrl + "producer/delete", {body:producer});
+  delete(producer: DeleteProducerRequest): Observable<ResponseModel> {
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "producer/delete", { body: producer });
   }
 
-  update(id:number, producer:UpdateProducerRequest):Observable<ResponseModel>{
+  update(id: number, producer: UpdateProducerRequest): Observable<ResponseModel> {
     return this.httpClient.put<ResponseModel>(this.apiUrl + "producer/update?id=" + id, producer);
   }
 }

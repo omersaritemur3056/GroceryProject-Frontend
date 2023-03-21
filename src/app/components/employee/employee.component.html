@@ -1,3 +1,11 @@
+<div class="mb-3">
+  <label for="filterText" class="form-label">Search employee</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter employee">
+</div>
+<div *ngIf="filterText.length >= 2" class="alert alert-success">
+  {{filterText}} searching...
+</div>
+
 <table class="table">
   <thead>
     <tr>
@@ -26,8 +34,7 @@
     <td>{{employee.salary}}</td>
     <td>
       <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;"
-        class="btn btn-warning btn-sm" routerLink="/employee/update/{{employee.id}}"
-        *ngIf="isAdmin()">Güncelle</button>
+        class="btn btn-warning btn-sm" routerLink="/employee/update/{{employee.id}}" *ngIf="isAdmin()">Güncelle</button>
       <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
         class="btn btn-danger btn-sm" (click)="deleteEmployee(employee.id)" *ngIf="isAdmin()">Sil</button>
     </td>

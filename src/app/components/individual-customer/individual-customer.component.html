@@ -1,3 +1,12 @@
+<div class="mb-3">
+    <label for="filterText" class="form-label">Search individual customer</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText"
+        placeholder="Enter individual customer">
+</div>
+<div *ngIf="filterText.length >= 2" class="alert alert-success">
+    {{filterText}} searching...
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -23,12 +32,12 @@
         <td>{{individualCustomer.gender}}</td>
         <td>{{individualCustomer.nationalIdentity}}</td>
         <td>
-            <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;" 
-            class="btn btn-secondary btn-sm" routerLink="/individualCustomer/update/{{individualCustomer.id}}"
-            *ngIf="isAdmin() || isModerator()">Güncelle</button>
+            <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;"
+                class="btn btn-secondary btn-sm" routerLink="/individualCustomer/update/{{individualCustomer.id}}"
+                *ngIf="isAdmin() || isModerator()">Güncelle</button>
             <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
-             class="btn btn-danger btn-sm" (click)="deleteIndividualCustomer(individualCustomer.id)"
-             *ngIf="isAdmin() || isModerator()">Sil</button>
+                class="btn btn-danger btn-sm" (click)="deleteIndividualCustomer(individualCustomer.id)"
+                *ngIf="isAdmin() || isModerator()">Sil</button>
         </td>
     </tr>
 </table>

@@ -1,20 +1,28 @@
+<div class="mb-3">
+  <label for="filterText" class="form-label">Search producer</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter producer name">
+</div>
+<div *ngIf="filterText.length >= 2" class="alert alert-success">
+  {{filterText}} searching...
+</div>
+
 <table class="table">
-    <thead>
-      <tr>
-        <th>Producer id</th>
-        <th>Üretici Adı</th>
-      </tr>
-    </thead>
-    <tr *ngFor="let producer of producers">
-      <td>{{producer.id}}</td>
-      <td>{{producer.name}}</td>
-      <td>
-        <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;" 
-        class="btn btn-secondary btn-sm" routerLink="/producer/update/{{producer.id}}" 
-        *ngIf="isAdmin() || isModerator()">Güncelle</button>
-        <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
-         class="btn btn-danger btn-sm" (click)="deleteProducer(producer.id)" 
-         *ngIf="isAdmin() || isModerator()">Sil</button>
-    </td>
+  <thead>
+    <tr>
+      <th>Producer id</th>
+      <th>Üretici Adı</th>
     </tr>
-  </table>
+  </thead>
+  <tr *ngFor="let producer of producers">
+    <td>{{producer.id}}</td>
+    <td>{{producer.name}}</td>
+    <td>
+      <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;"
+        class="btn btn-secondary btn-sm" routerLink="/producer/update/{{producer.id}}"
+        *ngIf="isAdmin() || isModerator()">Güncelle</button>
+      <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
+        class="btn btn-danger btn-sm" (click)="deleteProducer(producer.id)"
+        *ngIf="isAdmin() || isModerator()">Sil</button>
+    </td>
+  </tr>
+</table>

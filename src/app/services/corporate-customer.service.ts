@@ -15,32 +15,33 @@ export class CorporateCustomerService {
 
   apiUrl = "http://localhost:8080/api/";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getCorporateCustomers():Observable<ListResponseModel<GetAllCorporateCustomerResponse>>{
+  getCorporateCustomers(): Observable<ListResponseModel<GetAllCorporateCustomerResponse>> {
     let newPath = this.apiUrl + "corporatecustomer/getall"
     return this.httpClient.get<ListResponseModel<GetAllCorporateCustomerResponse>>(newPath);
   }
 
-  getCorporateCustomersBySortingNameAsc():Observable<ListResponseModel<GetAllCorporateCustomerResponse>>{
-    let newPath = this.apiUrl + "corporatecustomer/getlistbysorting"
+  getCorporateCustomersBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllCorporateCustomerResponse>> {
+    let newPath = this.apiUrl + "corporatecustomer/getlistbysorting?sortBy=" + sortBy
     return this.httpClient.get<ListResponseModel<GetAllCorporateCustomerResponse>>(newPath);
   }
 
-  getCorporateCustomersByPaginationAndSortingNameAsc(pageNo:number):Observable<ListResponseModel<GetAllCorporateCustomerResponse>>{
-    let newPath = this.apiUrl + "corporatecustomer/getlistbypaginationandsorting?pageNo=" + pageNo
+  getCorporateCustomersByPaginationAndSortingNameAsc(pageNo: number, pageSize: number, sortBy: string): Observable<ListResponseModel<GetAllCorporateCustomerResponse>> {
+    let newPath = this.apiUrl +
+      `corporatecustomer/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
     return this.httpClient.get<ListResponseModel<GetAllCorporateCustomerResponse>>(newPath);
   }
 
-  add(corporateCustomer:CreateCorporateCustomerRequest):Observable<ResponseModel>{
+  add(corporateCustomer: CreateCorporateCustomerRequest): Observable<ResponseModel> {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "corporatecustomer/add", corporateCustomer);
   }
-  
-  delete(corporateCustomer:DeleteCorporateCustomerRequest):Observable<ResponseModel>{
-    return this.httpClient.delete<ResponseModel>(this.apiUrl + "corporatecustomer/delete", {body:corporateCustomer});
+
+  delete(corporateCustomer: DeleteCorporateCustomerRequest): Observable<ResponseModel> {
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "corporatecustomer/delete", { body: corporateCustomer });
   }
 
-  update(id:number, corporateCustomer:UpdateCorporateCustomerRequest):Observable<ResponseModel>{
+  update(id: number, corporateCustomer: UpdateCorporateCustomerRequest): Observable<ResponseModel> {
     return this.httpClient.put<ResponseModel>(this.apiUrl + "corporateCustomer/update?id=" + id, corporateCustomer);
   }
 }

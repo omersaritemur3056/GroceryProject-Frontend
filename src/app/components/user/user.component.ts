@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class UserComponent {
 
   users: GetAllUserResponse[] = [];
+  filterText = "";
 
   constructor(private userService:UserService, private toastrService:ToastrService, 
     private authService:AuthService){}

@@ -15,32 +15,33 @@ export class OrderService {
 
   apiUrl = "http://localhost:8080/api/";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getOrders():Observable<ListResponseModel<GetAllOrderResponse>>{
+  getOrders(): Observable<ListResponseModel<GetAllOrderResponse>> {
     let newPath = this.apiUrl + "order/getall"
     return this.httpClient.get<ListResponseModel<GetAllOrderResponse>>(newPath);
   }
 
-  getOrdersBySortingNameAsc():Observable<ListResponseModel<GetAllOrderResponse>>{
-    let newPath = this.apiUrl + "order/getlistbysorting"
+  getOrdersBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllOrderResponse>> {
+    let newPath = this.apiUrl + "order/getlistbysorting?sortBy="
     return this.httpClient.get<ListResponseModel<GetAllOrderResponse>>(newPath);
   }
 
-  getOrdersByPaginationAndSortingNameAsc(pageNo:number):Observable<ListResponseModel<GetAllOrderResponse>>{
-    let newPath = this.apiUrl + "order/getlistbypaginationandsorting?pageNo=" + pageNo
+  getOrdersByPaginationAndSortingNameAsc(pageNo: number, pageSize: number, sortBy: string): Observable<ListResponseModel<GetAllOrderResponse>> {
+    let newPath = this.apiUrl +
+      `order/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
     return this.httpClient.get<ListResponseModel<GetAllOrderResponse>>(newPath);
   }
 
-  add(order:CreateOrderRequest):Observable<ResponseModel>{
+  add(order: CreateOrderRequest): Observable<ResponseModel> {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "order/add", order);
   }
 
-  delete(order:DeleteOrderRequest):Observable<ResponseModel>{
-    return this.httpClient.delete<ResponseModel>(this.apiUrl + "order/delete", {body:order});
+  delete(order: DeleteOrderRequest): Observable<ResponseModel> {
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "order/delete", { body: order });
   }
 
-  update(id:number, order:UpdateOrderRequest):Observable<ResponseModel>{
+  update(id: number, order: UpdateOrderRequest): Observable<ResponseModel> {
     return this.httpClient.put<ResponseModel>(this.apiUrl + "order/update?id=" + id, order);
   }
 }

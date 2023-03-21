@@ -11,20 +11,21 @@ export class PhotoService {
 
   apiUrl = "http://localhost:8080/api/";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getPhotos():Observable<ListResponseModel<GetAllImageResponse>>{
+  getPhotos(): Observable<ListResponseModel<GetAllImageResponse>> {
     let newPath = this.apiUrl + "image/getall"
     return this.httpClient.get<ListResponseModel<GetAllImageResponse>>(newPath);
   }
 
-  getPhotosBySortingNameAsc():Observable<ListResponseModel<GetAllImageResponse>>{
-    let newPath = this.apiUrl + "image/getlistbysorting"
+  getPhotosBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllImageResponse>> {
+    let newPath = this.apiUrl + "image/getlistbysorting?sortBy=" + sortBy
     return this.httpClient.get<ListResponseModel<GetAllImageResponse>>(newPath);
   }
 
-  getPhotosByPaginationAndSortingNameAsc(pageNo:number):Observable<ListResponseModel<GetAllImageResponse>>{
-    let newPath = this.apiUrl + "image/getlistbypaginationandsorting?pageNo=" + pageNo
+  getPhotosByPaginationAndSortingNameAsc(pageNo: number, pageSize: number, sortBy: string): Observable<ListResponseModel<GetAllImageResponse>> {
+    let newPath = this.apiUrl +
+      `image/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
     return this.httpClient.get<ListResponseModel<GetAllImageResponse>>(newPath);
   }
 }

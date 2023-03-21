@@ -15,32 +15,33 @@ export class SupplierService {
 
   apiUrl = "http://localhost:8080/api/";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getSuppliers():Observable<ListResponseModel<GetAllSupplierResponse>>{
+  getSuppliers(): Observable<ListResponseModel<GetAllSupplierResponse>> {
     let newPath = this.apiUrl + "supplier/getall"
     return this.httpClient.get<ListResponseModel<GetAllSupplierResponse>>(newPath);
   }
 
-  getSuppliersBySortingNameAsc():Observable<ListResponseModel<GetAllSupplierResponse>>{
+  getSuppliersBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllSupplierResponse>> {
     let newPath = this.apiUrl + "supplier/getlistbysorting"
     return this.httpClient.get<ListResponseModel<GetAllSupplierResponse>>(newPath);
   }
 
-  getSuppliersByPaginationAndSortingNameAsc(pageNo:number):Observable<ListResponseModel<GetAllSupplierResponse>>{
-    let newPath = this.apiUrl + "supplier/getlistbypaginationandsorting?pageNo=" + pageNo
+  getSuppliersByPaginationAndSortingNameAsc(pageNo: number, pageSize: number, sortBy: string): Observable<ListResponseModel<GetAllSupplierResponse>> {
+    let newPath = this.apiUrl +
+      `supplier/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
     return this.httpClient.get<ListResponseModel<GetAllSupplierResponse>>(newPath);
   }
 
-  add(supplier:CreateSupplierRequest):Observable<ResponseModel>{
+  add(supplier: CreateSupplierRequest): Observable<ResponseModel> {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "supplier/add", supplier);
   }
 
-  delete(supplier:DeleteSupplierRequest):Observable<ResponseModel>{
-    return this.httpClient.delete<ResponseModel>(this.apiUrl + "supplier/delete", {body:supplier});
+  delete(supplier: DeleteSupplierRequest): Observable<ResponseModel> {
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "supplier/delete", { body: supplier });
   }
 
-  update(id:number, supplier:UpdateSupplierRequest):Observable<ResponseModel>{
+  update(id: number, supplier: UpdateSupplierRequest): Observable<ResponseModel> {
     return this.httpClient.put<ResponseModel>(this.apiUrl + "supplier/update?id=" + id, supplier);
   }
 }

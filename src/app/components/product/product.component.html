@@ -53,13 +53,13 @@
   </tr>
 </table>
 <div *ngIf="enablePageButton">
-  <button (click)="getProductsByPaginationAndSortingNameAsc(1)" class="btn btn-danger">
-    <<< </button>
+  <button (click)="getProductsByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm" 
+  ><<</button>
       <span *ngFor="let item of products;let i = index">
         <span>
-          <button class="btn btn-danger" type="button" (click)="getProductsByPaginationAndSortingNameAsc(i + 1)"
-            routerLink="/product/pageNo/{{i|paging:pageSize}}">
-            {{i |paging:pageSize}}
+          <button class="btn btn-danger btn-sm" type="button" (click)="getProductsByPaginationAndSortingNameAsc(i + 1) "
+            routerLink="/product/page/{{i + 1}}">
+            {{i + 1}}
           </button>
         </span>
       </span>

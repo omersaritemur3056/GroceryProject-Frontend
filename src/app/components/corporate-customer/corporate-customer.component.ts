@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class CorporateCustomerComponent implements OnInit {
 
   corporateCustomers: GetAllCorporateCustomerResponse[] = [];
+  filterText = "";
 
   constructor(private corporateCustomerService:CorporateCustomerService, private toastrService:ToastrService, 
     private authService:AuthService){}

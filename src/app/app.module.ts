@@ -42,6 +42,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { UserComponent } from './components/user/user.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { UserUpdateComponent } from './components/user-update/user-update.compon
     LoginComponent,
     RegisterComponent,
     UserComponent,
-    UserUpdateComponent
+    UserUpdateComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

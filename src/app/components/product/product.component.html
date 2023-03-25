@@ -2,7 +2,7 @@
   <span class="visually-hidden">Loading...</span>
 </div>
 
-<div class="mb-3">
+<div class="mb-4">
   <label for="filterText" class="form-label">Search product</label>
   <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter product name">
 </div>
@@ -36,30 +36,28 @@
     <td>{{product.categoryName}}</td>
     <td>{{product.supplierName}}</td>
     <td>{{product.producerName}}</td>
-    <td *ngFor="let url of product.urls">
+    <td class="image-dimention" *ngFor="let url of product.urls">
       <a class="image-link" [href]="url" target="_blank">
         <img class="table-images" src="{{url}}" alt="">
       </a>
     </td>
     <td><button (click)="addToCart(product)" class="btn btn-success btn-sm">Sepete ekle!</button></td>
     <td>
-      <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;"
-        class="btn btn-secondary btn-sm" routerLink="/product/update/{{product.id}}"
+      <button class="btn btn-secondary btn-sm" routerLink="/product/update/{{product.id}}"
         *ngIf="isAdmin() || isModerator() || isEditor()">Güncelle</button>
-      <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
-        class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)" *ngIf="isAdmin() || isModerator()">
+      <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)" *ngIf="isAdmin() || isModerator()">
         Sil</button>
     </td>
   </tr>
 </table>
 <div *ngIf="enablePageButton">
-  <button (click)="getProductsByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm" 
-  ><<</button>
-      <span *ngFor="let item of products;let i = index">
+  <button (click)="getProductsByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"
+   ><<</button>
+      <span *ngFor="let i of products |paging:pageSize">
         <span>
-          <button class="btn btn-danger btn-sm" type="button" (click)="getProductsByPaginationAndSortingNameAsc(i + 1) "
-            routerLink="/product/page/{{i + 1}}">
-            {{i + 1}}
+          <button class="btn btn-danger btn-sm" type="button" (click)="getProductsByPaginationAndSortingNameAsc(i+1)"
+            routerLink="/product/page/{{i+1}}">
+            {{i+1}}
           </button>
         </span>
       </span>

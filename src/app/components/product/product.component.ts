@@ -14,13 +14,15 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ProductComponent implements OnInit {
 
-  products:GetAllProductResponse[] = [];
+  products: GetAllProductResponse[] = [];
+  pagedProducts: number[] = [];
   dataLoaded: boolean = false;
   enablePageButton: boolean = false;
   filterText = "";
-  pageNo:number;
-  pageSize:number = 10;
-  sortBy:string = "name";
+  pageNo: number;
+  pageSize: number = 10;
+  sortBy: string = "name";
+  currentPageNumber: number;
 
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute,
     private toastrService: ToastrService, private cartService: CartService, private authService: AuthService) { }
@@ -39,15 +41,7 @@ export class ProductComponent implements OnInit {
     })
   }
 
-  getProducts(): GetAllProductResponse[] {
-    this.productService.getProducts().subscribe(response => {
-      this.products = response.data;
-      this.enablePageButton = false;
-    })
-    return this.products;
-  }
-
-  getProductsBySortingNameAsc() {
+  getProducts() {
     this.productService.getProductsBySortingNameAsc(this.sortBy).subscribe(response => {
       this.products = response.data;
       this.dataLoaded = true;
@@ -62,7 +56,7 @@ export class ProductComponent implements OnInit {
         this.products = response.data;
         this.dataLoaded = true;
         this.enablePageButton = true;
-    })
+      })
   }
 
   getProductsByCategory(categoryId: number) {

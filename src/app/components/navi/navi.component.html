@@ -64,15 +64,13 @@
               ekle</button></li>
         </ul>
       </div>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-      <button type="button" class="btn btn-secondary" routerLink="/register" *ngIf="haveToken()==false">Kayıt
-        ol</button>
-      <button type="button" class="btn btn-secondary" routerLink="/login" *ngIf="haveToken()==false">Giriş yap</button>
-      <button type="button" class="btn btn-danger" (click)="logout()" *ngIf="haveToken()==true" routerLink="">Çıkış
-        yap</button>
+      <div>
+        <button type="button" class="btn btn-secondary" routerLink="/register" *ngIf="haveToken()==false">Kayıt
+          ol</button>
+        <button type="button" class="btn btn-secondary" routerLink="/login" *ngIf="haveToken()==false">Giriş yap</button>
+        <button type="button" class="btn btn-danger" (click)="logout()" *ngIf="haveToken()==true" routerLink="">Çıkış
+          yap</button>
+      </div>
     </div>
   </div>
 </nav>

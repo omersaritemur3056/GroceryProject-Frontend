@@ -58,7 +58,7 @@ export class ProductAddComponent implements OnInit {
         this.toastrService.success(response.message, "Başarili")
       }, error => {
         for(let key in error.error.data){
-          this.toastrService.error(error.error.data[key], error.error.message)
+          this.toastrService.error(error.error.data[key], "Başarısız!")
         }
       });
     }else{

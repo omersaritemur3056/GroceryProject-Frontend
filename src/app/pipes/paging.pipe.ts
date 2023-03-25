@@ -5,8 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PagingPipe implements PipeTransform {
 
-  transform(value: number, pageSize:number): number {
-    return Math.floor(value/pageSize) + 1;
+  transform(value: any, pageSize:number): number[] {
+    let total = [];
+    for (let i = 0; i < Math.floor(value.length/pageSize) + 1; i++) {
+      total.push(i);
+    }
+    return total;
   }
 
 }

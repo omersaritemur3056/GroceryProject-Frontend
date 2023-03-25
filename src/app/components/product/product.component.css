@@ -6,12 +6,12 @@
 }
 
 th{
-    font-size: 0.8rem;
-    padding-left: .8rem;
+    font-size: .8rem;
+    padding-left: .6rem;
 }
 
 td{
-    padding-left: .8rem;
+    padding-left: .6rem;
 }
 
 .alert{
@@ -20,9 +20,15 @@ td{
     background-color: #178600;
 }
 
+.image-dimention{
+    padding-right: 0;
+}
+
 .table-images{
     max-width: 40px;
     max-height: 40px;
 }
 
-
+.btn{
+    margin-bottom: .8rem;
+}

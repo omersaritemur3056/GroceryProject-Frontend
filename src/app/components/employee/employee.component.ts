@@ -4,6 +4,7 @@ import { GetAllEmployeeResponse } from 'src/app/models/employee/get-all-employee
 import { ToastrService } from 'ngx-toastr';
 import { DeleteEmployeeRequest } from 'src/app/models/employee/delete-employee-request';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertifyService } from 'src/app/services/customize-services/alertify.service';
 
 @Component({
   selector: 'app-employee',
@@ -16,7 +17,7 @@ export class EmployeeComponent implements OnInit {
   filterText = "";
 
   constructor(private employeeService:EmployeeService, private toastrService:ToastrService, 
-    private authService:AuthService){}
+    private authService:AuthService, private alertify: AlertifyService){}
 
   ngOnInit(): void {
     this.getEmployees();
@@ -28,11 +29,14 @@ export class EmployeeComponent implements OnInit {
     })
   }
 
-  deleteEmployee(deleteCorporateCustomerId:number){
-    if(!window.confirm("Silmek istediğinize emin misiniz?")){return;}
-    let deleteEmployee:DeleteEmployeeRequest = {id:deleteCorporateCustomerId}
-    this.employeeService.delete(deleteEmployee).subscribe(response => {
-      this.toastrService.error(response.message, deleteEmployee.id.toString());
+  deleteEmployee(deleteEmployeeId:number){
+    this.alertify.confirm("Silme Uyarısı", "Silmek istediğinize enin misiniz?", () => {
+      let deleteEmployee: DeleteEmployeeRequest = { id: deleteEmployeeId }
+       this.employeeService.delete(deleteEmployee).subscribe(response => {
+        this.toastrService.error(response.message, deleteEmployee.id.toString());
+      })
+    }, () => {
+      return;
     })
   }
 

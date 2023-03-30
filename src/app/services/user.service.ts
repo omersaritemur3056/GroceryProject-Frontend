@@ -26,6 +26,6 @@ export class UserService {
   }
 
   delete(user:DeleteUserRequest):Observable<ResponseModel>{
-    return this.httpClient.delete<ResponseModel>(this.apiUrl + "user/delete" , {body:user});
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "user/delete?id=" + user.id);
   }
 }

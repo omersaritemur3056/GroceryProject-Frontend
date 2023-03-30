@@ -43,6 +43,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserComponent } from './components/user/user.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { FooterComponent } from './components/footer/footer.component';
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     }),
+    NgxSpinnerModule,
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],

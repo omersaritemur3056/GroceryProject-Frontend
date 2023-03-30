@@ -4,6 +4,7 @@ import { GetAllIndividualCustomerResponse } from 'src/app/models/individual-cust
 import { ToastrService } from 'ngx-toastr';
 import { DeleteIndividualCustomerRequest } from 'src/app/models/individual-customer/delete-individual-customer-request';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertifyService } from 'src/app/services/customize-services/alertify.service';
 
 @Component({
   selector: 'app-individual-customer',
@@ -16,7 +17,7 @@ export class IndividualCustomerComponent implements OnInit {
   filterText = "";
 
   constructor(private individualCustomerService:IndividualCustomerService, private toastrService:ToastrService, 
-    private authService:AuthService){}
+    private authService:AuthService, private alertify: AlertifyService){}
 
   ngOnInit(): void {
     this.getIndividualCustomers();
@@ -29,10 +30,13 @@ export class IndividualCustomerComponent implements OnInit {
   }
 
   deleteIndividualCustomer(deleteIndividualCustomerId:number){
-    if(!window.confirm("Silmek istediğinize emin misiniz?")){return;}
-    let deleteCorporateCustomer:DeleteIndividualCustomerRequest = {id:deleteIndividualCustomerId}
-    this.individualCustomerService.delete(deleteCorporateCustomer).subscribe(response => {
-      this.toastrService.error(response.message, deleteCorporateCustomer.id.toString());
+    this.alertify.confirm("Silme Uyarısı", "Silmek istediğinize enin misiniz?", () => {
+      let deleteIndividualCustomer: DeleteIndividualCustomerRequest = { id: deleteIndividualCustomerId }
+       this.individualCustomerService.delete(deleteIndividualCustomer).subscribe(response => {
+        this.toastrService.error(response.message, deleteIndividualCustomer.id.toString());
+      })
+    }, () => {
+      return;
     })
   }
 

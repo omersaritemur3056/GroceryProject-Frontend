@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DeleteProducerRequest } from 'src/app/models/producer/delete-producer-request';
 import { GetAllProducerResponse } from 'src/app/models/producer/get-all-producer-response';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertifyService } from 'src/app/services/customize-services/alertify.service';
 import { ProducerService } from 'src/app/services/producer.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class ProducerComponent {
   filterText = "";
 
   constructor(private producerService:ProducerService, private toastrService:ToastrService, 
-    private authService:AuthService){}
+    private authService:AuthService, private alertify: AlertifyService){}
 
   ngOnInit(): void {
     this.getProducers();
@@ -29,10 +30,13 @@ export class ProducerComponent {
   }
 
   deleteProducer(deleteProducerId:number){
-    if(!window.confirm("Silmek istediğinize emin misiniz?")){return;}
-    let deleteProducer:DeleteProducerRequest = {id:deleteProducerId}
-    this.producerService.delete(deleteProducer).subscribe(response => {
-      this.toastrService.error(response.message, deleteProducer.id.toString());
+    this.alertify.confirm("Silme Uyarısı", "Silmek istediğinize enin misiniz?", () => {
+      let deleteProducer: DeleteProducerRequest = { id: deleteProducerId }
+       this.producerService.delete(deleteProducer).subscribe(response => {
+        this.toastrService.error(response.message, deleteProducer.id.toString());
+      })
+    }, () => {
+      return;
     })
   }
 

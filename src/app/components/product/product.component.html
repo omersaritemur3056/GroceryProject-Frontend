@@ -1,7 +1,3 @@
-<div *ngIf="dataLoaded==false" class="spinner-border text-warning" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-
 <div class="mb-4">
   <label for="filterText" class="form-label">Search product</label>
   <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter product name">
@@ -10,7 +6,7 @@
   {{filterText}} searching...
 </div>
 
-<table *ngIf="dataLoaded==true" class="table">
+<table class="table">
   <thead>
     <tr>
       <th>Ürün adı</th>

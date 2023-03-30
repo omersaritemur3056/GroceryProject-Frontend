@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DeleteUserRequest } from 'src/app/models/user/delete-user-request';
 import { GetAllUserResponse } from 'src/app/models/user/get-all-user-response';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertifyService } from 'src/app/services/customize-services/alertify.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class UserComponent {
   filterText = "";
 
   constructor(private userService:UserService, private toastrService:ToastrService, 
-    private authService:AuthService){}
+    private authService:AuthService, private alertify: AlertifyService){}
 
   ngOnInit(): void {
     this.getUsers();
@@ -29,10 +30,13 @@ export class UserComponent {
   }
 
   deleteUser(deleteUserId:number){
-    if(!window.confirm("Silmek istediğinize emin misiniz?")){return;}
-    let deleteUser:DeleteUserRequest = {id:deleteUserId}
-    this.userService.delete(deleteUser).subscribe(response => {
-      this.toastrService.error(response.message, deleteUser.id.toString());
+    this.alertify.confirm("Silme Uyarısı", "Silmek istediğinize enin misiniz?", () => {
+      let deleteUser: DeleteUserRequest = { id: deleteUserId }
+       this.userService.delete(deleteUser).subscribe(response => {
+        this.toastrService.error(response.message, deleteUser.id.toString());
+      })
+    }, () => {
+      return;
     })
   }
 

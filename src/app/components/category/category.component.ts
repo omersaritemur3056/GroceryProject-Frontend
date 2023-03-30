@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { DeleteCategoryRequest } from 'src/app/models/category/delete-category-request';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertifyService } from 'src/app/services/customize-services/alertify.service';
 
 @Component({
   selector: 'app-category',
@@ -16,7 +17,7 @@ export class CategoryComponent implements OnInit {
   currentCategory:GetAllCategoryResponse;
 
   constructor(private categoryService:CategoryService, private toastrService:ToastrService, 
-    private authService:AuthService){}
+    private authService:AuthService, private alertify: AlertifyService){}
 
   ngOnInit(): void {
     this.getCategories();
@@ -53,10 +54,13 @@ export class CategoryComponent implements OnInit {
   }
 
   deleteCategory(deleteCategoryId:number){
-    if(!window.confirm("Silmek istediğinize emin misiniz?")){return;}
-    let deleteCategory:DeleteCategoryRequest = {id:deleteCategoryId}
-    this.categoryService.delete(deleteCategory).subscribe(response => {
-      this.toastrService.error(response.message, deleteCategory.id.toString());
+    this.alertify.confirm("Silme Uyarısı", "Silmek istediğinize enin misiniz?", () => {
+      let deleteCategory: DeleteCategoryRequest = { id: deleteCategoryId }
+       this.categoryService.delete(deleteCategory).subscribe(response => {
+        this.toastrService.error(response.message, deleteCategory.id.toString());
+      })
+    }, () => {
+      return;
     })
   }
 

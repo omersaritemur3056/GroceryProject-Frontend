@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DeletePaymentRequest } from 'src/app/models/payment/delete-payment-request';
 import { GetAllPaymentResponse } from 'src/app/models/payment/get-all-payment-response';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertifyService } from 'src/app/services/customize-services/alertify.service';
 import { PaymentService } from 'src/app/services/payment.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class PaymentComponent {
   sortBy: string = "name";
 
   constructor(private paymentService: PaymentService, private activatedRoute: ActivatedRoute,
-    private toastrService: ToastrService, private authService: AuthService) { }
+    private toastrService: ToastrService, private authService: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -58,10 +59,13 @@ export class PaymentComponent {
   }
 
   deletePayment(deletePaymentId: number) {
-    if (!window.confirm("Silmek istediğinize emin misiniz?")) { return; }
-    let deletePayment: DeletePaymentRequest = { id: deletePaymentId }
-    this.paymentService.delete(deletePayment).subscribe(response => {
-      this.toastrService.error(response.message, deletePayment.id.toString());
+    this.alertify.confirm("Silme Uyarısı", "Silmek istediğinize enin misiniz?", () => {
+      let deletePayment: DeletePaymentRequest = { id: deletePaymentId }
+       this.paymentService.delete(deletePayment).subscribe(response => {
+        this.toastrService.error(response.message, deletePayment.id.toString());
+      })
+    }, () => {
+      return;
     })
   }
 

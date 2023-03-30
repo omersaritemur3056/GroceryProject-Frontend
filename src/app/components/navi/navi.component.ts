@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -6,9 +8,11 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './navi.component.html',
   styleUrls: ['./navi.component.css']
 })
-export class NaviComponent{
+export class NaviComponent extends BaseComponent{
 
-  constructor(private authService:AuthService){}
+  constructor(private authService:AuthService, spinner: NgxSpinnerService){
+    super(spinner);
+  }
 
   haveToken(){
     if (localStorage.length > 0) {
@@ -18,9 +22,17 @@ export class NaviComponent{
     }
   }
 
+  activateSpinner(){
+    this.showSpinner(SpinnerType.ScaleMultiple);
+    setTimeout(() => {
+      this.hideSpinner(SpinnerType.ScaleMultiple);
+    }, 2000);
+  }
+
   logout(){
     localStorage.clear();
     location.replace("/product")
+    this.hideSpinner(SpinnerType.ScaleMultiple);
   }
 
   isAdmin(){

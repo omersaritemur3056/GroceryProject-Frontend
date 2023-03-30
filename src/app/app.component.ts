@@ -8,6 +8,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title:string = 'Grocery-Project';
   user:string = "Ömer Sarıtemur";
-
-
 }

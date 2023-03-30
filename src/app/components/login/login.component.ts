@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,12 +11,14 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends BaseComponent implements OnInit {
 
   loginForm:FormGroup;
 
   constructor(private formBuilder:FormBuilder, private authService:AuthService, 
-    private toastrService:ToastrService, private router:Router) {}
+    private toastrService:ToastrService, private router:Router, spinner: NgxSpinnerService) {
+    super(spinner);
+  }
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -28,6 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    this.showSpinner(SpinnerType.ScaleMultiple)
     if (this.loginForm.valid) {
       let loginModel = Object.assign({}, this.loginForm.value);
       this.authService.login(loginModel).subscribe(response => {
@@ -37,9 +42,11 @@ export class LoginComponent implements OnInit {
         setTimeout(() => {
           location.replace("/product")
         },1000)
+        this.hideSpinner(SpinnerType.ScaleMultiple);
       }, error => {
         console.log(error);
         this.toastrService.error(error.error.message, "Hatalı bilgiler!");
+        this.hideSpinner(SpinnerType.ScaleMultiple);
       })
     }
   }

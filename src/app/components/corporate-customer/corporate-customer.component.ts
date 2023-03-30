@@ -4,6 +4,7 @@ import { GetAllCorporateCustomerResponse } from 'src/app/models/corporate-custom
 import { DeleteCorporateCustomerRequest } from 'src/app/models/corporate-customer/delete-corporate-customer-request';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertifyService } from 'src/app/services/customize-services/alertify.service';
 
 @Component({
   selector: 'app-corporate-customer',
@@ -16,7 +17,7 @@ export class CorporateCustomerComponent implements OnInit {
   filterText = "";
 
   constructor(private corporateCustomerService:CorporateCustomerService, private toastrService:ToastrService, 
-    private authService:AuthService){}
+    private authService:AuthService, private alertify: AlertifyService){}
 
   ngOnInit(): void {
     this.getCorporateCustomers();
@@ -29,10 +30,13 @@ export class CorporateCustomerComponent implements OnInit {
   }
 
   deleteCorporateCustomer(deleteCorporateCustomerId:number){
-    if(!window.confirm("Silmek istediğinize emin misiniz?")){return;}
-    let deleteCorporateCustomer:DeleteCorporateCustomerRequest = {id:deleteCorporateCustomerId}
-    this.corporateCustomerService.delete(deleteCorporateCustomer).subscribe(response => {
-      this.toastrService.error(response.message, deleteCorporateCustomer.id.toString());
+    this.alertify.confirm("Silme Uyarısı", "Silmek istediğinize enin misiniz?", () => {
+      let deleteCorporateCustomer: DeleteCorporateCustomerRequest = { id: deleteCorporateCustomerId }
+       this.corporateCustomerService.delete(deleteCorporateCustomer).subscribe(response => {
+        this.toastrService.error(response.message, deleteCorporateCustomer.id.toString());
+      })
+    }, () => {
+      return;
     })
   }
 

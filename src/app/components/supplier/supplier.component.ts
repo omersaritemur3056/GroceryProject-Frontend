@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DeleteSupplierRequest } from 'src/app/models/supplier/delete-supplier-request';
 import { GetAllSupplierResponse } from 'src/app/models/supplier/get-all-supplier-response';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertifyService } from 'src/app/services/customize-services/alertify.service';
 import { SupplierService } from 'src/app/services/supplier.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class SupplierComponent {
   filterText = "";
 
   constructor(private supplierService:SupplierService, private toastrService:ToastrService, 
-    private authService:AuthService){}
+    private authService:AuthService, private alertify: AlertifyService){}
 
   ngOnInit(): void {
     this.getSuppliers();
@@ -29,10 +30,13 @@ export class SupplierComponent {
   }
 
   deleteSupplier(deleteSupplierId:number){
-    if(!window.confirm("Silmek istediğinize emin misiniz?")){return;}
-    let deleteSupplier:DeleteSupplierRequest = {id:deleteSupplierId}
-    this.supplierService.delete(deleteSupplier).subscribe(response => {
-      this.toastrService.error(response.message, deleteSupplier.id.toString());
+    this.alertify.confirm("Silme Uyarısı", "Silmek istediğinize enin misiniz?", () => {
+      let deleteSupplier: DeleteSupplierRequest = { id: deleteSupplierId }
+       this.supplierService.delete(deleteSupplier).subscribe(response => {
+        this.toastrService.error(response.message, deleteSupplier.id.toString());
+      })
+    }, () => {
+      return;
     })
   }
 

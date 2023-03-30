@@ -65,9 +65,10 @@
         </ul>
       </div>
       <div>
-        <button type="button" class="btn btn-secondary" routerLink="/register" *ngIf="haveToken()==false">Kayıt
-          ol</button>
-        <button type="button" class="btn btn-secondary" routerLink="/login" *ngIf="haveToken()==false">Giriş yap</button>
+        <button type="button" class="btn btn-secondary" routerLink="/register" *ngIf="haveToken()==false"
+        (click)="activateSpinner()">Kayıt ol</button>
+        <button type="button" class="btn btn-secondary" routerLink="/login" *ngIf="haveToken()==false"
+        (click)="activateSpinner()">Giriş yap</button>
         <button type="button" class="btn btn-danger" (click)="logout()" *ngIf="haveToken()==true" routerLink="">Çıkış
           yap</button>
       </div>

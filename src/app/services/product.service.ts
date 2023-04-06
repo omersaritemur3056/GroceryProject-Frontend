@@ -3,7 +3,6 @@ import { ListResponseModel } from './../models/list-response-model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CategoryService } from './category.service';
 import { GetAllCategoryResponse } from '../models/category/get-all-category-response';
 import { CreateProductRequest } from '../models/product/create-product-request';
 import { ResponseModel } from '../models/response-model';
@@ -19,7 +18,7 @@ export class ProductService {
 
   apiUrl:string = "http://localhost:8080/api/";
 
-  constructor(private httpClient:HttpClient, private categoryService:CategoryService) { }
+  constructor(private httpClient:HttpClient) { }
 
   getProducts():Observable<ListResponseModel<GetAllProductResponse>>{
     let newPath = this.apiUrl + "product/getall"

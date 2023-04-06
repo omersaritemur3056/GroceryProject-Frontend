@@ -12,7 +12,7 @@
         <tr>
             <th>Corporate customer id</th>
             <th>User id</th>
-            <th>Image id</th>
+            <th>Resim</th>
             <th>Adres</th>
             <th>Telefon Numarası</th>
             <th>Şirket adı</th>
@@ -22,7 +22,11 @@
     <tr *ngFor="let corporateCustomer of corporateCustomers">
         <td>{{corporateCustomer.id}}</td>
         <td>{{corporateCustomer.userId}}</td>
-        <td>{{corporateCustomer.imageId}}</td>
+        <td>
+            <a class="image-link" [href]="corporateCustomer.imageUrl" target="_blank">
+                <img class="table-images" src="{{corporateCustomer.imageUrl}}" alt="">
+            </a>
+        </td>
         <td>{{corporateCustomer.address}}</td>
         <td>{{corporateCustomer.phoneNumber}}</td>
         <td>{{corporateCustomer.companyName}}</td>
@@ -37,3 +41,16 @@
         </td>
     </tr>
 </table>
+
+<div *ngIf="enablePageButton">
+    <button (click)="getCorporateCustomersByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"
+     ><<</button>
+        <span *ngFor="let i of sortedCorporateCustomers |paging:pageSize; let index = index">
+          <span>
+            <button class="btn btn-danger btn-sm" type="button" (click)="getCorporateCustomersByPaginationAndSortingNameAsc(index+1)"
+              routerLink="/corporatecustomer/page/{{index+1}}">
+              {{index+1}}
+            </button>
+          </span>
+        </span>
+  </div>

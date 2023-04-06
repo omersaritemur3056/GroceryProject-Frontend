@@ -44,6 +44,8 @@ import { UserComponent } from './components/user/user.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     RegisterComponent,
     UserComponent,
     UserUpdateComponent,
-    FooterComponent
+    FooterComponent,
+    ImageUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +96,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     }),
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxFileDropModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true },

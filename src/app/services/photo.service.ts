@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GetAllImageResponse } from '../models/image/get-all-image-response';
@@ -12,6 +12,12 @@ export class PhotoService {
   apiUrl = "http://localhost:8080/api/";
 
   constructor(private httpClient: HttpClient) { }
+
+  upload(file: FormData): Observable<any>{
+    let newPath = this.apiUrl + "image/add";
+    let headers = new HttpHeaders({"responseType": "blob"});
+    return this.httpClient.post<any>(newPath, file, {headers: headers});
+  }
 
   getPhotos(): Observable<ListResponseModel<GetAllImageResponse>> {
     let newPath = this.apiUrl + "image/getall"

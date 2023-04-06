@@ -21,6 +21,17 @@ export class UserService {
     return this.httpClient.get<ListResponseModel<GetAllUserResponse>>(newPath);
   }
 
+  getUsersBySortingNameAsc(sortBy:string):Observable<ListResponseModel<GetAllUserResponse>>{
+    let newPath = this.apiUrl + "user/getlistbysorting?sortBy=" + sortBy
+    return this.httpClient.get<ListResponseModel<GetAllUserResponse>>(newPath);
+  }
+
+  getUsersByPaginationAndSortingNameAsc(pageNo:number, pageSize:number, sortBy:string):Observable<ListResponseModel<GetAllUserResponse>>{
+    let newPath = this.apiUrl + 
+    `user/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
+    return this.httpClient.get<ListResponseModel<GetAllUserResponse>>(newPath);
+  }
+
   update(id:number, user:UpdateUserRequest):Observable<ResponseModel>{
     return this.httpClient.put<ResponseModel>(this.apiUrl + "user/update?id=" + id, user);
   }

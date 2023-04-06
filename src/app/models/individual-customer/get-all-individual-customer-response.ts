@@ -1,7 +1,7 @@
 export interface GetAllIndividualCustomerResponse {
     id: number;
     userId: number;
-    imageId: number;
+    imageUrl: string;
     address: string;
     phoneNumber: string;
     firstName: string;

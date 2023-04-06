@@ -26,3 +26,16 @@
     </td>
   </tr>
 </table>
+
+<div *ngIf="enablePageButton">
+  <button (click)="getProducersByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"
+   ><<</button>
+      <span *ngFor="let i of sortedProducers |paging:pageSize; let index = index">
+        <span>
+          <button class="btn btn-danger btn-sm" type="button" (click)="getProducersByPaginationAndSortingNameAsc(index+1)"
+            routerLink="/producer/page/{{index+1}}">
+            {{index+1}}
+          </button>
+        </span>
+      </span>
+</div>

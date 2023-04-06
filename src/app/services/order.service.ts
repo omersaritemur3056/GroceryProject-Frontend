@@ -22,14 +22,14 @@ export class OrderService {
     return this.httpClient.get<ListResponseModel<GetAllOrderResponse>>(newPath);
   }
 
-  getOrdersBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllOrderResponse>> {
-    let newPath = this.apiUrl + "order/getlistbysorting?sortBy="
+  getOrdersBySortingNameAsc(sortBy:string):Observable<ListResponseModel<GetAllOrderResponse>>{
+    let newPath = this.apiUrl + "order/getlistbysorting?sortBy=" + sortBy
     return this.httpClient.get<ListResponseModel<GetAllOrderResponse>>(newPath);
   }
 
-  getOrdersByPaginationAndSortingNameAsc(pageNo: number, pageSize: number, sortBy: string): Observable<ListResponseModel<GetAllOrderResponse>> {
-    let newPath = this.apiUrl +
-      `order/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
+  getOrdersByPaginationAndSortingNameAsc(pageNo:number, pageSize:number, sortBy:string):Observable<ListResponseModel<GetAllOrderResponse>>{
+    let newPath = this.apiUrl + 
+    `order/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
     return this.httpClient.get<ListResponseModel<GetAllOrderResponse>>(newPath);
   }
 

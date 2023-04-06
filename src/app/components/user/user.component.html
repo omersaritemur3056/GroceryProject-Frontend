@@ -36,3 +36,16 @@
     </td>
   </tr>
 </table>
+
+<div *ngIf="enablePageButton">
+  <button (click)="getUsersByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"
+   ><<</button>
+      <span *ngFor="let i of sortedUsers |paging:pageSize; let index = index">
+        <span>
+          <button class="btn btn-danger btn-sm" type="button" (click)="getUsersByPaginationAndSortingNameAsc(index+1)"
+            routerLink="/user/page/{{index+1}}">
+            {{index+1}}
+          </button>
+        </span>
+      </span>
+</div>

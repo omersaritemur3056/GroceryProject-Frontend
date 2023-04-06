@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { map, Observable } from 'rxjs';
 import { GetAllCategoryResponse } from 'src/app/models/category/get-all-category-response';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
+import { FileUploadOptions } from '../image-upload/image-upload.component';
 
 @Component({
   selector: 'app-product-add',
@@ -15,6 +16,12 @@ export class ProductAddComponent implements OnInit {
 
   productAddForm:FormGroup;
   categories:GetAllCategoryResponse[] = [];
+
+  @Output() fileUploadOptions: Partial<FileUploadOptions> = {
+    action: "upload",
+    explanation: "Resimleri sürükleyin veya seçin...",
+    accept: ".png, .jpg, .jpeg, .json"
+  }
 
   constructor(private formBuilder:FormBuilder, private productService:ProductService,
     private toastrService:ToastrService, private categoryService:CategoryService){}

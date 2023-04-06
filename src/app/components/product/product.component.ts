@@ -19,13 +19,12 @@ import { AlertifyService } from 'src/app/services/customize-services/alertify.se
 export class ProductComponent extends BaseComponent implements OnInit {
 
   products: GetAllProductResponse[] = [];
-  pagedProducts: number[] = [];
+  sortedProducts: GetAllProductResponse[] = [];
   enablePageButton: boolean = false;
   filterText = "";
   pageNo: number;
-  pageSize: number = 10;
+  pageSize: number = 5;
   sortBy: string = "name";
-  currentPageNumber: number;
 
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute,
     private toastrService: ToastrService, private cartService: CartService, private authService: AuthService,
@@ -38,22 +37,25 @@ export class ProductComponent extends BaseComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if (params["categoryId"]) {
         this.getProductsByCategory(params["categoryId"]);
+        this.getPageFromProductList()
       }
       else if (params["pageNo"]) {
+        this.getPageFromProductList()
         this.getProductsByPaginationAndSortingNameAsc(params["pageNo"]);
       }
       else {
+        this.getPageFromProductList()
         this.getProductsByPaginationAndSortingNameAsc(1);
       }
     })
   }
 
-  getProducts() {
-    this.productService.getProductsBySortingNameAsc(this.sortBy).subscribe(response => {
-      this.products = response.data;
+  async getPageFromProductList() {
+    this.productService.getProductsBySortingNameAsc(this.sortBy).subscribe(p => {
+      this.sortedProducts = p.data
       this.hideSpinner(SpinnerType.Spin);
-      this.enablePageButton = true;
-    })
+    });
+    return this.sortedProducts;
   }
 
   getProductsByPaginationAndSortingNameAsc(page: number) {
@@ -76,7 +78,7 @@ export class ProductComponent extends BaseComponent implements OnInit {
   deleteProduct(deleteProductId: number) {
     this.alertify.confirm("Silme Uyarısı", "Silmek istediğinize enin misiniz?", () => {
       let deleteProduct: DeleteProductRequest = { id: deleteProductId }
-       this.productService.delete(deleteProduct).subscribe(response => {
+      this.productService.delete(deleteProduct).subscribe(response => {
         this.toastrService.error(response.message, deleteProduct.id.toString());
       })
     }, () => {

@@ -1,3 +1,12 @@
 .table{
     background-color: aqua;
 }
+
+.image-dimention{
+    padding-right: 0;
+}
+
+.table-images{
+    max-width: 40px;
+    max-height: 40px;
+}

@@ -1,7 +1,7 @@
 export interface GetAllCorporateCustomerResponse {
     id: number;
     userId: number;
-    imageId: number;
+    imageUrl: string;
     address: string;
     phoneNumber: string;
     companyName:string;

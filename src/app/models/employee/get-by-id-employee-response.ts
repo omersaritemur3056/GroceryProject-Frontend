@@ -1,7 +1,7 @@
 export interface GetByIdEmployeeResponse {
     id: number;
     userId: number;
-    imageId: number;
+    imageUrl: string;
     firstName: string;
     lastName: string;
     gender: string

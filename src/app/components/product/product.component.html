@@ -49,11 +49,11 @@
 <div *ngIf="enablePageButton">
   <button (click)="getProductsByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"
    ><<</button>
-      <span *ngFor="let i of products |paging:pageSize">
+      <span *ngFor="let i of sortedProducts |paging:pageSize; let index = index">
         <span>
-          <button class="btn btn-danger btn-sm" type="button" (click)="getProductsByPaginationAndSortingNameAsc(i+1)"
-            routerLink="/product/page/{{i+1}}">
-            {{i+1}}
+          <button class="btn btn-danger btn-sm" type="button" (click)="getProductsByPaginationAndSortingNameAsc(index+1)"
+            routerLink="/product/page/{{index+1}}">
+            {{index+1}}
           </button>
         </span>
       </span>

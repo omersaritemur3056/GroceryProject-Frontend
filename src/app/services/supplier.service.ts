@@ -22,14 +22,14 @@ export class SupplierService {
     return this.httpClient.get<ListResponseModel<GetAllSupplierResponse>>(newPath);
   }
 
-  getSuppliersBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllSupplierResponse>> {
-    let newPath = this.apiUrl + "supplier/getlistbysorting"
+  getSuppliersBySortingNameAsc(sortBy:string):Observable<ListResponseModel<GetAllSupplierResponse>>{
+    let newPath = this.apiUrl + "supplier/getlistbysorting?sortBy=" + sortBy
     return this.httpClient.get<ListResponseModel<GetAllSupplierResponse>>(newPath);
   }
 
-  getSuppliersByPaginationAndSortingNameAsc(pageNo: number, pageSize: number, sortBy: string): Observable<ListResponseModel<GetAllSupplierResponse>> {
-    let newPath = this.apiUrl +
-      `supplier/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
+  getSuppliersByPaginationAndSortingNameAsc(pageNo:number, pageSize:number, sortBy:string):Observable<ListResponseModel<GetAllSupplierResponse>>{
+    let newPath = this.apiUrl + 
+    `supplier/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
     return this.httpClient.get<ListResponseModel<GetAllSupplierResponse>>(newPath);
   }
 

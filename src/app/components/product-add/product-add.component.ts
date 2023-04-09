@@ -18,7 +18,6 @@ export class ProductAddComponent implements OnInit {
   categories:GetAllCategoryResponse[] = [];
 
   @Output() fileUploadOptions: Partial<FileUploadOptions> = {
-    action: "upload",
     explanation: "Resimleri sürükleyin veya seçin...",
     accept: ".png, .jpg, .jpeg, .json"
   }

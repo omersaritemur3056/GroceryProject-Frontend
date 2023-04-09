@@ -10,39 +10,31 @@ import { PhotoService } from 'src/app/services/photo.service';
   styleUrls: ['./image-upload.component.css']
 })
 export class ImageUploadComponent {
-  
-  constructor(private photoService: PhotoService, private alertify: AlertifyService, private http: HttpClient){}
-  
-  public files: NgxFileDropEntry[];
+
+  constructor(private photoService: PhotoService, private alertify: AlertifyService, private http: HttpClient) { }
+
+  public files: NgxFileDropEntry[] = [];
 
   @Input() options: Partial<FileUploadOptions>
-  
-  public selectedFiles(files: NgxFileDropEntry[]){
+
+  public selectedFiles(files: NgxFileDropEntry[]) {
     this.files = files;
     const fileData: FormData = new FormData();
     for (const file of files) {
       (file.fileEntry as FileSystemFileEntry).file((_file: File) => {
-        fileData.append(_file.name, _file, file.relativePath);
+        fileData.append("file", _file, file.relativePath);
       });
-
-      console.log(file.relativePath, file, fileData);
     }
 
-    this.http.post('http://localhost:8080/api/image/add', fileData, {responseType:"blob"}).subscribe(data => {
+    this.photoService.upload(fileData).subscribe(data => {
       this.alertify.message("Dosya yüklendi!", MessageType.Success, Position.TopCenter);
-    }, ()=>{
-         this.alertify.message("Dosya yüklenemedi!", MessageType.Error, Position.TopCenter);
-       })
-    
-    // this.photoService.upload(fileData).subscribe(data => {
-    //   this.alertify.message(data.message, MessageType.Success, Position.TopCenter);
-    // }, ()=>{
-    //   this.alertify.message("Dosya yüklenemedi!", MessageType.Error, Position.TopCenter);
-    // })
+    }, () => {
+      this.alertify.message("Dosya yüklenemedi!", MessageType.Error, Position.TopCenter);
+    })
   }
 }
 
-export class FileUploadOptions{
+export class FileUploadOptions {
   controller?: string;
   action?: string;
   queryString?: string;

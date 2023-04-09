@@ -15,8 +15,7 @@ export class PhotoService {
 
   upload(file: FormData): Observable<any>{
     let newPath = this.apiUrl + "image/add";
-    let headers = new HttpHeaders({"responseType": "blob"});
-    return this.httpClient.post<any>(newPath, file, {headers: headers});
+    return this.httpClient.post<any>(newPath, file);
   }
 
   getPhotos(): Observable<ListResponseModel<GetAllImageResponse>> {

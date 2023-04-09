@@ -36,8 +36,8 @@ export class ProductComponent extends BaseComponent implements OnInit {
     this.showSpinner(SpinnerType.Spin);
     this.activatedRoute.params.subscribe(params => {
       if (params["categoryId"]) {
-        this.getProductsByCategory(params["categoryId"]);
         this.getPageFromProductList()
+        this.getProductsByCategory(params["categoryId"]);
       }
       else if (params["pageNo"]) {
         this.getPageFromProductList()

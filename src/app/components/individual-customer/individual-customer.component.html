@@ -37,7 +37,7 @@
         <td>{{individualCustomer.nationalIdentity}}</td>
         <td>
             <button style="--bs-btn-padding-y: .18rem; --bs-btn-padding-x: .08rem; --bs-btn-font-size: .7rem;"
-                class="btn btn-secondary btn-sm" routerLink="/individualCustomer/update/{{individualCustomer.id}}"
+                class="btn btn-secondary btn-sm" routerLink="/individualcustomer/update/{{individualCustomer.id}}"
                 *ngIf="isAdmin() || isModerator()">Güncelle</button>
             <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
                 class="btn btn-danger btn-sm" (click)="deleteIndividualCustomer(individualCustomer.id)"

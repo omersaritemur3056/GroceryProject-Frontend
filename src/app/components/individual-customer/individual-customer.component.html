@@ -47,14 +47,15 @@
 </table>
 
 <div *ngIf="enablePageButton">
-    <button (click)="getIndividualCustomersByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"
-     ><<</button>
-        <span *ngFor="let i of sortedIndividualCustomers |paging:pageSize; let index = index">
-          <span>
-            <button class="btn btn-danger btn-sm" type="button" (click)="getIndividualCustomersByPaginationAndSortingNameAsc(index+1)"
-              routerLink="/individualcustomer/page/{{index+1}}">
-              {{index+1}}
-            </button>
-          </span>
-        </span>
-  </div>
+    <button (click)="getIndividualCustomersByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"></button>
+        <<< /button>
+            <span *ngFor="let i of sortedIndividualCustomers |paging:pageSize; let index = index">
+                <span>
+                    <button class="btn btn-danger btn-sm" type="button"
+                        (click)="getIndividualCustomersByPaginationAndSortingNameAsc(index+1)"
+                        routerLink="/individualcustomer/page/{{index+1}}">
+                        {{index+1}}
+                    </button>
+                </span>
+            </span>
+</div>

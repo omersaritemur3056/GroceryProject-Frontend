@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
+import { SpinnerType } from 'src/app/base/base.component';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -11,49 +10,49 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent extends BaseComponent {
+export class RegisterComponent {
 
-  registerForm:FormGroup;
+  registerForm: FormGroup;
 
-  constructor(private formBuilder:FormBuilder, private authService:AuthService,
-    private toastrService:ToastrService, private router:Router, spinner: NgxSpinnerService){
-    super(spinner);
+  constructor(private formBuilder: FormBuilder, private toastrService: ToastrService, private spinner: NgxSpinnerService,
+    private authService: AuthService) {
   }
 
   ngOnInit(): void {
-      this.createRegisterForm();
+    this.createRegisterForm();
   }
 
-  createRegisterForm(){
+  createRegisterForm() {
     this.registerForm = this.formBuilder.group({
-      username:["", Validators.required],
-      email:["", Validators.required],
-      password:["", Validators.required]
+      username: ["", Validators.required],
+      email: ["", Validators.required],
+      password: ["", Validators.required]
     })
   }
 
-  register(){
-    this.showSpinner(SpinnerType.ScaleMultiple)
-    if(this.registerForm.valid){
+  register() {
+    this.spinner.show(SpinnerType.ScaleMultiple)
+    if (this.registerForm.valid) {
       let registerModel = JSON.parse(JSON.stringify(this.registerForm.value))
       this.authService.register(registerModel).subscribe(response => {
         this.toastrService.success(response.message, registerModel.username + " Başarıyla kaydoldu! Şimdi giriş yapabilirsiniz")
         setTimeout(() => {
           location.replace("/product")
-        },1000)
-        this.hideSpinner(SpinnerType.ScaleMultiple);
+        }, 1000)
+        this.spinner.hide(SpinnerType.ScaleMultiple);
       }, error => {
-        for(let key in error.error.data){
+        for (let key in error.error.data) {
           this.toastrService.error(error.error.data[key], error.error.message)
+          this.spinner.hide(SpinnerType.ScaleMultiple);
         }
       });
-    }else{
+    } else {
       this.toastrService.error("Form bilgileri eksik ya da hatali!", "Dikkat!")
-      this.hideSpinner(SpinnerType.ScaleMultiple);
+      this.spinner.hide(SpinnerType.ScaleMultiple);
     }
   }
 
-  haveToken(){
+  haveToken() {
     if (localStorage.length > 0) {
       return true;
     } else {

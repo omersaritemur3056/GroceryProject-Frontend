@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GetAllImageResponse } from '../models/image/get-all-image-response';
@@ -13,7 +13,7 @@ export class PhotoService {
 
   constructor(private httpClient: HttpClient) { }
 
-  upload(file: FormData): Observable<any>{
+  upload(file: FormData): Observable<any> {
     let newPath = this.apiUrl + "image/add";
     return this.httpClient.post<any>(newPath, file);
   }

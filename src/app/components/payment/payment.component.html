@@ -1,58 +1,58 @@
 <div class="mb-3">
-    <label for="filterText" class="form-label">Search payment</label>
-    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" 
-    placeholder="Enter payment data">
-  </div>
-  <div *ngIf="filterText.length >= 2" class="alert alert-success">
-    {{filterText}} searching...
-  </div>
-  
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Card Number</th>
-        <th>Fullname</th>
-        <th>Card Expiration Year</th>
-        <th>Card Expiration Month</th>
-        <th>Cvv</th>
-        <th>Balance</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tr *ngFor="let payment of payments">
-      <td>{{payment.cardNumber |titlecase}}</td>
-      <td>{{payment.fullName}}</td>
-      <td>{{payment.cardExpirationYear}}</td>
-      <td>{{payment.cardExpirationMonth}}</td>
-      <td>{{payment.cardCvv}}</td>
-      <td>{{payment.balance}}</td>
-      <td>
-          <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
-           class="btn btn-danger btn-sm" (click)="deletePayment(payment.id)" *ngIf="isAdmin()">Sil</button>
-      </td>
-    </tr>
-  </table>
-  <div *ngIf="enablePageButton">
-    <button (click)="getPaymentsByPaginationAndSortingNameAsc(1)" class="btn btn-danger"><<</button>
-    <span *ngFor="let item of payments;let i = index">
-      <span>
-        <button class="btn btn-danger" type="button" (click)="getPaymentsByPaginationAndSortingNameAsc(i + 1)"
-        routerLink="/payment/page/{{i + 1}}">
-          {{i + 1}}
-        </button>
-      </span>
-    </span>
-  </div>
+  <label for="filterText" class="form-label">Search payment</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter payment data">
+</div>
+<div *ngIf="filterText.length >= 2" class="alert alert-success">
+  {{filterText}} searching...
+</div>
 
-  <div *ngIf="enablePageButton">
-    <button (click)="getPaymentsByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"
-     ><<</button>
-        <span *ngFor="let i of sortedPayments |paging:pageSize; let index = index">
-          <span>
-            <button class="btn btn-danger btn-sm" type="button" (click)="getPaymentsByPaginationAndSortingNameAsc(index+1)"
-              routerLink="/payment/page/{{index+1}}">
-              {{index+1}}
-            </button>
-          </span>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Card Number</th>
+      <th>Fullname</th>
+      <th>Card Expiration Year</th>
+      <th>Card Expiration Month</th>
+      <th>Cvv</th>
+      <th>Balance</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tr *ngFor="let payment of payments">
+    <td>{{payment.cardNumber |titlecase}}</td>
+    <td>{{payment.fullName}}</td>
+    <td>{{payment.cardExpirationYear}}</td>
+    <td>{{payment.cardExpirationMonth}}</td>
+    <td>{{payment.cardCvv}}</td>
+    <td>{{payment.balance}}</td>
+    <td>
+      <button style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .7rem;"
+        class="btn btn-danger btn-sm" (click)="deletePayment(payment.id)" *ngIf="isAdmin()">Sil</button>
+    </td>
+  </tr>
+</table>
+<div *ngIf="enablePageButton">
+  <button (click)="getPaymentsByPaginationAndSortingNameAsc(1)" class="btn btn-danger">
+    <<< </button>
+      <span *ngFor="let item of payments;let i = index">
+        <span>
+          <button class="btn btn-danger" type="button" (click)="getPaymentsByPaginationAndSortingNameAsc(i + 1)"
+            routerLink="/payment/page/{{i + 1}}">
+            {{i + 1}}
+          </button>
         </span>
-  </div>
+      </span>
+</div>
+
+<div *ngIf="enablePageButton">
+  <button (click)="getPaymentsByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm">
+    <<< </button>
+      <span *ngFor="let i of sortedPayments |paging:pageSize; let index = index">
+        <span>
+          <button class="btn btn-danger btn-sm" type="button"
+            (click)="getPaymentsByPaginationAndSortingNameAsc(index+1)" routerLink="/payment/page/{{index+1}}">
+            {{index+1}}
+          </button>
+        </span>
+      </span>
+</div>

@@ -25,9 +25,9 @@ export class IndividualCustomerComponent extends BaseComponent implements OnInit
   sortBy: string = "firstName";
 
   constructor(private individualCustomerService: IndividualCustomerService, private toastrService: ToastrService,
-    private authService: AuthService, private alertify: AlertifyService, spinner: NgxSpinnerService,
-    private activatedRoute: ActivatedRoute) {
-    super(spinner);
+    private alertify: AlertifyService, spinner: NgxSpinnerService,
+    private activatedRoute: ActivatedRoute, authService: AuthService) {
+    super(spinner, authService);
   }
 
   ngOnInit(): void {
@@ -78,29 +78,5 @@ export class IndividualCustomerComponent extends BaseComponent implements OnInit
     }, () => {
       return;
     })
-  }
-
-  isAdmin() {
-    if (this.authService.hasAutorized().role == "ADMIN") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  isModerator() {
-    if (this.authService.hasAutorized().role == "MODERATOR") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  isEditor() {
-    if (this.authService.hasAutorized().role == "EDITOR") {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

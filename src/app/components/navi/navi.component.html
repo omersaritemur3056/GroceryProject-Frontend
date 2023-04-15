@@ -19,7 +19,8 @@
         </li>
       </ul>
       <div class="dropdown" *ngIf="isAdmin() || isModerator() || isEditor()">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown"
+          aria-expanded="false" style="margin-right: 1rem;">
           Varlıkları Listele
         </button>
         <ul class="dropdown-menu">
@@ -41,7 +42,8 @@
         </ul>
       </div>
       <div class="dropdown" *ngIf="isAdmin() || isModerator()">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown"
+          aria-expanded="false" style="margin-right: 1rem;">
           Ekleme Menüsü
         </button>
         <ul class="dropdown-menu">
@@ -65,12 +67,12 @@
         </ul>
       </div>
       <div>
-        <button type="button" class="btn btn-secondary" routerLink="/register" *ngIf="haveToken()==false"
-        (click)="activateSpinner()">Kayıt ol</button>
-        <button type="button" class="btn btn-secondary" routerLink="/login" *ngIf="haveToken()==false"
-        (click)="activateSpinner()">Giriş yap</button>
-        <button type="button" class="btn btn-danger" (click)="logout()" *ngIf="haveToken()==true" routerLink="">Çıkış
-          yap</button>
+        <button type="button" class="btn btn-primary btn-sm" routerLink="/register" *ngIf="haveToken()==false"
+          (click)="activateSpinner()" style="margin-right: 1rem;">Kayıt ol</button>
+        <button type="button" class="btn btn-primary btn-sm" routerLink="/login" *ngIf="haveToken()==false"
+          (click)="activateSpinner()" style="margin-right: 1rem;">Giriş yap</button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="logout()" *ngIf="haveToken()==true" routerLink=""
+          style="margin-right: 1rem;">Çıkış yap</button>
       </div>
     </div>
   </div>

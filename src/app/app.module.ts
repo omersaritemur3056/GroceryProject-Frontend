@@ -46,6 +46,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,13 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    NgxFileDropModule
+    NgxFileDropModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem("token"),
+        allowedDomains: ["localhost:8080"]
+      }
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true },

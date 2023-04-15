@@ -14,42 +14,42 @@ import { DeleteProductRequest } from '../models/product/delete-product-request';
 })
 export class ProductService {
 
-  categories:GetAllCategoryResponse[] = [];
+  categories: GetAllCategoryResponse[] = [];
 
-  apiUrl:string = "http://localhost:8080/api/";
+  apiUrl: string = "http://localhost:8080/api/";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getProducts():Observable<ListResponseModel<GetAllProductResponse>>{
+  getProducts(): Observable<ListResponseModel<GetAllProductResponse>> {
     let newPath = this.apiUrl + "product/getall"
     return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);
   }
 
-  getProductsBySortingNameAsc(sortBy:string):Observable<ListResponseModel<GetAllProductResponse>>{
+  getProductsBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllProductResponse>> {
     let newPath = this.apiUrl + "product/getlistbysorting?sortBy=" + sortBy
     return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);
   }
 
-  getProductsByPaginationAndSortingNameAsc(pageNo:number, pageSize:number, sortBy:string):Observable<ListResponseModel<GetAllProductResponse>>{
-    let newPath = this.apiUrl + 
-    `product/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
+  getProductsByPaginationAndSortingNameAsc(pageNo: number, pageSize: number, sortBy: string): Observable<ListResponseModel<GetAllProductResponse>> {
+    let newPath = this.apiUrl +
+      `product/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
     return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);
   }
 
-  getProductsByCategory(categoryId:number):Observable<ListResponseModel<GetAllProductResponse>>{
+  getProductsByCategory(categoryId: number): Observable<ListResponseModel<GetAllProductResponse>> {
     let newPath = this.apiUrl + "product/getallbycategory?categoryId=" + categoryId
     return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);
   }
 
-  add(product:CreateProductRequest):Observable<ResponseModel>{
+  add(product: CreateProductRequest): Observable<ResponseModel> {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "product/add", product);
   }
 
-  update(product:UpdateProductRequest, id:number):Observable<ResponseModel>{
+  update(product: UpdateProductRequest, id: number): Observable<ResponseModel> {
     return this.httpClient.put<ResponseModel>(this.apiUrl + "product/update?id=" + id, product);
   }
 
-  delete(deleteProduct:DeleteProductRequest):Observable<ResponseModel>{
-    return this.httpClient.delete<ResponseModel>(this.apiUrl + "product/delete" , {body:deleteProduct});
+  delete(deleteProduct: DeleteProductRequest): Observable<ResponseModel> {
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "product/delete", { body: deleteProduct });
   }
 }

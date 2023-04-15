@@ -25,9 +25,9 @@ export class PaymentComponent extends BaseComponent implements OnInit {
   sortBy: string = "fullname";
 
   constructor(private paymentService: PaymentService, private activatedRoute: ActivatedRoute,
-    private toastrService: ToastrService, private authService: AuthService, private alertify: AlertifyService, 
-    spinner: NgxSpinnerService) {
-    super(spinner);
+    private toastrService: ToastrService, private alertify: AlertifyService,
+    spinner: NgxSpinnerService, authService: AuthService) {
+    super(spinner, authService);
   }
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class PaymentComponent extends BaseComponent implements OnInit {
   }
 
   async getPageFromPaymentList() {
-    this.paymentService.getPaymentsBySortingNameAsc(this.sortBy).subscribe( p => {
+    this.paymentService.getPaymentsBySortingNameAsc(this.sortBy).subscribe(p => {
       this.sortedPayments = p.data
       this.hideSpinner(SpinnerType.Spin);
     });
@@ -80,35 +80,11 @@ export class PaymentComponent extends BaseComponent implements OnInit {
   deletePayment(deletePaymentId: number) {
     this.alertify.confirm("Silme Uyarısı", "Silmek istediğinize enin misiniz?", () => {
       let deletePayment: DeletePaymentRequest = { id: deletePaymentId }
-       this.paymentService.delete(deletePayment).subscribe(response => {
+      this.paymentService.delete(deletePayment).subscribe(response => {
         this.toastrService.error(response.message, deletePayment.id.toString());
       })
     }, () => {
       return;
     })
-  }
-
-  isAdmin() {
-    if (this.authService.hasAutorized().role == "ADMIN") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  isModerator() {
-    if (this.authService.hasAutorized().role == "MODERATOR") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  isEditor() {
-    if (this.authService.hasAutorized().role == "EDITOR") {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

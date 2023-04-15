@@ -8,5 +8,5 @@ export interface UpdateProductRequest {
     categoryId: number;
     supplierId: number;
     producerId: number;
-    imageUrls: String[]; // burası null gidiyor...
+    imageIds: any[];
 }

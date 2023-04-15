@@ -8,11 +8,11 @@ import { CartItem } from '../models/cart/cart-item';
 })
 export class CartService {
 
-  addToCart(product:GetAllProductResponse){
+  addToCart(product: GetAllProductResponse) {
     let item = CartItems.find(c => c.product.id === product.id);
-    if(item){
+    if (item) {
       item.quantity += 1;
-    }else{
+    } else {
       let cartItem = new CartItem();
       cartItem.product = product;
       cartItem.quantity = 1;
@@ -20,12 +20,12 @@ export class CartService {
     }
   }
 
-  removeFromCart(product:GetAllProductResponse){
+  removeFromCart(product: GetAllProductResponse) {
     let item = CartItems.find(c => c.product.id === product.id);
-    CartItems.splice(CartItems.indexOf(item),1)
+    CartItems.splice(CartItems.indexOf(item), 1)
   }
 
-  list():CartItem[]{
+  list(): CartItem[] {
     return CartItems;
   }
 }

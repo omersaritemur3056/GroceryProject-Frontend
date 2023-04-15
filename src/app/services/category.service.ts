@@ -16,22 +16,22 @@ export class CategoryService {
 
   apiUrl = "http://localhost:8080/api/";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getCategories():Observable<ListResponseModel<GetAllCategoryResponse>>{
+  getCategories(): Observable<ListResponseModel<GetAllCategoryResponse>> {
     let newPath = this.apiUrl + "category/getall"
     return this.httpClient.get<ListResponseModel<GetAllCategoryResponse>>(newPath);
   }
 
-  add(category:CreateCategoryRequest):Observable<ResponseModel>{
+  add(category: CreateCategoryRequest): Observable<ResponseModel> {
     return this.httpClient.post<ResponseModel>(this.apiUrl + "category/add", category);
   }
 
-  update(id:number, category:UpdateCategoryRequest):Observable<ResponseModel>{
+  update(id: number, category: UpdateCategoryRequest): Observable<ResponseModel> {
     return this.httpClient.put<ResponseModel>(this.apiUrl + "category/update?id=" + id, category);
   }
 
-  delete(category:DeleteCategoryRequest):Observable<ResponseModel>{
-    return this.httpClient.delete<ResponseModel>(this.apiUrl + "category/delete" , {body:category});
+  delete(category: DeleteCategoryRequest): Observable<ResponseModel> {
+    return this.httpClient.delete<ResponseModel>(this.apiUrl + "category/delete", { body: category });
   }
 }

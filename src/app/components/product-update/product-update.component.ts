@@ -32,7 +32,7 @@ export class ProductUpdateComponent {
       categoryId:["", Validators.required],
       producerId:["", Validators.required],
       supplierId:["", Validators.required],
-      imageUrls: [[""]]
+      imageIds: [[""]]
     })
   }
 

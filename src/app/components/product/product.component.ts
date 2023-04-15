@@ -2,14 +2,13 @@ import { CartService } from './../../services/cart.service';
 import { ProductService } from './../../services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { GetAllProductResponse } from 'src/app/models/product/get-all-product-response';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteProductRequest } from 'src/app/models/product/delete-product-request';
 import { AuthService } from 'src/app/services/auth.service';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AlertifyService } from 'src/app/services/customize-services/alertify.service';
-//declare var alertify: any
 
 @Component({
   selector: 'app-product',
@@ -27,9 +26,9 @@ export class ProductComponent extends BaseComponent implements OnInit {
   sortBy: string = "name";
 
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute,
-    private toastrService: ToastrService, private cartService: CartService, private authService: AuthService,
-    spinner: NgxSpinnerService, private alertify: AlertifyService) {
-    super(spinner);
+    private toastrService: ToastrService, private cartService: CartService, private router: Router,
+    spinner: NgxSpinnerService, private alertify: AlertifyService, authService: AuthService) {
+    super(spinner, authService);
   }
 
   ngOnInit(): void {
@@ -87,35 +86,13 @@ export class ProductComponent extends BaseComponent implements OnInit {
   }
 
   addToCart(product: GetAllProductResponse) {
-    if (localStorage.length < 1) {
+    const roles = localStorage.getItem("roles");
+    if (!roles) {
       this.toastrService.error("Sisteme giriş yapmalısınız!")
+      this.router.navigate(["login"]);
       return;
     }
-    this.toastrService.success("Sepete eklendi", product.name)
+    this.toastrService.success(product.name, "Sepete eklendi")
     this.cartService.addToCart(product);
-  }
-
-  isAdmin() {
-    if (this.authService.hasAutorized().role == "ADMIN") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  isModerator() {
-    if (this.authService.hasAutorized().role == "MODERATOR") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  isEditor() {
-    if (this.authService.hasAutorized().role == "EDITOR") {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

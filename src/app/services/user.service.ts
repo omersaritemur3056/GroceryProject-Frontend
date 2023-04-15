@@ -14,29 +14,29 @@ export class UserService {
 
   apiUrl = "http://localhost:8080/api/";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getUsers():Observable<ListResponseModel<GetAllUserResponse>>{
+  getUsers(): Observable<ListResponseModel<GetAllUserResponse>> {
     let newPath = this.apiUrl + "user/getall"
     return this.httpClient.get<ListResponseModel<GetAllUserResponse>>(newPath);
   }
 
-  getUsersBySortingNameAsc(sortBy:string):Observable<ListResponseModel<GetAllUserResponse>>{
+  getUsersBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllUserResponse>> {
     let newPath = this.apiUrl + "user/getlistbysorting?sortBy=" + sortBy
     return this.httpClient.get<ListResponseModel<GetAllUserResponse>>(newPath);
   }
 
-  getUsersByPaginationAndSortingNameAsc(pageNo:number, pageSize:number, sortBy:string):Observable<ListResponseModel<GetAllUserResponse>>{
-    let newPath = this.apiUrl + 
-    `user/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
+  getUsersByPaginationAndSortingNameAsc(pageNo: number, pageSize: number, sortBy: string): Observable<ListResponseModel<GetAllUserResponse>> {
+    let newPath = this.apiUrl +
+      `user/getlistbypaginationandsorting?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}`
     return this.httpClient.get<ListResponseModel<GetAllUserResponse>>(newPath);
   }
 
-  update(id:number, user:UpdateUserRequest):Observable<ResponseModel>{
+  update(id: number, user: UpdateUserRequest): Observable<ResponseModel> {
     return this.httpClient.put<ResponseModel>(this.apiUrl + "user/update?id=" + id, user);
   }
 
-  delete(user:DeleteUserRequest):Observable<ResponseModel>{
+  delete(user: DeleteUserRequest): Observable<ResponseModel> {
     return this.httpClient.delete<ResponseModel>(this.apiUrl + "user/delete?id=" + user.id);
   }
 }

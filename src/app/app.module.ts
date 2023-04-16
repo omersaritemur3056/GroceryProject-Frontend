@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations"
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,6 +47,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { JwtModule } from '@auth0/angular-jwt';
+import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+
 
 @NgModule({
   declarations: [
@@ -93,7 +95,7 @@ import { JwtModule } from '@auth0/angular-jwt';
     HttpClientModule,
     FormsModule,
     ToastrModule.forRoot({
-      positionClass:"toast-bottom-right"
+      positionClass: "toast-bottom-right"
     }),
     NgxSpinnerModule,
     BrowserAnimationsModule,
@@ -104,10 +106,25 @@ import { JwtModule } from '@auth0/angular-jwt';
         tokenGetter: () => localStorage.getItem("token"),
         allowedDomains: ["localhost:8080"]
       }
-    })
+    }),
+    SocialLoginModule,
+    GoogleSigninButtonModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: "SocialAuthServiceConfig",
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider("Your Google Cloud Client id")
+          }
+        ],
+        onError: err => console.log(err)
+      } as SocialAuthServiceConfig
+    }
   ],
   bootstrap: [AppComponent]
 })

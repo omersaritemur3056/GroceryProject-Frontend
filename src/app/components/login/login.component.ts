@@ -1,3 +1,4 @@
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +17,21 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private toastrService: ToastrService, private spinner: NgxSpinnerService,
-    private authService: AuthService, private activatedRoute: ActivatedRoute) { }
+    private authService: AuthService, private activatedRoute: ActivatedRoute, private socialAuthService: SocialAuthService) {
+    this.socialAuthService.authState.subscribe((user: SocialUser) => {
+      spinner.show(SpinnerType.ScaleMultiple);
+      authService.googleLogin(user).subscribe(response => {
+        console.log(response);
+        this.toastrService.success(user.name, "Hoş geldiniz!");
+        localStorage.setItem("token", user.idToken);
+        localStorage.setItem("roles", "USER");
+        setTimeout(() => {
+          location.replace("/product")
+        }, 1000)
+        spinner.hide(SpinnerType.ScaleMultiple);
+      });
+    });
+  }
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -36,7 +51,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginModel).subscribe(response => {
         this.toastrService.success(response.data.username, "Hoş geldiniz!");
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("roles", response.data.roles.toLocaleString())
+        localStorage.setItem("roles", response.data.roles.toLocaleString());
         this.activatedRoute.queryParams.subscribe(params => {
           const returnUrl: string = params['returnUrl']
           if (returnUrl) {

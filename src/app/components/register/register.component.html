@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="title">Kayıt Formu</h5>
+                <h5 class="title">Sisteme Kayıt ol!</h5>
             </div>
             <div class="card-body">
                 <form [formGroup]="registerForm">
@@ -31,6 +31,12 @@
             </div>
             <div class="card-footer">
                 <button class="btn btn-fill btn-primary" (click)="register()">Kayıt ol</button>
+            </div>
+            <div class="social-login">
+                <h5 class="social-login-title">Google ile giriş</h5>
+                <div class="mb-3">
+                    <asl-google-signin-button size="large"></asl-google-signin-button>
+                </div>
             </div>
         </div>
     </div>

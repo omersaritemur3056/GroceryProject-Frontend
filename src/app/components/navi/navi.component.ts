@@ -15,7 +15,7 @@ export class NaviComponent extends BaseComponent {
   }
 
   haveToken() {
-    if (localStorage.length > 0) {
+    if (localStorage.getItem("token")) {
       return true;
     } else {
       return false;

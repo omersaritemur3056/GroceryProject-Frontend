@@ -1,4 +1,4 @@
 export interface TokenModel{
-    token:string;
-    roles:string[];
+    token: string;
+    roles?: string[];
 }

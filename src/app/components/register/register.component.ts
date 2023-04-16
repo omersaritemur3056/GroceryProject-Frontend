@@ -1,3 +1,4 @@
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -15,7 +16,20 @@ export class RegisterComponent {
   registerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private toastrService: ToastrService, private spinner: NgxSpinnerService,
-    private authService: AuthService) {
+    private authService: AuthService, private socialAuthService: SocialAuthService) {
+    this.socialAuthService.authState.subscribe((user: SocialUser) => {
+      console.log(user);
+      spinner.show(SpinnerType.ScaleMultiple);
+      authService.googleLogin(user).subscribe(response => {
+        this.toastrService.success(user.name, "Hoş geldiniz!");
+        localStorage.setItem("token", user.idToken);
+        localStorage.setItem("roles", "USER");
+        setTimeout(() => {
+          location.replace("/product")
+        }, 1000)
+        spinner.hide(SpinnerType.ScaleMultiple);
+      });
+    });
   }
 
   ngOnInit(): void {

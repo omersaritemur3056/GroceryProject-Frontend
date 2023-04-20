@@ -30,8 +30,13 @@ export class AuthService {
     return this.httpClient.post<DataResponseModel<LoginModel>>(newPath, user);
   }
 
-  googleLogin(user: SocialUser){
+  googleLogin(user: SocialUser) {
     let newPath = this.apiUrl + "user/googlelogin";
+    return this.httpClient.post<SocialUser | TokenModel>(newPath, user);
+  }
+
+  facebookLogin(user: SocialUser) {
+    let newPath = this.apiUrl + "user/facebooklogin";
     return this.httpClient.post<SocialUser | TokenModel>(newPath, user);
   }
 

@@ -5,14 +5,17 @@
             <div class="form-floating">
                 <input type="text" formControlName="username" class="form-control" id="floatingInput"
                     placeholder="username">
-                <label for="floatingInput">Username</label>
+                <label for="floatingInput">Kullanıcı Adı</label>
             </div>
             <div class="form-floating">
                 <input type="password" formControlName="password" class="form-control" id="floatingPassword"
                     placeholder="Password">
                 <label for="floatingPassword">Şifre</label>
             </div>
-            <asl-google-signin-button size="large"></asl-google-signin-button>
+            <div class="social-login">
+                <img src="../../../../assets/facebook.png" alt="" class="facebook" (click)="facebookLogin()">
+                <asl-google-signin-button size="large" style="position: absolute; margin-left: 10px;"></asl-google-signin-button>
+            </div>
             <div class="checkbox mb-3">
                 <label>
                     <input type="checkbox" value="remember-me"> Beni hatırla

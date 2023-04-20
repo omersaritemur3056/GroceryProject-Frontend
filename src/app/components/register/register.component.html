@@ -33,9 +33,12 @@
                 <button class="btn btn-fill btn-primary" (click)="register()">Kayıt ol</button>
             </div>
             <div class="social-login">
-                <h5 class="social-login-title">Google ile giriş</h5>
+                <h5 class="social-login-title">Google veya Facebook ile giriş</h5>
                 <div class="mb-3">
-                    <asl-google-signin-button size="large"></asl-google-signin-button>
+                    <div class="social-login">
+                        <img src="../../../../assets/facebook.png" alt="" class="facebook" (click)="facebookLogin()">
+                        <asl-google-signin-button size="large" style="position: absolute; margin-left: 10px;"></asl-google-signin-button>
+                    </div>
                 </div>
             </div>
         </div>

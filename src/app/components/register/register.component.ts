@@ -1,4 +1,4 @@
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { FacebookLoginProvider, MicrosoftLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -18,22 +18,48 @@ export class RegisterComponent {
   constructor(private formBuilder: FormBuilder, private toastrService: ToastrService, private spinner: NgxSpinnerService,
     private authService: AuthService, private socialAuthService: SocialAuthService) {
     this.socialAuthService.authState.subscribe((user: SocialUser) => {
-      console.log(user);
       spinner.show(SpinnerType.ScaleMultiple);
-      authService.googleLogin(user).subscribe(response => {
-        this.toastrService.success(user.name, "Hoş geldiniz!");
-        localStorage.setItem("token", user.idToken);
-        localStorage.setItem("roles", "USER");
-        setTimeout(() => {
-          location.replace("/product")
-        }, 1000)
-        spinner.hide(SpinnerType.ScaleMultiple);
-      });
+      switch (user.provider) {
+        case "GOOGLE":
+          authService.googleLogin(user).subscribe(response => {
+            console.log(user);
+            this.toastrService.success(user.name, "Hoş geldiniz!");
+            localStorage.setItem("token", user.idToken);
+            localStorage.setItem("roles", "USER");
+            localStorage.setItem("provider", user.provider);
+            setTimeout(() => {
+              location.replace("/product")
+            }, 1000)
+          }, error => {
+            toastrService.error(error.error.message, "Hata Oluştu!")
+          })
+          break;
+
+        case "FACEBOOK":
+          authService.facebookLogin(user).subscribe(response => {
+            console.log(user);
+            this.toastrService.success(user.name, "Hoş geldiniz!");
+            localStorage.setItem("token", user.authToken);
+            localStorage.setItem("roles", "USER");
+            localStorage.setItem("provider", user.provider);
+            setTimeout(() => {
+              location.replace("/product")
+            }, 1000)
+          }, error => {
+            toastrService.error(error.error.message, "Hata Oluştu!")
+          })
+          break;
+      };
+      spinner.hide(SpinnerType.ScaleMultiple);
     });
   }
 
   ngOnInit(): void {
     this.createRegisterForm();
+  }
+
+  facebookLogin() {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 
   createRegisterForm() {

@@ -1,7 +1,15 @@
-.social-login{
-    margin-top: 2rem;
-}
-
-.social-login-title{
+.social-login-title {
     text-align: center;
 }
+
+.social-login {
+    margin-top: 25px;
+    margin-bottom: 15px;
+  }
+
+.facebook {
+    margin-top: 1px;
+    height: 37px;
+    width: 37px;
+    cursor: pointer;
+  }

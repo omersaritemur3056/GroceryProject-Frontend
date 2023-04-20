@@ -47,7 +47,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { JwtModule } from '@auth0/angular-jwt';
-import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, MicrosoftLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 
 
 @NgModule({
@@ -119,7 +119,11 @@ import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig,
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider("Your Google Cloud Client id")
+            provider: new GoogleLoginProvider("Your_Google_Client_Id")
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider("Your_Meta_Client_Id")
           }
         ],
         onError: err => console.log(err)

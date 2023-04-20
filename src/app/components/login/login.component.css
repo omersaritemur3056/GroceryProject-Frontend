@@ -83,3 +83,15 @@ body {
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 }
+
+.social-login {
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+.facebook {
+  margin-top: 1px;
+  height: 37px;
+  width: 37px;
+  cursor: pointer;
+}

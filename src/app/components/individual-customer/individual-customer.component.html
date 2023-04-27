@@ -1,10 +1,14 @@
-<div class="mb-3">
-    <label for="filterText" class="form-label">Search individual customer</label>
-    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText"
-        placeholder="Enter individual customer">
-</div>
-<div *ngIf="filterText.length >= 2" class="alert alert-success">
-    {{filterText}} searching...
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <label for="filterText" class="form-label"
+            style="display: flex; justify-content: center; color: purple;font-size: large; font-weight: 500;">Bireysel
+            müşteri Ara</label>
+        <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText"
+            placeholder="Bireysel müşteri adı giriniz...">
+        <div *ngIf="filterText.length >= 2" class="alert alert-danger">
+            {{filterText}} aranıyor...
+        </div>
+    </div>
 </div>
 
 <table class="table">
@@ -21,7 +25,7 @@
             <th>Kimlik No.</th>
         </tr>
     </thead>
-    <tr *ngFor="let individualCustomer of individualCustomers">
+    <tr *ngFor="let individualCustomer of individualCustomers|firstNameFilter:filterText">
         <td>{{individualCustomer.id}}</td>
         <td>{{individualCustomer.userId}}</td>
         <td>
@@ -46,16 +50,21 @@
     </tr>
 </table>
 
-<div *ngIf="enablePageButton">
-    <button (click)="getIndividualCustomersByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"></button>
-        <<< /button>
-            <span *ngFor="let i of sortedIndividualCustomers |paging:pageSize; let index = index">
-                <span>
-                    <button class="btn btn-danger btn-sm" type="button"
-                        (click)="getIndividualCustomersByPaginationAndSortingNameAsc(index+1)"
-                        routerLink="/individualcustomer/page/{{index+1}}">
-                        {{index+1}}
-                    </button>
-                </span>
+<div class="row justify-content-center" *ngIf="enablePageButton">
+    <div class="col-md-2">
+        <button (click)="getIndividualCustomersByPaginationAndSortingNameAsc(1)" class="btn btn-secondary btn-sm"
+            routerLink="/individualcustomer/page/1">İlk</button>
+        <span *ngFor="let i of sortedIndividualCustomers |paging:pageSize; let index = index">
+            <span>
+                <button class="btn btn-secondary btn-sm" type="button"
+                    (click)="getIndividualCustomersByPaginationAndSortingNameAsc(index+1)"
+                    routerLink="/individualcustomer/page/{{index+1}}" routerLinkActive="active">
+                    {{index+1}}
+                </button>
             </span>
+        </span>
+        <button (click)="getIndividualCustomersByPaginationAndSortingNameAsc(sortedIndividualCustomers.length/pageSize)"
+            class="btn btn-secondary btn-sm"
+            routerLink="/individualcustomer/page/{{sortedIndividualCustomers |mathRound:pageSize}}">Son</button>
+    </div>
 </div>

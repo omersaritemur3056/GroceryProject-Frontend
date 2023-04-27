@@ -1,60 +1,54 @@
-<div class="mb-4">
-  <label for="filterText" class="form-label">Search product</label>
-  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter product name">
-</div>
-<div *ngIf="filterText.length >= 2" class="alert alert-success">
-  {{filterText}} searching...
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <label for="filterText" class="form-label"
+      style="display: flex; justify-content: center; color: purple;font-size: large; font-weight: 500;">Ürün Ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Ürün adı giriniz...">
+    <div *ngIf="filterText.length >= 2" class="alert alert-danger">
+      {{filterText}} aranıyor...
+    </div>
+  </div>
 </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Ürün adı</th>
-      <th>KDV'li fiyatı</th>
-      <th>Açıklaması</th>
-      <th>Üretim tarihi</th>
-      <th>Son kullanma tarihi</th>
-      <th>Stok</th>
-      <th>Kategori</th>
-      <th>Tedarikçi</th>
-      <th>Üretici</th>
-      <th>Resimler</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tr *ngFor="let product of products |filterPipe:filterText">
-    <td>{{product.name |titlecase}}</td>
-    <td>{{product.price |vatAdded:18 |currency:'TRY':'symbol-narrow':'1.2-2'}}</td>
-    <td>{{product.description}}</td>
-    <td>{{product.productionDate |date:"dd/MM/yyyy"}}</td>
-    <td>{{product.expirationDate |date:"dd/MM/yyyy"}}</td>
-    <td>{{product.stock}}</td>
-    <td>{{product.categoryName}}</td>
-    <td>{{product.supplierName}}</td>
-    <td>{{product.producerName}}</td>
-    <td class="image-dimention" *ngFor="let url of product.urls">
-      <a class="image-link" [href]="url" target="_blank">
-        <img class="table-images" src="{{url}}" alt="">
-      </a>
-    </td>
-    <td><button (click)="addToCart(product)" class="btn btn-success btn-sm">Sepete ekle!</button></td>
-    <td>
-      <button class="btn btn-secondary btn-sm" routerLink="/product/update/{{product.id}}"
-        *ngIf="isAdmin() || isModerator() || isEditor()">Güncelle</button>
-      <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)" *ngIf="isAdmin() || isModerator()">
-        Sil</button>
-    </td>
-  </tr>
-</table>
-<div *ngIf="enablePageButton">
-  <button (click)="getProductsByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"
-   ><<</button>
-      <span *ngFor="let i of sortedProducts |paging:pageSize; let index = index">
-        <span>
-          <button class="btn btn-danger btn-sm" type="button" (click)="getProductsByPaginationAndSortingNameAsc(index+1)"
-            routerLink="/product/page/{{index+1}}">
-            {{index+1}}
-          </button>
-        </span>
+<div class="row justify-content-center">
+  <div class="card" *ngFor="let product of products |filterPipe:filterText">
+    <img width="200" height="250" *ngIf="!product.urls.length" src="../../../assets/default2.png" class="card-img-top"
+      alt="...">
+    <span *ngFor="let url of product.urls">
+      <img width="200" height="250" src="{{url}}" class="card-img-top" alt="...">
+    </span>
+    <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text">Fiyatı: {{product.price |currency:'₺'}}</p>
+      <p class="card-text" *ngIf="product.stock > 0">Stokta {{product.stock}} adet bulunmaktadır.</p>
+      <p class="card-text" *ngIf="product.stock == 0" style="color: red;">Bu ürün stokta tükenmiştir.</p>
+      <p class="card-text" *ngIf="product.description">Ürün açıklaması: {{product.description}}</p>
+      <p class="card-text" *ngIf="!product.description">Ürüne dair açıklama belirtilmemiştir.</p>
+      <button (click)="addToCart(product)" class="btn btn-success btn-sm" style="margin-left: .5vh;">Sepete
+        ekle!</button>
+      <button (click)="productDetail(product.id)" class="btn btn-primary btn-sm" style="margin-left: 4vh;">Ürüne
+        git</button>
+    </div>
+    <button class="btn btn-primary btn-sm" routerLink="/product/update/{{product.id}}"
+      *ngIf="isAdmin() || isModerator() || isEditor()">Güncelle</button>
+    <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)" *ngIf="isAdmin() || isModerator()">
+      Sil</button>
+  </div>
+</div>
+
+<div class="row justify-content-center" *ngIf="enablePageButton">
+  <div class="col-md-2">
+    <button (click)="getProductsByPaginationAndSortingNameAsc(1)" class="btn btn-secondary btn-sm"
+      routerLink="/product/page/1">İlk</button>
+    <span *ngFor="let i of sortedProducts |paging:pageSize; let index = index">
+      <span>
+        <button class="btn btn-secondary btn-sm" type="button"
+          (click)="getProductsByPaginationAndSortingNameAsc(index+1)" routerLink="/product/page/{{index+1}}"
+          routerLinkActive="active">
+          {{index+1}}
+        </button>
       </span>
+    </span>
+    <button (click)="getProductsByPaginationAndSortingNameAsc(sortedProducts.length/pageSize)"
+      class="btn btn-secondary btn-sm" routerLink="/product/page/{{sortedProducts |mathRound:pageSize}}">Son</button>
+  </div>
 </div>

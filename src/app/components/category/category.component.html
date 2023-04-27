@@ -3,9 +3,9 @@
   <li (click)="setCurrentCategory(category)" routerLink="/product/category/{{category.id}}"
     [class]="getCurrentCategoryClass(category)" *ngFor="let category of categories">
     {{category.name |titlecase}}
-    <button type="button" class="btn btn-warning btn-sm" routerLink="/category/update/{{category.id}}" 
+    <button type="button" class="btn btn-secondary btn-sm" (click)="updateCategory(category.id)"
       *ngIf="isAdmin() || isEditor() || isModerator()">Güncelle</button>
-    <button type="button" class="btn btn-danger btn-sm" (click)="deleteCategory(category.id)" 
+    <button type="button" class="btn btn-danger btn-sm" (click)="deleteCategory(category.id)"
       *ngIf="isAdmin() || isEditor() || isModerator()">Sil</button>
   </li>
 </ul>

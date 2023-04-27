@@ -47,7 +47,13 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { JwtModule } from '@auth0/angular-jwt';
-import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, MicrosoftLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { MathRoundPipe } from './pipes/math-round.pipe';
+import { ProductByIdComponent } from './components/product-by-id/product-by-id.component';
+import { UserFilterPipe } from './pipes/user-filter.pipe';
+import { FullNameFilterPipe } from './pipes/full-name-filter.pipe';
+import { FirstNameFilterPipe } from './pipes/first-name-filter.pipe';
+import { CompanyNameFilterPipe } from './pipes/company-name-filter.pipe';
 
 
 @NgModule({
@@ -87,7 +93,13 @@ import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, M
     UserComponent,
     UserUpdateComponent,
     FooterComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    MathRoundPipe,
+    ProductByIdComponent,
+    UserFilterPipe,
+    FullNameFilterPipe,
+    FirstNameFilterPipe,
+    CompanyNameFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -119,11 +131,11 @@ import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, M
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider("Your_Google_Client_Id")
+            provider: new GoogleLoginProvider("701530053355-l0n5pnqifn4qeq1h714immqeiuomb92b.apps.googleusercontent.com")
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider("Your_Meta_Client_Id")
+            provider: new FacebookLoginProvider("2395539210626739")
           }
         ],
         onError: err => console.log(err)

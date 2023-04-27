@@ -32,3 +32,13 @@ td{
 .btn{
     margin-bottom: .8rem;
 }
+
+.card{
+    float: left;
+    width: 18rem;
+    margin: 5vh;
+}
+
+.card-text{
+    border-bottom: solid 2px;
+}

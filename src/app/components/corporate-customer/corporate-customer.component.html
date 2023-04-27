@@ -1,11 +1,13 @@
-<div class="mb-3">
-    <label for="filterText" class="form-label">Search corporate customer</label>
-    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText"
-        placeholder="Enter corporate customer">
-</div>
-<div *ngIf="filterText.length >= 2" class="alert alert-success">
-    {{filterText}} searching...
-</div>
+<div class="row justify-content-center">
+    <div class="col-md-4">
+      <label for="filterText" class="form-label"
+        style="display: flex; justify-content: center; color: purple;font-size: large; font-weight: 500;">Tüzel müşteri Ara</label>
+      <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Tüzel müşteri adı giriniz...">
+      <div *ngIf="filterText.length >= 2" class="alert alert-danger">
+        {{filterText}} aranıyor...
+      </div>
+    </div>
+  </div>
 
 <table class="table">
     <thead>
@@ -19,7 +21,7 @@
             <th>Vergi No.</th>
         </tr>
     </thead>
-    <tr *ngFor="let corporateCustomer of corporateCustomers">
+    <tr *ngFor="let corporateCustomer of corporateCustomers|companyNameFilter:filterText">
         <td>{{corporateCustomer.id}}</td>
         <td>{{corporateCustomer.userId}}</td>
         <td>
@@ -42,16 +44,21 @@
     </tr>
 </table>
 
-<div *ngIf="enablePageButton">
-    <button (click)="getCorporateCustomersByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"></button>
-        <<< /button>
-            <span *ngFor="let i of sortedCorporateCustomers |paging:pageSize; let index = index">
-                <span>
-                    <button class="btn btn-danger btn-sm" type="button"
-                        (click)="getCorporateCustomersByPaginationAndSortingNameAsc(index+1)"
-                        routerLink="/corporatecustomer/page/{{index+1}}">
-                        {{index+1}}
-                    </button>
-                </span>
+<div class="row justify-content-center" *ngIf="enablePageButton">
+    <div class="col-md-2">
+        <button (click)="getCorporateCustomersByPaginationAndSortingNameAsc(1)" class="btn btn-secondary btn-sm"
+            routerLink="/corporatecustomer/page/1">İlk</button>
+        <span *ngFor="let i of sortedCorporateCustomers |paging:pageSize; let index = index">
+            <span>
+                <button class="btn btn-secondary btn-sm" type="button"
+                    (click)="getCorporateCustomersByPaginationAndSortingNameAsc(index+1)"
+                    routerLink="/corporatecustomer/page/{{index+1}}" routerLinkActive="active">
+                    {{index+1}}
+                </button>
             </span>
+        </span>
+        <button (click)="getCorporateCustomersByPaginationAndSortingNameAsc(sortedCorporateCustomers.length/pageSize)"
+            class="btn btn-secondary btn-sm"
+            routerLink="/corporatecustomer/page/{{sortedCorporateCustomers |mathRound:pageSize}}">Son</button>
+    </div>
 </div>

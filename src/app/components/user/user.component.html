@@ -1,9 +1,14 @@
-<div class="mb-3">
-  <label for="filterText" class="form-label">Search user</label>
-  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter user data">
-</div>
-<div *ngIf="filterText.length >= 2" class="alert alert-success">
-  {{filterText}} searching...
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <label for="filterText" class="form-label"
+      style="display: flex; justify-content: center; color: purple;font-size: large; font-weight: 500;">Kullanıcı
+      Ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText"
+      placeholder="Username adı giriniz...">
+    <div *ngIf="filterText.length >= 2" class="alert alert-danger">
+      {{filterText}} aranıyor...
+    </div>
+  </div>
 </div>
 
 <table class="table">
@@ -19,7 +24,7 @@
       <th>Active</th>
     </tr>
   </thead>
-  <tr *ngFor="let user of users">
+  <tr *ngFor="let user of users|userFilter:filterText">
     <td>{{user.id}}</td>
     <td>{{user.username}}</td>
     <td>{{user.password}}</td>
@@ -37,15 +42,19 @@
   </tr>
 </table>
 
-<div *ngIf="enablePageButton">
-  <button (click)="getUsersByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"
-   ><<</button>
-      <span *ngFor="let i of sortedUsers |paging:pageSize; let index = index">
-        <span>
-          <button class="btn btn-danger btn-sm" type="button" (click)="getUsersByPaginationAndSortingNameAsc(index+1)"
-            routerLink="/user/page/{{index+1}}">
-            {{index+1}}
-          </button>
-        </span>
+<div class="row justify-content-center" *ngIf="enablePageButton">
+  <div class="col-md-2">
+    <button (click)="getUsersByPaginationAndSortingNameAsc(1)" class="btn btn-secondary btn-sm"
+      routerLink="/user/page/1">İlk</button>
+    <span *ngFor="let i of sortedUsers |paging:pageSize; let index = index">
+      <span>
+        <button class="btn btn-secondary btn-sm" type="button" (click)="getUsersByPaginationAndSortingNameAsc(index+1)"
+          routerLink="/user/page/{{index+1}}" routerLinkActive="active">
+          {{index+1}}
+        </button>
       </span>
+    </span>
+    <button (click)="getUsersByPaginationAndSortingNameAsc(sortedUsers.length/pageSize)"
+      class="btn btn-secondary btn-sm" routerLink="/user/page/{{sortedUsers |mathRound:pageSize}}">Son</button>
+  </div>
 </div>

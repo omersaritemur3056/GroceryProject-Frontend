@@ -22,7 +22,7 @@ export class PaymentComponent extends BaseComponent implements OnInit {
   filterText = "";
   pageNo: number;
   pageSize: number = 10;
-  sortBy: string = "fullname";
+  sortBy: string = "fullName";
 
   constructor(private paymentService: PaymentService, private activatedRoute: ActivatedRoute,
     private toastrService: ToastrService, private alertify: AlertifyService,
@@ -73,6 +73,7 @@ export class PaymentComponent extends BaseComponent implements OnInit {
     this.paymentService.getPaymentsByPaginationAndSortingNameAsc(x - 1, this.pageSize, this.sortBy)
       .subscribe(response => {
         this.payments = response.data;
+        this.hideSpinner(SpinnerType.Spin);
         this.enablePageButton = true;
       })
   }

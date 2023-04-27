@@ -1,9 +1,14 @@
-<div class="mb-3">
-  <label for="filterText" class="form-label">Search supplier</label>
-  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter supplier data">
-</div>
-<div *ngIf="filterText.length >= 2" class="alert alert-success">
-  {{filterText}} searching...
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <label for="filterText" class="form-label"
+      style="display: flex; justify-content: center; color: purple;font-size: large; font-weight: 500;">Tedarikçi
+      Ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText"
+      placeholder="Tedarikçi adı giriniz...">
+    <div *ngIf="filterText.length >= 2" class="alert alert-danger">
+      {{filterText}} aranıyor...
+    </div>
+  </div>
 </div>
 
 <table class="table">
@@ -15,7 +20,7 @@
       <th>Email</th>
     </tr>
   </thead>
-  <tr *ngFor="let supplier of suppliers">
+  <tr *ngFor="let supplier of suppliers|filterPipe:filterText">
     <td>{{supplier.name}}</td>
     <td>{{supplier.address}}</td>
     <td>{{supplier.phoneNumber}}</td>
@@ -31,15 +36,20 @@
   </tr>
 </table>
 
-<div *ngIf="enablePageButton">
-  <button (click)="getSuppliersByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"
-   ><<</button>
-      <span *ngFor="let i of sortedSuppliers |paging:pageSize; let index = index">
-        <span>
-          <button class="btn btn-danger btn-sm" type="button" (click)="getSuppliersByPaginationAndSortingNameAsc(index+1)"
-            routerLink="/supplier/page/{{index+1}}">
-            {{index+1}}
-          </button>
-        </span>
+<div class="row justify-content-center" *ngIf="enablePageButton">
+  <div class="col-md-2">
+    <button (click)="getSuppliersByPaginationAndSortingNameAsc(1)" class="btn btn-secondary btn-sm"
+      routerLink="/supplier/page/1">İlk</button>
+    <span *ngFor="let i of sortedSuppliers |paging:pageSize; let index = index">
+      <span>
+        <button class="btn btn-secondary btn-sm" type="button"
+          (click)="getSuppliersByPaginationAndSortingNameAsc(index+1)" routerLink="/supplier/page/{{index+1}}"
+          routerLinkActive="active">
+          {{index+1}}
+        </button>
       </span>
+    </span>
+    <button (click)="getSuppliersByPaginationAndSortingNameAsc(sortedSuppliers.length/pageSize)"
+      class="btn btn-secondary btn-sm" routerLink="/supplier/page/{{sortedSuppliers |mathRound:pageSize}}">Son</button>
+  </div>
 </div>

@@ -1,9 +1,12 @@
-<div class="mb-3">
-  <label for="filterText" class="form-label">Search producer</label>
-  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter producer name">
-</div>
-<div *ngIf="filterText.length >= 2" class="alert alert-success">
-  {{filterText}} searching...
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <label for="filterText" class="form-label"
+      style="display: flex; justify-content: center; color: purple;font-size: large; font-weight: 500;">Üretici Ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Üretici adı giriniz...">
+    <div *ngIf="filterText.length >= 2" class="alert alert-danger">
+      {{filterText}} aranıyor...
+    </div>
+  </div>
 </div>
 
 <table class="table">
@@ -13,7 +16,7 @@
       <th>Üretici Adı</th>
     </tr>
   </thead>
-  <tr *ngFor="let producer of producers">
+  <tr *ngFor="let producer of producers|filterPipe:filterText">
     <td>{{producer.id}}</td>
     <td>{{producer.name}}</td>
     <td>
@@ -27,15 +30,20 @@
   </tr>
 </table>
 
-<div *ngIf="enablePageButton">
-  <button (click)="getProducersByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"
-   ><<</button>
-      <span *ngFor="let i of sortedProducers |paging:pageSize; let index = index">
-        <span>
-          <button class="btn btn-danger btn-sm" type="button" (click)="getProducersByPaginationAndSortingNameAsc(index+1)"
-            routerLink="/producer/page/{{index+1}}">
-            {{index+1}}
-          </button>
-        </span>
+<div class="row justify-content-center" *ngIf="enablePageButton">
+  <div class="col-md-2">
+    <button (click)="getProducersByPaginationAndSortingNameAsc(1)" class="btn btn-secondary btn-sm"
+      routerLink="/producer/page/1">İlk</button>
+    <span *ngFor="let i of sortedProducers |paging:pageSize; let index = index">
+      <span>
+        <button class="btn btn-secondary btn-sm" type="button"
+          (click)="getProducersByPaginationAndSortingNameAsc(index+1)" routerLink="/producer/page/{{index+1}}"
+          routerLinkActive="active">
+          {{index+1}}
+        </button>
       </span>
+    </span>
+    <button (click)="getProducersByPaginationAndSortingNameAsc(sortedProducers.length/pageSize)"
+      class="btn btn-secondary btn-sm" routerLink="/producer/page/{{sortedProducers |mathRound:pageSize}}">Son</button>
+  </div>
 </div>

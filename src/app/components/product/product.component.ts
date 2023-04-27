@@ -22,8 +22,10 @@ export class ProductComponent extends BaseComponent implements OnInit {
   enablePageButton: boolean = false;
   filterText = "";
   pageNo: number;
-  pageSize: number = 5;
+  pageSize: number = 6;
   sortBy: string = "name";
+  showFirstPage: boolean = true;
+  showLastPage: boolean = true;
 
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute,
     private toastrService: ToastrService, private cartService: CartService, private router: Router,
@@ -41,6 +43,12 @@ export class ProductComponent extends BaseComponent implements OnInit {
       else if (params["pageNo"]) {
         this.getPageFromProductList()
         this.getProductsByPaginationAndSortingNameAsc(params["pageNo"]);
+        if (params["pageNo"] == 1) {
+          this.showFirstPage = false
+        }
+        if (params["pageNo"] == Math.ceil(this.sortedProducts.length / this.pageSize)) {
+          this.showLastPage = false
+        }
       }
       else {
         this.getPageFromProductList()
@@ -94,5 +102,9 @@ export class ProductComponent extends BaseComponent implements OnInit {
     }
     this.toastrService.success(product.name, "Sepete eklendi")
     this.cartService.addToCart(product);
+  }
+
+  productDetail(productId: number){
+    this.router.navigate(["product/" + productId])
   }
 }

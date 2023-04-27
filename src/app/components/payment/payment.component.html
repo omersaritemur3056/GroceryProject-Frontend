@@ -1,9 +1,12 @@
-<div class="mb-3">
-  <label for="filterText" class="form-label">Search payment</label>
-  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter payment data">
-</div>
-<div *ngIf="filterText.length >= 2" class="alert alert-success">
-  {{filterText}} searching...
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <label for="filterText" class="form-label"
+      style="display: flex; justify-content: center; color: purple;font-size: large; font-weight: 500;">Ödeme bilgisi Ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Ödeme bilgisi giriniz...">
+    <div *ngIf="filterText.length >= 2" class="alert alert-danger">
+      {{filterText}} aranıyor...
+    </div>
+  </div>
 </div>
 
 <table class="table">
@@ -18,7 +21,7 @@
       <th></th>
     </tr>
   </thead>
-  <tr *ngFor="let payment of payments">
+  <tr *ngFor="let payment of payments|fullNameFilter:filterText">
     <td>{{payment.cardNumber |titlecase}}</td>
     <td>{{payment.fullName}}</td>
     <td>{{payment.cardExpirationYear}}</td>
@@ -31,28 +34,21 @@
     </td>
   </tr>
 </table>
-<div *ngIf="enablePageButton">
-  <button (click)="getPaymentsByPaginationAndSortingNameAsc(1)" class="btn btn-danger">
-    <<< </button>
-      <span *ngFor="let item of payments;let i = index">
-        <span>
-          <button class="btn btn-danger" type="button" (click)="getPaymentsByPaginationAndSortingNameAsc(i + 1)"
-            routerLink="/payment/page/{{i + 1}}">
-            {{i + 1}}
-          </button>
-        </span>
-      </span>
-</div>
 
-<div *ngIf="enablePageButton">
-  <button (click)="getPaymentsByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm">
-    <<< </button>
-      <span *ngFor="let i of sortedPayments |paging:pageSize; let index = index">
-        <span>
-          <button class="btn btn-danger btn-sm" type="button"
-            (click)="getPaymentsByPaginationAndSortingNameAsc(index+1)" routerLink="/payment/page/{{index+1}}">
-            {{index+1}}
-          </button>
-        </span>
+<div class="row justify-content-center" *ngIf="enablePageButton">
+  <div class="col-md-2">
+    <button (click)="getPaymentsByPaginationAndSortingNameAsc(1)" class="btn btn-secondary btn-sm"
+      routerLink="/payment/page/1">İlk</button>
+    <span *ngFor="let i of sortedPayments |paging:pageSize; let index = index">
+      <span>
+        <button class="btn btn-secondary btn-sm" type="button"
+          (click)="getPaymentsByPaginationAndSortingNameAsc(index+1)" routerLink="/payment/page/{{index+1}}"
+          routerLinkActive="active">
+          {{index+1}}
+        </button>
       </span>
+    </span>
+    <button (click)="getPaymentsByPaginationAndSortingNameAsc(sortedPayments.length/pageSize)"
+      class="btn btn-secondary btn-sm" routerLink="/payment/page/{{sortedPayments |mathRound:pageSize}}">Son</button>
+  </div>
 </div>

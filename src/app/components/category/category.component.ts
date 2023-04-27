@@ -66,4 +66,8 @@ export class CategoryComponent extends BaseComponent implements OnInit {
       return;
     })
   }
+
+  updateCategory(updateCategoryId: number) {
+    location.replace("/category/update/" + updateCategoryId);
+  }
 }

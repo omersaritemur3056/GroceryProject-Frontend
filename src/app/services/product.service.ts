@@ -8,6 +8,7 @@ import { CreateProductRequest } from '../models/product/create-product-request';
 import { ResponseModel } from '../models/response-model';
 import { UpdateProductRequest } from '../models/product/update-product-request';
 import { DeleteProductRequest } from '../models/product/delete-product-request';
+import { GetByIdProductResponse } from '../models/product/get-by-id-product-request';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,11 @@ export class ProductService {
   getProducts(): Observable<ListResponseModel<GetAllProductResponse>> {
     let newPath = this.apiUrl + "product/getall"
     return this.httpClient.get<ListResponseModel<GetAllProductResponse>>(newPath);
+  }
+
+  getProductById(id: number): Observable<any> {
+    let newPath = this.apiUrl + "product/getbyid?id="
+    return this.httpClient.get<any>(newPath + id);
   }
 
   getProductsBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllProductResponse>> {

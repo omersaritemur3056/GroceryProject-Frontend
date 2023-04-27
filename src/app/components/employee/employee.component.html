@@ -1,9 +1,12 @@
-<div class="mb-3">
-  <label for="filterText" class="form-label">Search employee</label>
-  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter employee">
-</div>
-<div *ngIf="filterText.length >= 2" class="alert alert-success">
-  {{filterText}} searching...
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <label for="filterText" class="form-label"
+      style="display: flex; justify-content: center; color: purple;font-size: large; font-weight: 500;">Çalışan Ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Çalışan adı giriniz...">
+    <div *ngIf="filterText.length >= 2" class="alert alert-danger">
+      {{filterText}} aranıyor...
+    </div>
+  </div>
 </div>
 
 <table class="table">
@@ -21,7 +24,7 @@
       <th>Maaş</th>
     </tr>
   </thead>
-  <tr *ngFor="let employee of employees">
+  <tr *ngFor="let employee of employees|firstNameFilter:filterText">
     <td>{{employee.id}}</td>
     <td>{{employee.userId}}</td>
     <td>
@@ -45,15 +48,20 @@
   </tr>
 </table>
 
-<div *ngIf="enablePageButton">
-  <button (click)="getEmployeesByPaginationAndSortingNameAsc(1)" class="btn btn-danger btn-sm"
-   ><<</button>
-      <span *ngFor="let i of sortedEmployees |paging:pageSize; let index = index">
-        <span>
-          <button class="btn btn-danger btn-sm" type="button" (click)="getEmployeesByPaginationAndSortingNameAsc(index+1)"
-            routerLink="/employee/page/{{index+1}}">
-            {{index+1}}
-          </button>
-        </span>
+<div class="row justify-content-center" *ngIf="enablePageButton">
+  <div class="col-md-2">
+    <button (click)="getEmployeesByPaginationAndSortingNameAsc(1)" class="btn btn-secondary btn-sm"
+      routerLink="/employee/page/1">İlk</button>
+    <span *ngFor="let i of sortedEmployees |paging:pageSize; let index = index">
+      <span>
+        <button class="btn btn-secondary btn-sm" type="button"
+          (click)="getEmployeesByPaginationAndSortingNameAsc(index+1)" routerLink="/employee/page/{{index+1}}"
+          routerLinkActive="active">
+          {{index+1}}
+        </button>
       </span>
+    </span>
+    <button (click)="getEmployeesByPaginationAndSortingNameAsc(sortedEmployees.length/pageSize)"
+      class="btn btn-secondary btn-sm" routerLink="/employee/page/{{sortedEmployees |mathRound:pageSize}}">Son</button>
+  </div>
 </div>

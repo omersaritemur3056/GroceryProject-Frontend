@@ -1,0 +1,30 @@
+<div class="card mb-3" style="max-width: 1140px;">
+    <div class="row g-0 ">
+        <div class="col-md-4">
+            <img width="250" height="250" *ngIf="!product.urls.length" src="../../../assets/default2.png"
+                class="card-img-top" alt="...">
+            <span *ngFor="let url of product.urls">
+                <img width="250" height="250" src="{{url}}" class="card-img-top" alt="...">
+            </span>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{product.name |titlecase}}</h5>
+                <p class="card-text">Fiyatı: {{product.price |currency:'₺'}}</p>
+                <p class="card-text" *ngIf="product.stock > 0">Stokta {{product.stock}} adet bulunmaktadır.</p>
+                <p class="card-text" *ngIf="product.stock == 0" style="color: red;">Bu ürün stokta tükenmiştir.</p>
+                <p class="card-text" *ngIf="product.description">Ürün açıklaması: {{product.description}}</p>
+                <p class="card-text" *ngIf="!product.description">Ürüne dair açıklama belirtilmemiştir.</p>
+                <p class="card-text" *ngIf="product.description">Kategori: {{product.categoryName |titlecase}}</p>
+                <p class="card-text" *ngIf="product.description">Üretim Tarihi: {{product.productionDate
+                    |date:'dd/MM/yyyy'}} (gün/ay/yıl)</p>
+                <p class="card-text" *ngIf="product.description">Son Kullanma Tarihi: {{product.expirationDate
+                    |date:'dd/MM/yyyy'}} (gün/ay/yıl)
+                </p>
+                <p class="card-text" *ngIf="product.description">Üretici Firma: {{product.producerName |titlecase}}</p>
+                <button (click)="addToCart(product)" class="btn btn-success btn-lg" style="margin: 2vh;">Sepete
+                    ekle!</button>
+            </div>
+        </div>
+    </div>
+</div>

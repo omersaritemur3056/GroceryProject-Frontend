@@ -52,8 +52,8 @@ export class ProductAddComponent implements OnInit {
       stock:["", Validators.required],
       categoryId:["", Validators.required],
       producerId:["", Validators.required],
-      supplierId:["", Validators.required],
-      imageIds: [[""]]
+      supplierId:["", Validators.required]
+      //imageIds: [[""]]
     })
   }
 

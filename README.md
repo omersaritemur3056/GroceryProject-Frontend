@@ -1,5 +1,10 @@
 # GroceryProject
 
+![google login](https://user-images.githubusercontent.com/91964643/233383012-6401138c-f850-4628-8301-2bd4425346cd.png)
+
+![facebook login](https://user-images.githubusercontent.com/91964643/233383120-84a51f76-bbd1-423a-94ac-78e55f135736.png)
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
 
 ## Development server

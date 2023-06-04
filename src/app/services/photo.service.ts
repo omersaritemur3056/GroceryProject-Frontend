@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { GetAllImageResponse } from '../models/image/get-all-image-response';
 import { ListResponseModel } from '../models/list-response-model';
 
@@ -21,6 +21,14 @@ export class PhotoService {
   getPhotos(): Observable<ListResponseModel<GetAllImageResponse>> {
     let newPath = this.apiUrl + "image/getall"
     return this.httpClient.get<ListResponseModel<GetAllImageResponse>>(newPath);
+  }
+
+  async getPhotosAsync() {
+    let newPath = this.apiUrl + "image/getall"
+    const observable = this.httpClient.get<ListResponseModel<GetAllImageResponse>>(newPath);
+    const promiseData = firstValueFrom(observable);
+
+    return await promiseData;
   }
 
   getPhotosBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllImageResponse>> {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { ListResponseModel } from '../models/list-response-model';
 import { CreateProducerRequest } from '../models/producer/create-producer-request';
 import { DeleteProducerRequest } from '../models/producer/delete-producer-request';
@@ -20,6 +20,14 @@ export class ProducerService {
   getProducers(): Observable<ListResponseModel<GetAllProducerResponse>> {
     let newPath = this.apiUrl + "producer/getall"
     return this.httpClient.get<ListResponseModel<GetAllProducerResponse>>(newPath);
+  }
+
+  async getProducersAsync() {
+    let newPath = this.apiUrl + "producer/getall"
+    const observable = this.httpClient.get<ListResponseModel<GetAllProducerResponse>>(newPath);
+    const promiseData = firstValueFrom(observable);
+
+    return await promiseData;
   }
 
   getProducersBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllProducerResponse>> {

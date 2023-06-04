@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { ListResponseModel } from '../models/list-response-model';
 import { ResponseModel } from '../models/response-model';
 import { CreateSupplierRequest } from '../models/supplier/create-supplier-request';
@@ -20,6 +20,14 @@ export class SupplierService {
   getSuppliers(): Observable<ListResponseModel<GetAllSupplierResponse>> {
     let newPath = this.apiUrl + "supplier/getall"
     return this.httpClient.get<ListResponseModel<GetAllSupplierResponse>>(newPath);
+  }
+
+  async getSuppliersAsync() {
+    let newPath = this.apiUrl + "supplier/getall"
+    const observable = this.httpClient.get<ListResponseModel<GetAllSupplierResponse>>(newPath);
+    const promiseData = firstValueFrom(observable);
+
+    return await promiseData;
   }
 
   getSuppliersBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllSupplierResponse>> {

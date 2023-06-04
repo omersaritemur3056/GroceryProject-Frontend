@@ -30,8 +30,8 @@
                     <div class="mb-3">
                         <label for="nationalIdentity">Kimlik No.</label>
                         <div class="form-group">
-                            <input type="text" id="nationalIdentity" formControlName="nationalIdentity" class="form-control"
-                                placeholder="Kimlik No." />
+                            <input type="text" id="nationalIdentity" formControlName="nationalIdentity"
+                                class="form-control" placeholder="Kimlik No." />
                         </div>
                     </div>
                     <div class="mb-3">
@@ -49,17 +49,23 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="userId">User Id</label>
+                        <label for="userId">Username</label>
                         <div class="form-group">
-                            <input type="number" id="userId" formControlName="userId" class="form-control"
-                                placeholder="User Id" />
+                            <select id="userId" formControlName="userId" class="form-control">
+                                <option value="">Seçiniz</option>
+                                <option *ngFor="let user of users" [value]="user.id">{{ user.username }}
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="imageId">Image Id</label>
+                        <label for="imageId">Image URL</label>
                         <div class="form-group">
-                            <input type="number" id="imageId" formControlName="imageId" class="form-control"
-                                placeholder="Image Id" />
+                            <select id="imageId" formControlName="imageId" class="form-control">
+                                <option value="">Seçiniz</option>
+                                <option *ngFor="let image of images" [value]="image.id">{{ image.url }}
+                                </option>
+                            </select>
                         </div>
                     </div>
                 </form>

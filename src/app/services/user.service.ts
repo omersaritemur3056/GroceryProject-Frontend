@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { ListResponseModel } from '../models/list-response-model';
 import { ResponseModel } from '../models/response-model';
 import { DeleteUserRequest } from '../models/user/delete-user-request';
@@ -19,6 +19,14 @@ export class UserService {
   getUsers(): Observable<ListResponseModel<GetAllUserResponse>> {
     let newPath = this.apiUrl + "user/getall"
     return this.httpClient.get<ListResponseModel<GetAllUserResponse>>(newPath);
+  }
+
+  async getUsersAsync() {
+    let newPath = this.apiUrl + "user/getall"
+    const observable = this.httpClient.get<ListResponseModel<GetAllUserResponse>>(newPath);
+    const promiseData = firstValueFrom(observable);
+
+    return await promiseData;
   }
 
   getUsersBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllUserResponse>> {

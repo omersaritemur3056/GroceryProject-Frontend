@@ -1,7 +1,7 @@
 import { GetAllCategoryResponse } from '../models/category/get-all-category-response';
 import { ListResponseModel } from './../models/list-response-model';
 
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateCategoryRequest } from '../models/category/create-category-request';
@@ -21,6 +21,14 @@ export class CategoryService {
   getCategories(): Observable<ListResponseModel<GetAllCategoryResponse>> {
     let newPath = this.apiUrl + "category/getall"
     return this.httpClient.get<ListResponseModel<GetAllCategoryResponse>>(newPath);
+  }
+
+  async getCategoriesAsync() {
+    let newPath = this.apiUrl + "category/getall"
+    const observable = this.httpClient.get<ListResponseModel<GetAllCategoryResponse>>(newPath);
+    const promiseData = firstValueFrom(observable);
+
+    return await promiseData;
   }
 
   add(category: CreateCategoryRequest): Observable<ResponseModel> {

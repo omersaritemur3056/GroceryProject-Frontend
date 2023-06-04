@@ -1,14 +1,15 @@
 <li *ngIf="cartItems.length > 0" class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Your Cart
-    </a>
-    <ul class="dropdown-menu">
-      <li *ngFor="let cartItem of cartItems"><a class="dropdown-item">
+  <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Sepetiniz
+  </a>
+  <ul class="dropdown-menu">
+    <li *ngFor="let cartItem of cartItems"><a class="dropdown-item">
         <span class="badge text-bg-secondary">{{cartItem.quantity}}</span> {{cartItem.product.name}}
-        <button type="button" (click)="removeFromCart(cartItem.product)" class="btn btn-danger" 
-        style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .6rem;">Çıkar</button>
+        <button type="button" (click)="removeFromCart(cartItem.product)" class="btn btn-danger btn-sm">Çıkar</button>
       </a></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Sepetinize gidin</a></li>
-    </ul>
+    <li>
+      <hr class="dropdown-divider">
+    </li>
+    <li><a class="dropdown-item" href="#">Sepetinize gidin</a></li>
+  </ul>
 </li>

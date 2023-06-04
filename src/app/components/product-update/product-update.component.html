@@ -49,31 +49,43 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="categoryId">Kategori id</label>
+                        <label for="categoryId">Kategori Adı</label>
                         <div class="form-group">
-                            <input type="number" id="categoryId" formControlName="categoryId" class="form-control"
-                                placeholder="Kategori id" />
+                            <select id="categoryId" formControlName="categoryId" class="form-control">
+                                <option value="">Seçiniz</option>
+                                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="supplierId">Tedarikçi id</label>
+                        <label for="supplierId">Tedarikçi Adı</label>
                         <div class="form-group">
-                            <input type="number" id="supplierId" formControlName="supplierId" class="form-control"
-                                placeholder="Tedarikçi id" />
+                            <select id="supplierId" formControlName="supplierId" class="form-control">
+                                <option value="">Seçiniz</option>
+                                <option *ngFor="let supplier of suppliers" [value]="supplier.id">{{ supplier.name }}
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="producerId">Üretici id</label>
+                        <label for="producerId">Üretici Adı</label>
                         <div class="form-group">
-                            <input type="number" id="producerId" formControlName="producerId" class="form-control"
-                                placeholder="Üretici id" />
+                            <select id="producerId" formControlName="producerId" class="form-control">
+                                <option value="">Seçiniz</option>
+                                <option *ngFor="let producer of producers" [value]="producer.id">{{ producer.name }}
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="imageIds">Resim IDleri</label>
+                        <label for="imageIds">Resim URL</label>
                         <div class="form-group">
-                            <input type="text" id="imageIds" formControlName="imageIds" class="form-control"
-                                placeholder="Resim Idleri" />
+                            <select id="imageIds" formControlName="imageIds" class="form-control">
+                                <option value="">Seçiniz</option>
+                                <option *ngFor="let image of images" [value]="image.id">{{ image.url }}
+                                </option>
+                            </select>
                         </div>
                     </div>
                 </form>

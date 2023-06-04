@@ -33,7 +33,7 @@ export class ProductComponent extends BaseComponent implements OnInit {
     super(spinner, authService);
   }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
     this.showSpinner(SpinnerType.Spin);
     this.activatedRoute.params.subscribe(params => {
       if (params["categoryId"]) {
@@ -93,18 +93,18 @@ export class ProductComponent extends BaseComponent implements OnInit {
     })
   }
 
-  addToCart(product: GetAllProductResponse) {
+  async addToCart(product: GetAllProductResponse) {
     const roles = localStorage.getItem("roles");
     if (!roles) {
       this.toastrService.error("Sisteme giriş yapmalısınız!")
-      this.router.navigate(["login"]);
+      await this.router.navigate(["login"]);
       return;
     }
     this.toastrService.success(product.name, "Sepete eklendi")
     this.cartService.addToCart(product);
   }
 
-  productDetail(productId: number){
-    this.router.navigate(["product/" + productId])
+  async productDetail(productId: number){
+    await this.router.navigate(["product/product/" + productId])
   }
 }

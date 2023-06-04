@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { GetAllRoleResponse } from 'src/app/models/role/get-all-role-response';
+import { RoleService } from 'src/app/services/role.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,12 +15,21 @@ export class UserUpdateComponent {
 
   userUpdateForm:FormGroup;
   id:number;
+  roles: GetAllRoleResponse[] = [];
 
-  constructor(private formBuilder:FormBuilder, private userService:UserService,
-    private toastrService:ToastrService, private route:ActivatedRoute){}
+  constructor(private formBuilder:FormBuilder, private userService:UserService, private roleService: RoleService,
+    private toastrService:ToastrService, private route:ActivatedRoute){
+      this.getRolesAsync();
+    }
 
   ngOnInit(): void {
       this.createUserUpdateForm();
+  }
+
+  async getRolesAsync() {
+    const allRoles = await this.roleService.getRolesAsync();
+
+    this.roles = allRoles.data;
   }
 
   createUserUpdateForm(){

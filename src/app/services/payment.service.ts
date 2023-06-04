@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { ListResponseModel } from '../models/list-response-model';
 import { CreatePaymentRequest } from '../models/payment/create-payment-request';
 import { DeletePaymentRequest } from '../models/payment/delete-payment-request';
@@ -20,6 +20,14 @@ export class PaymentService {
   getPayments(): Observable<ListResponseModel<GetAllPaymentResponse>> {
     let newPath = this.apiUrl + "payment/getall"
     return this.httpClient.get<ListResponseModel<GetAllPaymentResponse>>(newPath);
+  }
+
+  async getPaymentsAsync() {
+    let newPath = this.apiUrl + "category/getall"
+    const observable = this.httpClient.get<ListResponseModel<GetAllPaymentResponse>>(newPath);
+    const promiseData = firstValueFrom(observable);
+
+    return await promiseData;
   }
 
   getPaymentsBySortingNameAsc(sortBy: string): Observable<ListResponseModel<GetAllPaymentResponse>> {

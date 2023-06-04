@@ -33,7 +33,7 @@ import { ProductByIdComponent } from './components/product-by-id/product-by-id.c
 const routes: Routes = [
   {path:"", component:ProductComponent},
   {path:"product", component:ProductComponent},
-  {path:"product/:id", component:ProductByIdComponent},
+  {path:"product/product/:id", component:ProductByIdComponent},
   {path:"product/page/:pageNo", component:ProductComponent},
   {path:"product/category/:categoryId", component:ProductComponent},
   {path:"product/add", component:ProductAddComponent, canActivate:[LoginGuard]},

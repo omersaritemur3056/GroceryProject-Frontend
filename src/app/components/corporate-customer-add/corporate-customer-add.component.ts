@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { GetAllImageResponse } from 'src/app/models/image/get-all-image-response';
+import { GetAllUserResponse } from 'src/app/models/user/get-all-user-response';
 import { CorporateCustomerService } from 'src/app/services/corporate-customer.service';
+import { PhotoService } from 'src/app/services/photo.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-corporate-customer-add',
@@ -11,12 +15,29 @@ import { CorporateCustomerService } from 'src/app/services/corporate-customer.se
 export class CorporateCustomerAddComponent {
 
   corporateCustomerAddForm:FormGroup;
+  users: GetAllUserResponse[] = [];
+  images: GetAllImageResponse[] = [];
 
   constructor(private formBuilder:FormBuilder, private corporateCustomerService:CorporateCustomerService,
-    private toastrService:ToastrService){}
+    private toastrService:ToastrService, private photoService: PhotoService, private userService: UserService){
+      this.getUsersAsync();
+      this.getImagesAsync();
+    }
 
   ngOnInit(): void {
       this.createCorporateCustomerAddForm();
+  }
+
+  async getUsersAsync() {
+    const allUsers = await this.userService.getUsersAsync();
+
+    this.users = allUsers.data;
+  }
+
+  async getImagesAsync() {
+    const allImages = await this.photoService.getPhotosAsync();
+
+    this.images = allImages.data;
   }
 
   createCorporateCustomerAddForm(){

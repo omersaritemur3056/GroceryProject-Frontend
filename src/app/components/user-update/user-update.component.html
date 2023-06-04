@@ -23,8 +23,11 @@
                     <div class="mb-3">
                         <label for="role">Yetkiler</label>
                         <div class="form-group">
-                            <input type="text" id="role" formControlName="role" class="form-control"
-                                placeholder="Yetkiler" />
+                            <select id="role" formControlName="role" class="form-control">
+                                <option value="">Seçiniz</option>
+                                <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3">
